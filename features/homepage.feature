@@ -1,12 +1,4 @@
 Feature: Homepage
-<<<<<<< HEAD
-=======
-  Given I am on homepage
-  Then I should see “Welcome to Shinigami Laser”
-  And I should see “Register”
-  And I should see “Login”
-
->>>>>>> a5bfac4a50d2b37ff81ce7b8a1928d8dd3941eef
 
   Scenario: See the home page
     Given I am on "/"
