@@ -1,0 +1,13 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+register:
+    path: /register
+    defaults:
+        _controller: AppBundle:Security:register
+
+login:
+    path: /login
+    defaults:
+        _controller: AppBundle:Security:login

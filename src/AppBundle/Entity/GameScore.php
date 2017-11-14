@@ -1,0 +1,128 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * GameScore
+ *
+ * @ORM\Table(name="game_score")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GameScoreRepository")
+ */
+class GameScore
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * Many GameScores have One Card.
+     * @ORM\ManyToOne(targetEntity="Card", inversedBy="gameScores")
+     * @ORM\JoinColumn(name="card_id", referencedColumnName="id")
+     */
+    private $card;
+
+    /**
+     * Many GameScores have One GameSession.
+     * @ORM\ManyToOne(targetEntity="GameSession", inversedBy="gameScores")
+     * @ORM\JoinColumn(name="game_session_id", referencedColumnName="id")
+     */
+    private $gameSession;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="score", type="integer")
+     */
+    private $score;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set score
+     *
+     * @param integer $score
+     *
+     * @return GameScore
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * Set card
+     *
+     * @param \AppBundle\Entity\Card $card
+     *
+     * @return GameScore
+     */
+    public function setCard(\AppBundle\Entity\Card $card = null)
+    {
+        $this->card = $card;
+
+        return $this;
+    }
+
+    /**
+     * Get card
+     *
+     * @return \AppBundle\Entity\Card
+     */
+    public function getCard()
+    {
+        return $this->card;
+    }
+
+    /**
+     * Set gameSession
+     *
+     * @param \AppBundle\Entity\GameSession $gameSession
+     *
+     * @return GameScore
+     */
+    public function setGameSession(\AppBundle\Entity\GameSession $gameSession = null)
+    {
+        $this->gameSession = $gameSession;
+
+        return $this;
+    }
+
+    /**
+     * Get gameSession
+     *
+     * @return \AppBundle\Entity\GameSession
+     */
+    public function getGameSession()
+    {
+        return $this->gameSession;
+    }
+}

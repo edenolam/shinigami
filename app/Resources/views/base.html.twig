@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <!--Import Google Icon Font-->
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <!--Import materialize.css-->
+            <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <nav class="nav nav-bar">
+            <a href="{{ path('register') }}" id="register">register</a>
+            <a href="{{ path('login') }}" id="login">login</a>
+        </nav>
+        <h1>Welcome to Shinigami Laser</h1>
+        <h1>SHINIGAMI.</h1>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="js/materialize.min.js"></script>
+        {% endblock %}
+    </body>
+
+</html>
+
