@@ -13,5 +13,12 @@ Feature: Security
     And I press "submit"
     Then I am on "/register_success"
     And I should see "Congratulation!!!"
+@security
+  Scenario: LoginForm
+    Given I am on "/login"
+    And I fill in "username" with "toto"
+    And I fill in "password" with "test"
+    And I press "submit"
+    Then I should be logged as "username"
 
 

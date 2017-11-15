@@ -4,7 +4,17 @@ default:
       contexts:
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
+    security:
+      filters:
+        tags: '@security'
+      contexts:
+        - Behat\MinkExtension\Context\MinkContext
+        - FeatureContext
+        - SecurityContext
   extensions:
+    Behat\Symfony2Extension:
+        kernel:
+            bootstrap: ""
     Behat\MinkExtension:
       base_url: 'http://shinigamilaser.local/app_dev.php'
       goutte: ~
