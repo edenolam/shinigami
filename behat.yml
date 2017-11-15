@@ -1,12 +1,24 @@
 default:
   suites:
     default:
+      filters:
+        tags: '@default'
       contexts:
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
+    security:
+      filters:
+        tags: '@security'
+      contexts:
+        - SecurityContext
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
   extensions:
+    Behat\Symfony2Extension:
+        kernel:
+            bootstrap: ""
     Behat\MinkExtension:
-      base_url: 'http://shinigamilaser.local/app_dev.php'
+      base_url: 'http://wf3projet2.local/app_dev.php'
       goutte: ~
       selenium2:
         wd_host: 'http://phantomjs:8910/wd/hub'
