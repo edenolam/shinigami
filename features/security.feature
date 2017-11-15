@@ -13,6 +13,7 @@ Feature: Security
     And I press "submit"
     Then I am on "/register_success"
     And I should see "Congratulation!!!"
+<<<<<<< HEAD
 @security
   Scenario: LoginForm
     Given I am on "/login"
@@ -20,5 +21,7 @@ Feature: Security
     And I fill in "password" with "test"
     And I press "submit"
     Then I should be logged as "username"
+=======
+>>>>>>> fb96296a42268762e485c7f6c56a729ac51dcfd9
 
 
