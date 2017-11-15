@@ -14,3 +14,13 @@ login:
 
 logout:
     path: /logout
+
+customer_panel:
+    path: /customer
+    defaults:
+        _controller: AppBundle:Customer:panel
+
+staff_panel:
+    path: /staff
+    defaults:
+        _controller: AppBundle:Staff:panel
