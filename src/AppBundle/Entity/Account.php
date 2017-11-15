@@ -34,7 +34,7 @@ class Account implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255, unique=true)
      */
     private $password;
 
@@ -49,7 +49,7 @@ class Account implements UserInterface, \Serializable
      * @Assert\NotBlank()
      * @Assert\Email(message="This email is not valid.")
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
 

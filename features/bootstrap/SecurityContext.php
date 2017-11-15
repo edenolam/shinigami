@@ -11,16 +11,20 @@ use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 
-class SecurityContext implements KernelAwareContext
+class SecurityContext implements Context, KernelAwareContext
 {
+
 	use KernelDictionary;
 	/**
 	 * @Then /^I should be logged as "([^"]*)"$/
 	 */
 	public function iShouldBeLoggedAs($username)
 	{
-		$session = $this->dictionary->getContainer()->get('session');
-		exit(dump($session));
+		$token = $this->getContainer()->get("security.token_storage")->getToken();
+		dump($token);
+		if($token->getUser()->getUsername() != $username){
+			throw new Exception("Your are not $username !!!");
+		}
 	}
 
 
@@ -31,6 +35,6 @@ class SecurityContext implements KernelAwareContext
 	 */
 	public function setKernel(\Symfony\Component\HttpKernel\KernelInterface $kernel)
 	{
-		// TODO: Implement setKernel() method.
+		$this->kernel = $kernel;
 	}
 }
