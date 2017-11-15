@@ -19,6 +19,13 @@
         </nav>
         <h1>Welcome to Shinigami Laser</h1>
         <h1>SHINIGAMI.</h1>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

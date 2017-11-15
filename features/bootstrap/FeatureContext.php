@@ -20,5 +20,4 @@ class FeatureContext implements Context
     {
     }
 
-
 }

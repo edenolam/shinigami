@@ -2,4 +2,13 @@
 
 {% block body %}
     <h1>Registration</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+    {{ form_widget(form.customer) }}
+
+    <button type="submit">Register!</button>
+    {{ form_end(form) }}
 {% endblock %}
