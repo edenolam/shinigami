@@ -23,6 +23,9 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+            logout:
+                path:   /logout
+                target: /
             provider: db_provider
             # activate different ways to authenticate
 
