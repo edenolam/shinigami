@@ -1,44 +1,51 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hello
- * Date: 15/11/2017
-<<<<<<< HEAD
- * Time: 16:59
-=======
- * Time: 16:56
->>>>>>> commit sans push
- */
-
 namespace AppBundle\Controller;
 
-<<<<<<< HEAD
-
+use AppBundle\Entity\Card;
+use AppBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\SearchCustomerType;
 
 class StaffController extends Controller
 {
-
-    public function panelAction()
-    {
-
-    }
-
-=======
-use AppBundle\Entity\Account;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-class staffController extends Controller
-{
-	public function indexAction()
+	public function panelAction(Request $request)
 	{
+
+		$form = $this->createForm(SearchCustomerType::class);
+
+		$form->handleRequest($request);
+
 		$entity_manager = $this->getDoctrine()->getManager();
+		if ($request->isMethod('POST')){
+			if ($form->isSubmitted() && $form->isValid()){
+				$customerData = $form->getData();
+				$customer = $entity_manager->getRepository('AppBundle:Customer')
+					->findCustomerWithoutCard(
+						$customerData["firstname"],
+						$customerData["lastname"],
+						$customerData['phone']
+					);
+			}else{
+				$cardData = $request->get('search_field');
+				$card = $entity_manager->getRepository('AppBundle:Card')
+					->findValidCardByNumber($cardData);
+				return $this->redirectToRoute('staff_card', [
+					'number' => $card->getNumber()
+				]);
+			}
+		}
 
-		$accounts = $entity_manager->getRepository('AppBundle:Account');
-
-		return $this->render('staff/index.html.twig', array(
-			'accounts' => $accounts,
+		return $this->render('staff/panel.html.twig', array(
+			'form' =>$form->createView()
 		));
 	}
->>>>>>> commit sans push
+
+	public function manageCardAction(Card $card)
+	{
+		$customer = $card->getCustomer();
+		return $this->render('staff/card.html.twig',[
+			'customer' => $customer
+		]);
+	}
 }

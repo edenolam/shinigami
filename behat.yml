@@ -6,6 +6,12 @@ default:
       contexts:
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
+    staff:
+     filters:
+       tags: '@staff'
+     contexts:
+       - FeatureContext
+       - Behat\MinkExtension\Context\MinkContext
     security:
       filters:
         tags: '@security'

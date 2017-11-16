@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+
+    <div class="nav-item nav-link app-user-username">{{ app.user.username }}</div>
+    <a class="nav-item nav-link" href="{{ path('staff_newsletter') }}" id="newsletter">newsletter</a>
+    <a class="nav-item nav-link" href="{{ path('staff_offer') }}" id="offer">offer</a>
+    <a class="nav-item nav-link" href="{{ path('logout') }}" id="logout">logout</a>
+
+{% endblock %}
