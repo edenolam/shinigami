@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="customer-infos">
+        <h2>{{ customer.nickname }}</h2>
+        <table>
+            <tr>
+                <td>Firstname</td>
+                <td>{{ customer.firstname }}</td>
+            </tr>
+            <tr>
+                <td>Lastname</td>
+                <td>{{ customer.lastname }}</td>
+            </tr>
+            <tr>
+                <td>Adress</td>
+                <td>{{ customer.adress }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ customer.phone }}</td>
+            </tr>
+            <tr>
+                <td>Birthday</td>
+                <td>{{ customer.birthday|date('d M y') }}</td>
+            </tr>
+        </table>
+        <a id="modify" href="{{ path("customer_modify_infos") }}">Modify my infos</a>
+    </div>
+
+
+    <div class="card-infos">
+        <h2>My card</h2>
+        {% if customer.card %}
+            <p>Card n° {{ card.number }} </p>
+            <table>
+                <tr>
+                    <td>Visits</td>
+                    <td>Total score</td>
+                </tr>
+                <tr>
+                    <td>{{ card.visits }}</td>
+                    <td>{{ card.score }}</td>
+                </tr>
+            </table>
+            <h3>My game sessions</h3>
+        {% else %}
+            <form method="post">
+                <label for="addcard">Add card</label>
+                <input type="text" name="number" id="addcard" placeholder="Must be a number of 10 characters" />
+                <button type="submit" name="submit">Validate</button>
+            </form>
+        {% endif %}
+    </div>
+    <div class="offers-infos">
+        <h2>My offers</h2>
+        {% if card %}
+            {% if offers %}
+            {% else %}
+                <p>There is no available offers.</p>
+            {% endif %}
+        {% else %}
+            <p>You must have a card to access to our offers.</p>
+        {% endif %}
+    </div>
+
+
+
+{% endblock %}

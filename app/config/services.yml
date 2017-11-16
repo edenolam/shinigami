@@ -36,3 +36,7 @@ services:
     app.login.listener:
           class: AppBundle\Listener\LoginListener
 
+    app.card.manager:
+          class: AppBundle\Service\CardManager
+          public: true
+

@@ -20,6 +20,11 @@ customer_panel:
     defaults:
         _controller: AppBundle:Customer:panel
 
+customer_modify_infos:
+    path: /customer/modify
+    defaults:
+        _controller: AppBundle:Customer:modify
+
 staff_panel:
     path: /staff
     defaults:
