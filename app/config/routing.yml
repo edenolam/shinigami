@@ -15,6 +15,7 @@ login:
 logout:
     path: /logout
 
+<<<<<<< HEAD
 customer_panel:
     path: /customer
     defaults:
@@ -24,3 +25,8 @@ staff_panel:
     path: /staff
     defaults:
         _controller: AppBundle:Staff:panel
+=======
+staff:
+    path: /staff
+    defaults: { _controller: AppBundle:Staff:index }
+>>>>>>> commit sans push
