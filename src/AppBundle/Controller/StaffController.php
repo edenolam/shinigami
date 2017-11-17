@@ -3,6 +3,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\GameSession;
+use AppBundle\Form\GameSessionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\SearchCustomerType;
@@ -48,4 +50,27 @@ class StaffController extends Controller
 			'customer' => $customer
 		]);
 	}
+
+    public function newGameSessionAction(Request $request)
+    {
+        $gameSession = new GameSession();
+        $form = $this->createForm(GameSessionType::class, $gameSession);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $gameSession = $this->get('app.gamesession.manager')->gameSessionsHydratation($request, $gameSession);
+            if($gameSession instanceof GameSession){
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($gameSession);
+                $entityManager->flush();
+                $this->addFlash('success', 'The game session has been saved !');
+
+                return $this->redirectToRoute('staff_panel');
+            }
+        }
+
+        return $this->render('staff/game_session.html.twig', array(
+            "form" => $form->createView()
+        ));
+    }
 }

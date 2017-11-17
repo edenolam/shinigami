@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Customer
@@ -23,6 +24,7 @@ class Customer
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please enter your firstname.")
      *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
@@ -30,6 +32,7 @@ class Customer
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please enter your lastname.")
      *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
@@ -37,6 +40,7 @@ class Customer
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please enter a nickname.")
      *
      * @ORM\Column(name="nickname", type="string", length=255)
      */
@@ -44,6 +48,7 @@ class Customer
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please enter your adress.")
      *
      * @ORM\Column(name="adress", type="string", length=255)
      */
@@ -51,6 +56,7 @@ class Customer
 
     /**
      * @var string
+     * @Assert\NotBlank(message="Please enter your phone.")
      *
      * @ORM\Column(name="phone", type="string", length=255)
      */
@@ -58,6 +64,7 @@ class Customer
 
     /**
      * @var \DateTime
+     * @Assert\NotBlank(message="Please enter your birthday.")
      *
      * @ORM\Column(name="birthday", type="datetimetz")
      */

@@ -22,6 +22,13 @@ class GameScore
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="player_name", type="string")
+     */
+    private $playerName;
+
+    /**
      * Many GameScores have One Card.
      * @ORM\ManyToOne(targetEntity="Card", inversedBy="gameScores")
      * @ORM\JoinColumn(name="card_id", referencedColumnName="id")
