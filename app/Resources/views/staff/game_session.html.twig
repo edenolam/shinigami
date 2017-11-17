@@ -1,0 +1,79 @@
+{% extends 'staff/staff.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_row(form.center) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.time) }}
+        {{ form_row(form.numberPlayers) }}
+        {{ form_row(form.gameScores, {"data-prototype": form.gameScores.vars.prototype|e}) }}
+        {#<ul id="gamescore-fields-list" data-prototype="{{ form_widget(form.gameScores.vars.prototype)|e }}">#}
+            {#{% for gamescoreField in form.gameScores %}#}
+                {#<li>#}
+                    {#{{ form_errors(gamescoreField) }}#}
+                    {#{{ form_widget(gamescoreField) }}#}
+                {#</li>#}
+            {#{% endfor %}#}
+        {#</ul>#}
+        <button class="btn" type="submit">Submit</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
+        $('.timepicker').pickatime({
+            default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+            fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+            twelvehour: false, // Use AM/PM or 24-hour format
+            donetext: 'OK', // text for done-button
+            cleartext: 'Clear', // text for clear-button
+            canceltext: 'Cancel', // Text for cancel-button
+            autoclose: false, // automatic close timepicker
+            ampmclickable: true, // make AM PM clickable
+            aftershow: function(){} //Function for after opening timepicker
+        });
+
+
+        jQuery(document).ready(function() {
+            jQuery('#appbundle_gamesession_numberPlayers').change(function(e) {
+                e.preventDefault();
+
+                $('#appbundle_gamesession_gameScores').empty();
+
+                var numberPlayer = $('#appbundle_gamesession_numberPlayers').val();
+                var gamescoreList = jQuery('#appbundle_gamesession_gameScores');
+                for(var i = 0; i < numberPlayer; i++) {
+                    // grab the prototype template
+                    var newWidget = gamescoreList.attr('data-prototype');
+                    // replace the "__name__" used in the id and name of the prototype
+                    // with a number that's unique to your emails
+                    // end name attribute looks like name="contact[emails][2]"
+                    newWidget = newWidget.replace(/__name__/g, i);
+
+                    // create a new list element and add it to the list
+                    var newLi = jQuery('<li class="row card"></li>').html(newWidget);
+                    newLi.appendTo(gamescoreList);
+
+                }
+
+            });
+        })
+    </script>
+{% endblock %}
+

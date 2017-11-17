@@ -2,22 +2,36 @@
 
 {% block body %}
 
-<div class="form-row center center mx-auto" style="width: 400px;">
+<div class="form-row center center mx-auto">
 
-    <div class="col-auto">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary">rechercher</button>
-        {{ form_end(form) }}
+    <div class="card" style="width: 400px; margin:auto;">
+        <span class="card-title">Find a customer</span>
+        <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab"><a class="active" href="#by-card">Search by card</a></li>
+                <li class="tab"><a href="#by-name">Search by name</a></li>
+            </ul>
+        </div>
+        <div class="card-content grey lighten-4">
+            <div id="by-card">
+                <form action="" method="post">
+                    <label for="">Search by card</label>
+                    <input type="text" name="search_field">
+                    <input type="submit" value="Search" class="waves-effect waves-light btn">
+                </form>
+            </div>
+            <div id="by-name">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit" class="waves-effect waves-light btn">Search</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
 
-    <form action="" method="post">
-        <div class="col-auto">
-            <label for="">search by card</label>
-            <input type="text" name="search_field">
-            <input type="submit" value="search" class="btn btn-primary">
-        </div>
-    </form>
-
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

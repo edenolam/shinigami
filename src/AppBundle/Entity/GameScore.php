@@ -22,6 +22,13 @@ class GameScore
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="player_name", type="string")
+     */
+    private $playerName;
+
+    /**
      * Many GameScores have One Card.
      * @ORM\ManyToOne(targetEntity="Card", inversedBy="gameScores")
      * @ORM\JoinColumn(name="card_id", referencedColumnName="id")
@@ -124,5 +131,29 @@ class GameScore
     public function getGameSession()
     {
         return $this->gameSession;
+    }
+
+    /**
+     * Set playerName
+     *
+     * @param string $playerName
+     *
+     * @return GameScore
+     */
+    public function setPlayerName($playerName)
+    {
+        $this->playerName = $playerName;
+
+        return $this;
+    }
+
+    /**
+     * Get playerName
+     *
+     * @return string
+     */
+    public function getPlayerName()
+    {
+        return $this->playerName;
     }
 }

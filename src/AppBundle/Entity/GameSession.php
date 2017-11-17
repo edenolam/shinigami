@@ -43,7 +43,7 @@ class GameSession
 
     /**
      * One GameSession has Many GameScores.
-     * @ORM\OneToMany(targetEntity="GameScore", mappedBy="gameSession")
+     * @ORM\OneToMany(targetEntity="GameScore", mappedBy="gameSession", cascade={"persist"})
      */
     private $gameScores;
 
