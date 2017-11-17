@@ -1,0 +1,10 @@
+{% extends 'staff/staff.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" id="submit">Edit</button>
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -47,7 +47,9 @@ class StaffController extends Controller
 	{
 		$customer = $card->getCustomer();
 		return $this->render('staff/card.html.twig',[
-			'customer' => $customer
+			'customer' => $customer,
+			'card'     => $card,
+			'offers'   => NULL
 		]);
 	}
 
