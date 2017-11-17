@@ -12,6 +12,15 @@ default:
       contexts:
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
+    staff:
+      filters:
+        tags: '@staff'
+      contexts:
+        - StaffContext
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
+      parameters:
+        browser: 'chrome'
     security:
       filters:
         tags: '@security'
@@ -30,7 +39,9 @@ default:
         kernel:
             bootstrap: ""
     Behat\MinkExtension:
-      base_url: 'http://wf3projet2.local/app_dev.php'
-      goutte: ~
-      selenium2:
-        wd_host: 'http://phantomjs:8910/wd/hub'
+        default_session: goutte
+        goutte: ~
+        selenium2:
+          wd_host: "http://127.0.0.1:4444/wd/hub"
+          capabilities: { "browserName": "firefox", "browser": "firefox", "version":  "", "platform": "WINDOWS" }
+        browser_name: firefox

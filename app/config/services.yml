@@ -40,3 +40,7 @@ services:
           class: AppBundle\Service\CardManager
           public: true
 
+    app.gamesession.manager:
+          class: AppBundle\Service\GameSessionManager
+          public: true
+

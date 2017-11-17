@@ -2,8 +2,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
-use AppBundle\Form\CustomerType;
-use AppBundle\Form\CardType;
+use AppBundle\Entity\Customer;
+use AppBundle\Entity\GameSession;
+use AppBundle\Form\GameSessionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\SearchCustomerType;
@@ -52,43 +53,26 @@ class StaffController extends Controller
 		]);
 	}
 
-	public function editCustomerAction(Request $request, Card $card)
-	{
-		$form = $this->createForm(CustomerType::class, $card->getCustomer());
-		$form->handleRequest($request);
+    public function newGameSessionAction(Request $request)
+    {
+        $gameSession = new GameSession();
+        $form = $this->createForm(GameSessionType::class, $gameSession);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $gameSession = $this->get('app.gamesession.manager')->gameSessionsHydratation($request, $gameSession);
+            if($gameSession instanceof GameSession){
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($gameSession);
+                $entityManager->flush();
+                $this->addFlash('success', 'The game session has been saved !');
 
-		if($form->isSubmitted() && $form->isValid()){
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($card->getCustomer());
-			$em->flush();
+                return $this->redirectToRoute('staff_panel');
+            }
+        }
 
-			$this->addFlash('success', "The profile were modified.");
-
-			return $this->redirectToRoute('staff_card', array('number' => $card->getNumber()));
-		}
-
-		return $this->render('staff/edit_customer.html.twig', array(
-			"form" => $form->createView()
-		));
-	}
-
-	public function editCardAction(Request $request, Card $card)
-	{
-		$form = $this->createForm(CardType::class, $card);
-		$form->handleRequest($request);
-
-		if($form->isSubmitted() && $form->isValid()){
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($card);
-			$em->flush();
-
-			$this->addFlash('success', "The card were modified.");
-
-			return $this->redirectToRoute('staff_card', array('number' => $card->getNumber()));
-		}
-
-		return $this->render('staff/edit_card.html.twig', array(
-			"form" => $form->createView()
-		));
-	}
+        return $this->render('staff/game_session.html.twig', array(
+            "form" => $form->createView()
+        ));
+    }
 }

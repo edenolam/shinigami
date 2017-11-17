@@ -41,22 +41,29 @@ staff_panel:
     defaults:
         _controller: AppBundle:Staff:panel
 
+staff_card:
+    path: /staff/card/{number}
+    defaults:
+        _controller: AppBundle:Staff:manageCard
+    requirements:
+          number:     \d+
+
 staff_newsletter:
     path: /staff/newsletter
     defaults:
-            _controller: AppBundle:Staff:manageNewsletter
+        _controller: AppBundle:Staff:manageNewsletter
 
 staff_offer:
     path: /staff/offer
     defaults:
-            _controller: AppBundle:Staff:manageOffer
+        _controller: AppBundle:Staff:manageOffer
 
-staff_card:
-    path: /staff/card/{number}
+
+staff_gamesession:
+    path: /staff/gamesession
     defaults:
-            _controller: AppBundle:Staff:manageCard
-    requirements:
-          number:     \d+
+        _controller: AppBundle:Staff:newGameSession
+
 
 staff_edit_profile:
     path: /staff/card/{number}/editcustomer
