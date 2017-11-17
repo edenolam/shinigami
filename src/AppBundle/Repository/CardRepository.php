@@ -10,6 +10,20 @@ namespace AppBundle\Repository;
  */
 class CardRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findValidCardByNumber($number)
+	{
+		return $this->createQueryBuilder('c')
+			->where('c.number = :number')
+			->andWhere('c.isActive = true')
+			->andWhere('c.customer IS NOT null')
+			->setParameter('number', $number)
+			->getQuery()
+			->getOneOrNullResult()
+			;
+
+
+	}
+
     public function findInactiveCardByNumber($number)
     {
         return $this->createQueryBuilder('c')

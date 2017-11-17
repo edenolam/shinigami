@@ -10,4 +10,21 @@ namespace AppBundle\Repository;
  */
 class CustomerRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findCustomerWithoutCard($firstname, $lastname, $phone )
+	{
+		return $this->createQueryBuilder('c')
+			->where('c.firstname = :firstname')
+			->andWhere('c.lastname = :lastname')
+			->andWhere('c.phone = :phone')
+			->setParameters([
+				'firstname' => $firstname,
+				'lastname'  => $lastname,
+				'phone'     => $phone
+				])
+			->getQuery()
+			->getOneOrNullResult()
+			;
+
+
+	}
 }

@@ -29,3 +29,25 @@ staff_panel:
     path: /staff
     defaults:
         _controller: AppBundle:Staff:panel
+
+staff_newsletter:
+    path: /staff/newsletter
+    defaults:
+            _controller: AppBundle:Staff:manageNewsletter
+
+staff_offer:
+    path: /staff/offer
+    defaults:
+            _controller: AppBundle:Staff:manageOffer
+
+staff_card:
+    path: /staff/card/{number}
+    defaults:
+            _controller: AppBundle:Staff:manageCard
+    requirements:
+          number:     \d+
+
+
+
+
+

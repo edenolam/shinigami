@@ -1,0 +1,23 @@
+{% extends 'staff/staff.html.twig' %}
+
+{% block body %}
+
+<div class="form-row center center mx-auto" style="width: 400px;">
+
+    <div class="col-auto">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">rechercher</button>
+        {{ form_end(form) }}
+    </div>
+
+    <form action="" method="post">
+        <div class="col-auto">
+            <label for="">search by card</label>
+            <input type="text" name="search_field">
+            <input type="submit" value="search" class="btn btn-primary">
+        </div>
+    </form>
+
+</div>
+{% endblock %}
