@@ -2,39 +2,33 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         {% block stylesheets %}
-            <link type="text/css" rel="stylesheet" href="css/paper.css"  media="screen,projection"/>
+            <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"  media="screen,projection"/>
             <!--Import Google Icon Font-->
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <!--Import materialize.css-->
             <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
         {% endblock %}
 
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">SHINIGAMI</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    {% block nav %}
-                            <a class="nav-item nav-link" href="{{ path('register') }}" id="register">register</a>
-                            <a class="nav-item nav-link" href="{{ path('login') }}" id="login">login</a>
-                    {% endblock %}
+        <nav>
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">SHINIGAMI</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        {% block nav %}
+                            <li><a href="{{ path('register') }}" id="register">register</a></li>
+                            <li><a href="{{ path('login') }}" id="login">login</a></li>
+                        {% endblock %}
+                    </ul>
                 </div>
             </div>
         </nav>
 
-       <div class="container">
-           <h1>Welcome to Shinigami Laser</h1>
+        <div class="container">
 
            <div id="flashbag">
                {% for label, messages in app.flashes %}
@@ -43,9 +37,37 @@
                    {% endfor %}
                {% endfor %}
            </div>
+
            {% block body %}{% endblock %}
        </div>
 
+        <!-- footer -->
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Footer Content</h5>
+                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2014 Copyright Text
+                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                </div>
+            </div>
+        </footer>
+        <!-- fin footer -->
         {% block javascripts %}
             <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
             <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>

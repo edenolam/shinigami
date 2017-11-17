@@ -2,7 +2,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
-use AppBundle\Entity\Customer;
+use AppBundle\Form\CustomerType;
+use AppBundle\Form\CardType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\SearchCustomerType;
@@ -45,7 +46,49 @@ class StaffController extends Controller
 	{
 		$customer = $card->getCustomer();
 		return $this->render('staff/card.html.twig',[
-			'customer' => $customer
+			'customer' => $customer,
+			'card'     => $card,
+			'offers'   => NULL
 		]);
+	}
+
+	public function editCustomerAction(Request $request, Card $card)
+	{
+		$form = $this->createForm(CustomerType::class, $card->getCustomer());
+		$form->handleRequest($request);
+
+		if($form->isSubmitted() && $form->isValid()){
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($card->getCustomer());
+			$em->flush();
+
+			$this->addFlash('success', "The profile were modified.");
+
+			return $this->redirectToRoute('staff_card', array('number' => $card->getNumber()));
+		}
+
+		return $this->render('staff/edit_customer.html.twig', array(
+			"form" => $form->createView()
+		));
+	}
+
+	public function editCardAction(Request $request, Card $card)
+	{
+		$form = $this->createForm(CardType::class, $card);
+		$form->handleRequest($request);
+
+		if($form->isSubmitted() && $form->isValid()){
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($card);
+			$em->flush();
+
+			$this->addFlash('success', "The card were modified.");
+
+			return $this->redirectToRoute('staff_card', array('number' => $card->getNumber()));
+		}
+
+		return $this->render('staff/edit_card.html.twig', array(
+			"form" => $form->createView()
+		));
 	}
 }

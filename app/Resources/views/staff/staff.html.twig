@@ -2,9 +2,9 @@
 
 {% block nav %}
 
-    <div class="nav-item nav-link app-user-username">{{ app.user.username }}</div>
-    <a class="nav-item nav-link" href="{{ path('staff_newsletter') }}" id="newsletter">newsletter</a>
-    <a class="nav-item nav-link" href="{{ path('staff_offer') }}" id="offer">offer</a>
-    <a class="nav-item nav-link" href="{{ path('logout') }}" id="logout">logout</a>
+    <li><div class="nav-item nav-link app-user-username">{{ app.user.username }}</div></li>
+    <li><a href="{{ path('staff_newsletter') }}" id="newsletter">newsletter</a></li>
+    <li><a href="{{ path('staff_offer') }}" id="offer">offer</a></li>
+    <li><a href="{{ path('logout') }}" id="logout">logout</a></li>
 
 {% endblock %}

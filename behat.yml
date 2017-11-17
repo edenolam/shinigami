@@ -19,6 +19,12 @@ default:
         - SecurityContext
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
+    staff:
+      filters:
+        tags: '@staff'
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
   extensions:
     Behat\Symfony2Extension:
         kernel:
