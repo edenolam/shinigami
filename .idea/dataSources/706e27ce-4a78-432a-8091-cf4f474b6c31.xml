@@ -12,60 +12,56 @@
     <schema id="6" parent="1" name="sutekinabox"/>
     <schema id="7" parent="1" name="symfony"/>
     <schema id="8" parent="1" name="sys"/>
-    <schema id="9" parent="1" name="agenda"/>
-    <schema id="10" parent="1" name="avatar"/>
-    <schema id="11" parent="1" name="box"/>
-    <schema id="12" parent="1" name="export"/>
-    <schema id="13" parent="1" name="fftcg"/>
-    <schema id="14" parent="1" name="pokemon"/>
-    <schema id="15" parent="1" name="tvshow"/>
-    <schema id="16" parent="1" name="user"/>
-    <table id="17" parent="2" name="account"/>
-    <table id="18" parent="2" name="card"/>
-    <table id="19" parent="2" name="cards_gamesessions"/>
-    <table id="20" parent="2" name="cards_offers"/>
-    <table id="21" parent="2" name="center"/>
-    <table id="22" parent="2" name="customer"/>
-    <table id="23" parent="2" name="game_score"/>
-    <table id="24" parent="2" name="game_session"/>
-    <table id="25" parent="2" name="offer"/>
-    <column id="26" parent="17" name="id">
+    <schema id="9" parent="1" name="administrationsbc"/>
+    <schema id="10" parent="1" name="badges"/>
+    <schema id="11" parent="1" name="fosuser"/>
+    <schema id="12" parent="1" name="tdd14"/>
+    <table id="13" parent="2" name="account"/>
+    <table id="14" parent="2" name="card"/>
+    <table id="15" parent="2" name="cards_gamesessions"/>
+    <table id="16" parent="2" name="cards_offers"/>
+    <table id="17" parent="2" name="center"/>
+    <table id="18" parent="2" name="customer"/>
+    <table id="19" parent="2" name="game_score"/>
+    <table id="20" parent="2" name="game_session"/>
+    <table id="21" parent="2" name="offer"/>
+    <column id="22" parent="13" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="27" parent="17" name="customer_id">
+    <column id="23" parent="13" name="customer_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="28" parent="17" name="username">
+    <column id="24" parent="13" name="username">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="17" name="password">
+    <column id="25" parent="13" name="password">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="17" name="email">
+    <column id="26" parent="13" name="email">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="31" parent="17" name="roles">
+    <column id="27" parent="13" name="roles">
       <Position>6</Position>
       <Comment>(DC2Type:array)</Comment>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="17" name="is_active">
+    <column id="28" parent="13" name="is_active">
       <Position>7</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="33" parent="17" name="UNIQ_7D3656A49395C3F3">
+    <index id="29" parent="13" name="UNIQ_7D3656A49395C3F3">
       <ColNames>customer_id</ColNames>
       <Unique>1</Unique>
     </index>

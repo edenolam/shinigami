@@ -23,4 +23,15 @@ class CardRepository extends \Doctrine\ORM\EntityRepository
 
 
 	}
+
+    public function findInactiveCardByNumber($number)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.customer IS NULL')
+            ->andWhere('c.isActive = false')
+            ->andWhere('c.number = :number')
+            ->setParameter("number", $number)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
