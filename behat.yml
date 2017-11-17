@@ -6,6 +6,12 @@ default:
       contexts:
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
+    customer:
+      filters:
+        tags: '@customer'
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
     security:
       filters:
         tags: '@security'
