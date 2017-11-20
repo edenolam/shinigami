@@ -16,11 +16,9 @@ default:
       filters:
         tags: '@staff'
       contexts:
-        - StaffContext
+        #- StaffContext
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
-      parameters:
-        browser: 'chrome'
     security:
       filters:
         tags: '@security'
