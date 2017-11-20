@@ -53,12 +53,6 @@ staff_newsletter:
     defaults:
         _controller: AppBundle:Staff:manageNewsletter
 
-staff_offer:
-    path: /staff/offer
-    defaults:
-        _controller: AppBundle:Staff:manageOffer
-
-
 staff_gamesession:
     path: /staff/gamesession
     defaults:
@@ -79,6 +73,9 @@ staff_edit_card:
     requirements:
           number:     \d+
 
-
+staff_offers_list:
+    path: /staff/offers/list
+    defaults:
+          _controller: AppBundle:Staff:offersList
 
 

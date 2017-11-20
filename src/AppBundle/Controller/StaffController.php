@@ -46,9 +46,12 @@ class StaffController extends Controller
 	public function manageCardAction(Card $card)
 	{
 		$customer = $card->getCustomer();
+		$em = $this->getDoctrine()->getManager();
+		$gameSession = $em->getRepository("AppBundle:GameSession")->findGameSessionsOfCustomer($card);
 		return $this->render('staff/card.html.twig',[
 			'customer' => $customer,
 			'card'     => $card,
+			'gameSessions' => $gameSession,
 			'offers'   => NULL
 		]);
 	}
@@ -60,7 +63,7 @@ class StaffController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            $gameSession = $this->get('app.gamesession.manager')->gameSessionsHydratation($request, $gameSession);
+            $gameSession = $this->get('app.gamesession.manager')->gameSessionCreation($request, $gameSession);
             if($gameSession instanceof GameSession){
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($gameSession);
@@ -74,5 +77,10 @@ class StaffController extends Controller
         return $this->render('staff/game_session.html.twig', array(
             "form" => $form->createView()
         ));
+    }
+
+    public function offersListAction()
+    {
+        return $this->render('staff/offers_list.html.twig', array('offers' => null));
     }
 }

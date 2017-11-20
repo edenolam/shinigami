@@ -68,13 +68,10 @@ Feature: Staff
     Then I should be on "/staff/gamesession"
     And the response status code should be 200
     And the ".alert-success" element should contain "The game session has been saved."
-<<<<<<< HEAD
-=======
 
 
   @staff
   Scenario: From panel to offers CRUD
-  Scenario: From panel to new game session and making of a game session
     Given I am on "/login"
     And I fill in "username" with "staff"
     And I fill in "password" with "staff"
@@ -82,6 +79,8 @@ Feature: Staff
     Then I should be on "/staff"
     And the response status code should be 200
     Then I follow "offers"
-    Then I should see "Create"
+    Then I should be on "/staff/offers/list"
+    And the response status code should be 200
+    And I should see "Create"
 
->>>>>>> debut crud offers
+

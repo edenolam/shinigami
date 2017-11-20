@@ -43,6 +43,7 @@ class GameSessionType extends AbstractType
                 "mapped" => false
             ))
             ->add('numberPlayers', NumberType::class, array(
+                "label" => "Number of players",
                 "mapped" => false,
             ))
             ->add('gameScores', CollectionType::class, array(

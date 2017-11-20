@@ -9,7 +9,9 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Event\GameSessionCreationEvent;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -24,14 +26,33 @@ class GameSessionManager
      * @var Session
      */
     private $session;
+    /**
+     * @var EventDispatcher
+     */
+    private $dispatcher;
 
-    public function __construct(ObjectManager $entityManager, Session $session)
+    public function __construct(ObjectManager $entityManager, Session $session, EventDispatcher $dispatcher)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;
+        $this->dispatcher = $dispatcher;
     }
 
-    public function gameSessionsHydratation($request, $gameSession)
+
+    public function gameSessionCreation($request, $gameSession)
+    {
+        $hydratedGameSession = $this->gameSessionsHydratation($request, $gameSession);
+
+        if($hydratedGameSession){
+            // Dispatch Game Session creation event
+            $event = new GameSessionCreationEvent($gameSession);
+            $this->dispatcher->dispatch(GameSessionCreationEvent::NAME, $event);
+        }
+
+        return $hydratedGameSession;
+    }
+
+    private function gameSessionsHydratation($request, $gameSession)
     {
         // Hydratation of unmapped datas (cards, datetime)
         $data = $request->request->get('appbundle_gamesession');

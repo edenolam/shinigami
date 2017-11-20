@@ -1,0 +1,39 @@
+{% extends 'staff/staff.html.twig' %}
+
+{% block body %}
+
+    <h1>Offers</h1>
+    <a href="" class="btn">Create new offer</a>
+
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Type</td>
+                <td>Count</td>
+                <td>Level</td>
+                <td>Active</td>
+            </tr>
+        </thead>
+        {% for offer in offers %}
+            <tr>
+                <td>{{ offer.id }}</td>
+                <td>{{ offer.name }}</td>
+                <td>{{ offer.type }}</td>
+                <td>{{ offer.count }}</td>
+                <td>{{ offer.level }}</td>
+                <td>{{ offer.isAction }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+
