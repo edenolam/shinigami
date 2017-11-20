@@ -2,8 +2,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
-use AppBundle\Entity\Customer;
 use AppBundle\Entity\GameSession;
+use AppBundle\Form\CardType;
+use AppBundle\Form\CustomerType;
 use AppBundle\Form\GameSessionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ class StaffController extends Controller
 
 		$entity_manager = $this->getDoctrine()->getManager();
 		if ($request->isMethod('POST')){
+			$card = null;
 			if ($form->isSubmitted() && $form->isValid()){
 				$customerData = $form->getData();
 				$customer = $entity_manager->getRepository('AppBundle:Customer')
@@ -28,13 +30,21 @@ class StaffController extends Controller
 						$customerData["lastname"],
 						$customerData['phone']
 					);
+				if ($customer){
+					$card = $customer->getCard();
+				}
 			}else{
 				$cardData = $request->get('search_field');
 				$card = $entity_manager->getRepository('AppBundle:Card')
 					->findValidCardByNumber($cardData);
+			}
+
+			if ($card){
 				return $this->redirectToRoute('staff_card', [
 					'number' => $card->getNumber()
 				]);
+			}else{
+				$this->addFlash('error', 'Card not found');
 			}
 		}
 
@@ -75,4 +85,44 @@ class StaffController extends Controller
             "form" => $form->createView()
         ));
     }
+
+    public function editCardAction(Request $request, Card $card)
+	{
+		$form = $this->createForm(CardType::class, $card);
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()){
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($card);
+			$entityManager->flush();
+			$this->addFlash('success', 'The card has been updated');
+			return $this->redirectToRoute('staff_card', [
+				'number' => $card->getNumber()
+			]);
+		}
+		return $this->render('staff/edit_card.html.twig', array(
+			"form" => $form->createView()
+		));
+	}
+
+	public function editCustomerAction(Request $request, Card $card)
+	{
+		$form = $this->createForm(CustomerType::class, $card->getCustomer());
+		$form->handleRequest($request);
+
+		if($form->isSubmitted() && $form->isValid()){
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($this->getUser()->getCustomer());
+			$em->flush();
+
+			$this->addFlash('success', "Your informations were modified.");
+
+			return $this->redirectToRoute('staff_card');
+		}
+
+		return $this->render('customer/modify.html.twig', array(
+			"form" => $form->createView()
+		));
+	}
+
+
 }

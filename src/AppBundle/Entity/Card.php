@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +25,12 @@ class Card
      * @var int
      *
      * @ORM\Column(name="number", type="integer", unique=true)
+	 * @Assert\Length(
+	 *      min = 9,
+	 *      max = 9,
+	 *      minMessage = "the card number must be at least {{ limit }} characters long",
+	 *      maxMessage = "the card number cannot be longer than {{ limit }} characters"
+	 * )
      */
     private $number;
 
