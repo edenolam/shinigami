@@ -81,6 +81,31 @@ Feature: Staff
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
-    And I should see "Create"
+    And I should see "Create new offer"
 
 
+  @staff
+  Scenario: From offers list to offers creation, creation of an offer
+    Given I am on "/login"
+    And I fill in "username" with "staff"
+    And I fill in "password" with "staff"
+    And I press "submit"
+    Then I should be on "/staff"
+    And the response status code should be 200
+    Then I follow "offers"
+    Then I should be on "/staff/offers/list"
+    And the response status code should be 200
+    And I should see "Create new offer"
+    And I follow "new-offer"
+    Then I should be on "/staff/offers/new"
+    And the response status code should be 200
+    And I fill in "appbundle_offer_code" with "SCR100"
+    And I fill in "appbundle_offer_count" with "100"
+    And I fill in "appbundle_offer_name" with "Beginner"
+    And I fill in "appbundle_offer_offerType" with "score"
+    And I fill in "appbundle_offer_description" with "Yey ! Welcome in the family of Shinigami Laser !"
+    And I fill in "appbundle_offer_level" with "1"
+    And I press "submit"
+    Then I should be on "/staff/offers/list"
+    And the response status code should be 200
+    And I should see "The offer Beginner has been saved"

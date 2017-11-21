@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Card;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\GameSession;
+use AppBundle\Entity\Offer;
 use AppBundle\Form\GameSessionType;
+use AppBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\SearchCustomerType;
@@ -82,5 +84,24 @@ class StaffController extends Controller
     public function offersListAction()
     {
         return $this->render('staff/offers_list.html.twig', array('offers' => null));
+    }
+
+    public function offersCreateAction(Request $request)
+    {
+
+        $offer = new Offer();
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $offer->setIsActive(true);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offer);
+            $entityManager->flush();
+            $this->addFlash('success', "The offer ".$offer->getName()." has been saved");
+            return $this->redirectToRoute('staff_offers_list');
+        }
+        return $this->render('staff/offers_create.html.twig', array(
+            "form" => $form->createView()
+        ));
     }
 }

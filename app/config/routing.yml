@@ -78,4 +78,8 @@ staff_offers_list:
     defaults:
           _controller: AppBundle:Staff:offersList
 
+staff_offers_create:
+    path: /staff/offers/new
+    defaults:
+          _controller: AppBundle:Staff:offersCreate
 
