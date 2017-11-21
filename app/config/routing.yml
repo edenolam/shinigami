@@ -83,3 +83,9 @@ staff_offers_create:
     defaults:
           _controller: AppBundle:Staff:offersCreate
 
+
+staff_offers_active:
+    path: /staff/offers/active/{id}
+    defaults:
+          _controller: AppBundle:Staff:offersActive
+

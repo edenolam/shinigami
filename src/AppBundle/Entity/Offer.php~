@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Offer
@@ -22,7 +23,16 @@ class Offer
     private $id;
 
     /**
+     * @var string
+     * @Assert\NotBlank()
+     *
+     * @ORM\Column(name="code", type="string", length=255, unique=true)
+     */
+    private $code;
+
+    /**
      * @var int
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="count", type="integer")
      */
@@ -30,6 +40,15 @@ class Offer
 
     /**
      * @var string
+     * @Assert\NotBlank()
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="offerType", type="string", length=255)
      */
@@ -37,6 +56,7 @@ class Offer
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
@@ -44,6 +64,7 @@ class Offer
 
     /**
      * @var int
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="level", type="integer")
      */
@@ -185,5 +206,37 @@ class Offer
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 }

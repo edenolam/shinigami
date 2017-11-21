@@ -98,7 +98,16 @@
     <div class="card row offers-infos">
         <h2>My offers</h2>
         {% if card %}
-            {% if offers %}
+            {% if cardsOffers %}
+                <div class="carousel">
+                    {% for cardsOffer in cardsOffers %}
+                        <div class="carousel-item">
+                            <div class="card-panel red" style="width: 180px; height: 180px;">
+                                <span class="white-text">{{ cardsOffer.offer.description }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             {% else %}
                 <p>There is no available offers.</p>
             {% endif %}
@@ -109,4 +118,13 @@
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="application/javascript">
+    $(document).ready(function(){
+        $('.carousel').carousel();
+    });
+</script>
 {% endblock %}

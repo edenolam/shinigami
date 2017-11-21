@@ -61,7 +61,7 @@ class StaffController extends Controller
 			'customer' => $customer,
 			'card'     => $card,
 			'gameSessions' => $gameSession,
-			'offers'   => NULL
+			'cardsOffers'   => $card->getCardsOffers()
 		]);
 	}
 
@@ -87,9 +87,6 @@ class StaffController extends Controller
             "form" => $form->createView()
         ));
     }
-
-
-
 
     public function editCardAction(Request $request, Card $card)
 	{
@@ -132,7 +129,9 @@ class StaffController extends Controller
 
     public function offersListAction()
     {
-        return $this->render('staff/offers_list.html.twig', array('offers' => null));
+        $entityManager = $this->getDoctrine()->getManager();
+        $offers = $entityManager->getRepository("AppBundle:Offer")->findAll();
+        return $this->render('staff/offers_list.html.twig', array('offers' => $offers));
     }
 
     public function offersCreateAction(Request $request)
@@ -152,6 +151,19 @@ class StaffController extends Controller
         return $this->render('staff/offers_create.html.twig', array(
             "form" => $form->createView()
         ));
+    }
+
+    public function offersActiveAction(Offer $offer)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        if($offer->getIsActive()) {
+            $offer->setIsActive(false);
+        }else{
+            $offer->setIsActive(true);
+        }
+        $entityManager->persist($offer);
+        $entityManager->flush();
+        return $this->redirectToRoute('staff_offers_list');
     }
 
 }
