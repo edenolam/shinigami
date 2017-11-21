@@ -3,10 +3,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
 use AppBundle\Entity\GameSession;
-<<<<<<< HEAD
 use AppBundle\Form\CardType;
 use AppBundle\Form\CustomerType;
-=======
 use AppBundle\Entity\Offer;
 >>>>>>> 4969cd43d1496a83f1abe97885f82825e615c5c9
 use AppBundle\Form\GameSessionType;
@@ -91,7 +89,7 @@ class StaffController extends Controller
         ));
     }
 
-<<<<<<< HEAD
+
 
 
     public function editCardAction(Request $request, Card $card)
@@ -133,7 +131,6 @@ class StaffController extends Controller
 	}
 
 
-=======
     public function offersListAction()
     {
         return $this->render('staff/offers_list.html.twig', array('offers' => null));
@@ -157,5 +154,5 @@ class StaffController extends Controller
             "form" => $form->createView()
         ));
     }
->>>>>>> 4969cd43d1496a83f1abe97885f82825e615c5c9
+
 }
