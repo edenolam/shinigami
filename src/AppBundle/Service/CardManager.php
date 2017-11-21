@@ -48,9 +48,9 @@ class CardManager
     public function addCardToCustomer($number, $customer)
     {
         $number = intval($number);
-
+//exit(dump($number));
         if($number){
-            if(strlen((string)$number) != 10){
+            if(strlen((string)$number) != 9){
                 $this->session->getFlashBag()->add('error', 'The card number your entered is not valid.');
                 return;
             }
@@ -63,7 +63,7 @@ class CardManager
                 $this->entityManager->persist($card);
                 $this->entityManager->flush();
                 $this->session->getFlashBag()->add('success', 'Success ! You have a new card !');
-                return;
+				return;
             }else{
                 $this->session->getFlashBag()->add('error', 'The card number your entered doesn\'t exist.');
                 return;

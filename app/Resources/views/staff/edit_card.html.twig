@@ -3,7 +3,8 @@
 {% block body %}
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    {{ form_row(form.number) }}
     <button type="submit" id="submit">Edit</button>
     {{ form_end(form) }}
 
