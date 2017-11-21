@@ -1,0 +1,25 @@
+<div class="card card-infos">
+    <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-card" href="{{ path("staff_edit_card", {'number':card.number }) }}">
+        <i class="large material-icons">mode_edit</i>
+    </a>
+    <h2>Customer card </h2>
+    {% if customer.card %}
+        <p>Card n° {{ card.number }} </p>
+        <table>
+            <tr>
+                <td>Visits</td>
+                <td>Total score</td>
+            </tr>
+            <tr>
+                <td>{{ card.visits }}</td>
+                <td>{{ card.score }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <form method="post">
+            <label for="addcard">Add card</label>
+            <input type="text" name="number" id="addcard" placeholder="Must be a number of 10 characters" />
+            <button type="submit" name="submit">Validate</button>
+        </form>
+    {% endif %}
+</div>

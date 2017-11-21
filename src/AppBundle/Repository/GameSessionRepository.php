@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * GameSessionRepository
@@ -10,4 +11,13 @@ namespace AppBundle\Repository;
  */
 class GameSessionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findGameSessionsOfCustomer($card)
+    {
+        return $this->createQueryBuilder('gs')
+            ->innerJoin('gs.cards', "c", Join::WITH, "c = :card")
+            ->orderBy("gs.date", "DESC")
+            ->setParameter("card", $card)
+            ->getQuery()
+            ->getResult();
+    }
 }

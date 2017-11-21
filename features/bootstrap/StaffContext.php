@@ -1,4 +1,7 @@
 <?php
+
+use Behat\Behat\Context\Context;
+
 /**
  * Created by PhpStorm.
  * User: hello
@@ -6,15 +9,7 @@
  * Time: 15:19
  */
 
-class StaffContext extends \Behat\MinkExtension\Context\MinkContext implements \Behat\Behat\Context\Context
+class StaffContext implements Context
 {
-    private $driver;
-    private $session;
 
-    public function __construct()
-    {
-        $this->driver = new \Behat\Mink\Driver\Selenium2Driver('firefox');
-        $this->session = new \Behat\Mink\Session($this->driver);
-        $this->session->start();
-    }
 }
