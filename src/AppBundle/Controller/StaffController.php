@@ -14,11 +14,8 @@ class StaffController extends Controller
 {
 	public function panelAction(Request $request)
 	{
-
 		$form = $this->createForm(SearchCustomerType::class);
-
 		$form->handleRequest($request);
-
 		$entity_manager = $this->getDoctrine()->getManager();
 		if ($request->isMethod('POST')){
 			$card = null;
@@ -85,6 +82,8 @@ class StaffController extends Controller
             "form" => $form->createView()
         ));
     }
+
+
 
     public function editCardAction(Request $request, Card $card)
 	{
