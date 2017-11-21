@@ -3,9 +3,16 @@
 {% block nav %}
 
     <div class="nav-item nav-link app-user-username">{{ app.user.username }}</div>
+<<<<<<< HEAD
     <a href="{{ path('staff_newsletter') }}" id="newsletter">Newsletter</a>
     <a href="{{ path('staff_offer') }}" id="offer">Offers</a>
     <a href="{{ path('staff_gamesession') }}" id="new-gamesession">New game session</a>
     <a href="{{ path('logout') }}" id="logout">logout</a>
+=======
+    <a class="nav-item nav-link" href="{{ path('staff_newsletter') }}" id="newsletter">Newsletter</a>
+    <a class="nav-item nav-link" href="{{ path('staff_offers_list') }}" id="offers">Offers</a>
+    <a class="nav-item nav-link" href="{{ path('staff_gamesession') }}" id="new-gamesession">New game session</a>
+    <a class="nav-item nav-link" href="{{ path('logout') }}" id="logout">logout</a>
+>>>>>>> 4969cd43d1496a83f1abe97885f82825e615c5c9
 
 {% endblock %}
