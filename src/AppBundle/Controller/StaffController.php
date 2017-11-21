@@ -5,7 +5,9 @@ use AppBundle\Entity\Card;
 use AppBundle\Entity\GameSession;
 use AppBundle\Form\CardType;
 use AppBundle\Form\CustomerType;
+use AppBundle\Entity\Offer;
 use AppBundle\Form\GameSessionType;
+use AppBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\SearchCustomerType;
@@ -53,9 +55,12 @@ class StaffController extends Controller
 	public function manageCardAction(Card $card)
 	{
 		$customer = $card->getCustomer();
+		$em = $this->getDoctrine()->getManager();
+		$gameSession = $em->getRepository("AppBundle:GameSession")->findGameSessionsOfCustomer($card);
 		return $this->render('staff/card.html.twig',[
 			'customer' => $customer,
 			'card'     => $card,
+			'gameSessions' => $gameSession,
 			'offers'   => NULL
 		]);
 	}
@@ -67,7 +72,7 @@ class StaffController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            $gameSession = $this->get('app.gamesession.manager')->gameSessionsHydratation($request, $gameSession);
+            $gameSession = $this->get('app.gamesession.manager')->gameSessionCreation($request, $gameSession);
             if($gameSession instanceof GameSession){
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($gameSession);
@@ -82,8 +87,6 @@ class StaffController extends Controller
             "form" => $form->createView()
         ));
     }
-
-
 
     public function editCardAction(Request $request, Card $card)
 	{
@@ -124,4 +127,28 @@ class StaffController extends Controller
 	}
 
 
+
+    public function offersListAction()
+    {
+        return $this->render('staff/offers_list.html.twig', array('offers' => null));
+    }
+
+    public function offersCreateAction(Request $request)
+    {
+
+        $offer = new Offer();
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $offer->setIsActive(true);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offer);
+            $entityManager->flush();
+            $this->addFlash('success', "The offer ".$offer->getName()." has been saved");
+            return $this->redirectToRoute('staff_offers_list');
+        }
+        return $this->render('staff/offers_create.html.twig', array(
+            "form" => $form->createView()
+        ));
+    }
 }

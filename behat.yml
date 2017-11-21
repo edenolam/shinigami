@@ -19,19 +19,11 @@ default:
         - StaffContext
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
-      parameters:
-        browser: 'chrome'
     security:
       filters:
         tags: '@security'
       contexts:
         - SecurityContext
-        - FeatureContext
-        - Behat\MinkExtension\Context\MinkContext
-    staff:
-      filters:
-        tags: '@staff'
-      contexts:
         - FeatureContext
         - Behat\MinkExtension\Context\MinkContext
   extensions:
@@ -43,5 +35,4 @@ default:
         goutte: ~
         selenium2:
           wd_host: "http://127.0.0.1:4444/wd/hub"
-          capabilities: { "browserName": "firefox", "browser": "firefox", "version":  "", "platform": "WINDOWS" }
-        browser_name: firefox
+        base_url: 'http://wf3projet2.local/app_dev.php'

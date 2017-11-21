@@ -33,9 +33,6 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
-    app.login.listener:
-          class: AppBundle\Listener\LoginListener
-
     app.card.manager:
           class: AppBundle\Service\CardManager
           public: true
@@ -43,4 +40,13 @@ services:
     app.gamesession.manager:
           class: AppBundle\Service\GameSessionManager
           public: true
+
+    app.login.listener:
+          class: AppBundle\Listener\LoginListener
+
+    app.gamesession.listener:
+          class: AppBundle\Listener\GameSessionListener
+          tags:
+              - { name: kernel.event_listener, event: app.gamesession_created.event, method: onGameSessionCreation }
+
 
