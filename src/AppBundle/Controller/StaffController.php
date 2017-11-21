@@ -6,7 +6,6 @@ use AppBundle\Entity\GameSession;
 use AppBundle\Form\CardType;
 use AppBundle\Form\CustomerType;
 use AppBundle\Entity\Offer;
->>>>>>> 4969cd43d1496a83f1abe97885f82825e615c5c9
 use AppBundle\Form\GameSessionType;
 use AppBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
