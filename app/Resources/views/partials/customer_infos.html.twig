@@ -1,0 +1,30 @@
+<div class="customer-infos card">
+    <span class="card-title col s12">
+        {{ customer.nickname }}
+        <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-profile" href="{{ path("staff_edit_profile", {'number':card.number }) }}">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+    </span>
+    <table>
+        <tr>
+            <td>Firstname</td>
+            <td>{{ customer.firstname }}</td>
+        </tr>
+        <tr>
+            <td>Lastname</td>
+            <td>{{ customer.lastname }}</td>
+        </tr>
+        <tr>
+            <td>Adress</td>
+            <td>{{ customer.adress }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ customer.phone }}</td>
+        </tr>
+        <tr>
+            <td>Birthday</td>
+            <td>{{ customer.birthday|date('d M y') }}</td>
+        </tr>
+    </table>
+</div>

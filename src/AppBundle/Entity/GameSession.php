@@ -182,4 +182,14 @@ class GameSession
     {
         return $this->gameScores;
     }
+
+    /**
+     * Get the number of players
+     *
+     * @return int
+     */
+    public function getNbPlayers()
+    {
+        return count($this->getGameScores());
+    }
 }
