@@ -19,11 +19,12 @@ Feature: Customer
     And I fill in "password" with "test"
     And I press "submit"
     Then I should be on "/customer"
-    And I fill in "number" with "1234567890"
+    And I fill in "number" with "123456789"
     And I press "submit"
     Then I should be on "/customer"
     And the response status code should be 200
     And the ".alert-success" element should contain "Success ! You have a new card !"
+    And I should see "Hey ! You can now use the offer Welcome !"
 
   @customer
   Scenario: Modify customer infos

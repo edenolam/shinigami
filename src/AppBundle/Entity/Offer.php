@@ -77,6 +77,12 @@ class Offer
      */
     private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CardsOffers", mappedBy="offer")
+     */
+    private $cardsOffers;
+
+
 
     /**
      * Get id

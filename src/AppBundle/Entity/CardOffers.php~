@@ -1,0 +1,127 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CardOffers
+ *
+ * @ORM\Table(name="card_offers")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CardOffersRepository")
+ */
+class CardOffers
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Card", inversedBy="cardOffers")
+     * @ORM\JoinColumn(name="card_id", nullable=false)
+     */
+    private $card;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Offer")
+     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
+     */
+    private $offer;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="used", type="boolean")
+     */
+    private $used;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set card
+     *
+     * @param \stdClass $card
+     *
+     * @return CardOffers
+     */
+    public function setCard($card)
+    {
+        $this->card = $card;
+
+        return $this;
+    }
+
+    /**
+     * Get card
+     *
+     * @return \stdClass
+     */
+    public function getCard()
+    {
+        return $this->card;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param \stdClass $offer
+     *
+     * @return CardOffers
+     */
+    public function setOffer($offer)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \stdClass
+     */
+    public function getOffer()
+    {
+        return $this->offer;
+    }
+
+    /**
+     * Set used
+     *
+     * @param boolean $used
+     *
+     * @return CardOffers
+     */
+    public function setUsed($used)
+    {
+        $this->used = $used;
+
+        return $this;
+    }
+
+    /**
+     * Get used
+     *
+     * @return bool
+     */
+    public function getUsed()
+    {
+        return $this->used;
+    }
+}
+

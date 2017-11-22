@@ -18,17 +18,21 @@ class CustomerController extends Controller
     public function panelAction(Request $request)
     {
         $customer = $this->getUser()->getCustomer();
-        $card = $customer->getCard();
+        $cardManager = $this->get('app.card.manager');
 
         if($request->isMethod("POST")){
-            $cardNumber = $request->get("number");
-            $this->get('app.card.manager')->addCardToCustomer($cardNumber, $customer);
+            $cardManager->addCardToCustomer($request->get("number"), $customer);
         }
+
+        $card = $customer->getCard();
+        $cardsOffers = $cardManager->getValidCardsOffersOfCustomer($card);
+        $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
 
         return $this->render('customer/panel.html.twig', array(
             "customer" => $customer,
             "card" => $card,
-            "offers" => null
+            "cardsOffers" => $cardsOffers,
+            "lockedOffers" => $lockedOffers
         ));
     }
 

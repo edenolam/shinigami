@@ -63,14 +63,10 @@ class Card
     private $score;
 
     /**
-     * Many Cards have Many Offers.
-     * @ORM\ManyToMany(targetEntity="Offer")
-     * @ORM\JoinTable(name="cards_offers",
-     *      joinColumns={@ORM\JoinColumn(name="card_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id")}
-     *      )
+     *
+     * @ORM\OneToMany(targetEntity="CardsOffers", mappedBy="card")
      */
-    private $offers;
+    private $cardsOffers;
 
     /**
      * @var bool
@@ -81,7 +77,7 @@ class Card
 
     /**
      * Many Cards have Many GameSessions.
-     * @ORM\ManyToMany(targetEntity="GameSession", inversedBy="cards")
+     * @ORM\ManyToMany(targetEntity="GameSession", inversedBy="cards", cascade={"persist"})
      * @ORM\JoinTable(name="cards_gameSessions")
      */
     private $gameSessions;
@@ -102,6 +98,8 @@ class Card
         $this->gameSessions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->gameScores = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
 
     /**
      * Get id
@@ -258,37 +256,37 @@ class Card
     }
 
     /**
-     * Add offer
+     * Add cardsOffer
      *
-     * @param \AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\cardsOffers $cardsOffer
      *
      * @return Card
      */
-    public function addOffer(\AppBundle\Entity\Offer $offer)
+    public function addCardsOffer(\AppBundle\Entity\cardsOffers $cardsOffer)
     {
-        $this->offers[] = $offer;
+        $this->cardsOffers[] = $cardsOffer;
 
         return $this;
     }
 
     /**
-     * Remove offer
+     * Remove cardsOffer
      *
-     * @param \AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\cardsOffers $cardsOffer
      */
-    public function removeOffer(\AppBundle\Entity\Offer $offer)
+    public function removeCardsOffer(\AppBundle\Entity\cardsOffers $cardsOffer)
     {
-        $this->offers->removeElement($offer);
+        $this->cardsOffers->removeElement($cardsOffer);
     }
 
     /**
-     * Get offers
+     * Get cardsOffers
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOffers()
+    public function getCardsOffers()
     {
-        return $this->offers;
+        return $this->cardsOffers;
     }
 
     /**

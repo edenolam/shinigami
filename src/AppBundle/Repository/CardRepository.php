@@ -20,8 +20,6 @@ class CardRepository extends \Doctrine\ORM\EntityRepository
 			->getQuery()
 			->getOneOrNullResult()
 			;
-
-
 	}
 
     public function findInactiveCardByNumber($number)

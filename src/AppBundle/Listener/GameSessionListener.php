@@ -9,8 +9,21 @@
 namespace AppBundle\Listener;
 
 
+use AppBundle\Event\CustomerStatsUpdateEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+
 class GameSessionListener
 {
+
+    /**
+     * @var EventDispatcher
+     */
+    private $dispatcher;
+
+    public function __construct(EventDispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
 
     /**
      *
@@ -27,6 +40,8 @@ class GameSessionListener
             if($card){
                 $card->setVisits($card->getVisits() + 1);
                 $card->setScore($card->getScore() + $gameScore->getScore());
+                $event = new CustomerStatsUpdateEvent($card);
+                $this->dispatcher->dispatch($event::NAME, $event);
             }
         }
     }

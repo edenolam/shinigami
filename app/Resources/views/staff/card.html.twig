@@ -3,34 +3,42 @@
 {% block body %}
     <div class="row customer-card-infos">
 
-        <div class="col s3">
-            {% include 'partials/customer_infos.html.twig' %}
-        </div>
+    <div class="col s3">
+        {% include 'partials/customer_infos.html.twig' %}
+    </div>
 
-        <div class="col s9">
-            {% include 'partials/card_infos.html.twig' %}
-            {% if customer.card %}
-                <div class="card">
-                    <div class="card-tabs">
-                        <ul class="tabs tabs-fixed-width">
-                            <li class="tab"><a class="active" href="#game-sessions-card">Game Sessions</a></li>
-                            <li class="tab"><a href="#offers-card">Offers</a></li>
-                        </ul>
+    <div class="col s9">
+        {% include 'partials/card_infos.html.twig' %}
+        {% if customer.card %}
+            <div class="card">
+                <div class="card-tabs">
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab"><a class="active" href="#game-sessions-card">Game Sessions</a></li>
+                        <li class="tab"><a href="#offers-card">Offers</a></li>
+                    </ul>
+                </div>
+                <div class="card-content grey lighten-4">
+                    <div id="game-sessions-card">
+                        {% include 'partials/game_sessions_infos.html.twig' %}
                     </div>
-                    <div class="card-content grey lighten-4">
-                        <div id="game-sessions-card">
-                            {% include 'partials/game_sessions_infos.html.twig' %}
-                        </div>
-                        <div id="offers-card">
-                            {% include 'partials/offers_infos.html.twig' %}
-                        </div>
+                    <div id="offers-card">
+                        {% include 'partials/offers_infos.html.twig' %}
                     </div>
                 </div>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </div>
+</div>
 
 
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
+    </script>
+{% endblock %}
 

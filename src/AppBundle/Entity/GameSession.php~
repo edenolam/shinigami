@@ -43,7 +43,7 @@ class GameSession
 
     /**
      * One GameSession has Many GameScores.
-     * @ORM\OneToMany(targetEntity="GameScore", mappedBy="gameSession")
+     * @ORM\OneToMany(targetEntity="GameScore", mappedBy="gameSession", cascade={"persist"})
      */
     private $gameScores;
 
@@ -181,5 +181,15 @@ class GameSession
     public function getGameScores()
     {
         return $this->gameScores;
+    }
+
+    /**
+     * Get the number of players
+     *
+     * @return int
+     */
+    public function getNbPlayers()
+    {
+        return count($this->getGameScores());
     }
 }

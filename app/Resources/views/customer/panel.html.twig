@@ -98,7 +98,32 @@
     <div class="card row offers-infos">
         <h2>My offers</h2>
         {% if card %}
-            {% if offers %}
+            {% if cardsOffers %}
+                <div class="carousel">
+                    {% for cardsOffer in cardsOffers %}
+                        <div class="carousel-item">
+                            {% if cardsOffer.used %}
+                                <div class="card-panel red" style="width: 250px; height: 250px;">
+                                    <span class="white-text">{{ cardsOffer.offer.description }}</span>
+                                    <span>Used</span>
+                                </div>
+                            {% else %}
+                                <div class="card-panel green" style="width: 250px; height: 250px;">
+                                    <span class="white-text">{{ cardsOffer.offer.description }}</span>
+                                    {% if is_granted('ROLE_STAFF') %}<a href="{{ path('staff_customer_offers_use', { 'id' : cardsOffer.id }) }}" class="btn">Use</a>{% endif %}
+                                    {% if is_granted('ROLE_CUSTOMER') %}<span>Usable</span>{% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    {% for lockedOffer in lockedOffers %}
+                        <div class="carousel-item">
+                            <div class="card-panel grey" style="width: 220px; height: 220px;">
+                                <span class="white-text">{{ lockedOffer.description }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             {% else %}
                 <p>There is no available offers.</p>
             {% endif %}
@@ -109,4 +134,13 @@
 
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
+    </script>
 {% endblock %}
