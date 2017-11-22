@@ -83,4 +83,18 @@ class CardManager
 
     }
 
+    public function getValidCardsOffersOfCustomer($card)
+    {
+        if($card){
+            return $this->entityManager->getRepository("AppBundle:CardsOffers")->findValidCardsOffersOfCustomer($card);
+        }else{
+            return null;
+        }
+    }
+
+    public function getLockedOffersOfCustomer($card)
+    {
+        return $this->entityManager->getRepository('AppBundle:Offer')->findLockedOffersForCustomer($card);
+    }
+
 }

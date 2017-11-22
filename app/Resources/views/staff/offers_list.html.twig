@@ -15,6 +15,7 @@
                 <td>Count</td>
                 <td>Level</td>
                 <td>Description</td>
+                <td>Modify</td>
                 <td>Active</td>
             </tr>
         </thead>
@@ -27,11 +28,12 @@
                 <td>{{ offer.count }}</td>
                 <td>{{ offer.level }}</td>
                 <td>{{ offer.description }}</td>
+                <td><a href="{{ path('staff_offers_modify', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light blue" id="modify-{{ offer.id }}"><i class="material-icons">edit</i></a></td>
                 <td>
                     {% if offer.isActive %}
-                        <a href="{{ path('staff_offers_active', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light green"><i class="material-icons">check</i></a>
+                        <a href="{{ path('staff_offers_active', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light green" id="disable-{{ offer.id }}"><i class="material-icons">check</i></a>
                     {% else %}
-                        <a href="{{ path('staff_offers_active', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light red"><i class="material-icons">close</i></a>
+                        <a href="{{ path('staff_offers_active', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light red" id="activate-{{ offer.id }}"><i class="material-icons">close</i></a>
                     {% endif %}
                 </td>
 

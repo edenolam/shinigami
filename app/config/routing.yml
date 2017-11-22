@@ -73,6 +73,11 @@ staff_edit_card:
     requirements:
           number:     \d+
 
+staff_customer_offers_use:
+    path: /staff/cardoffer/use/{id}
+    defaults:
+         _controller: AppBundle:Staff:useCardOffer
+
 staff_offers_list:
     path: /staff/offers/list
     defaults:
@@ -88,4 +93,10 @@ staff_offers_active:
     path: /staff/offers/active/{id}
     defaults:
           _controller: AppBundle:Staff:offersActive
+
+
+staff_offers_modify:
+    path: /staff/offers/modify/{id}
+    defaults:
+          _controller: AppBundle:Staff:offersModify
 

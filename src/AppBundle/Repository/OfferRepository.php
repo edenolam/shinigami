@@ -26,4 +26,14 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findLockedOffersForCustomer($card)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.cardsOffers', "co", Join::WITH, "co.card = :card")
+            ->where("o.isActive = true")
+            ->setParameter("card", $card)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
+use AppBundle\Entity\CardsOffers;
 use AppBundle\Entity\GameSession;
 use AppBundle\Form\CardType;
 use AppBundle\Form\CustomerType;
@@ -52,18 +53,32 @@ class StaffController extends Controller
 		));
 	}
 
-	public function manageCardAction(Card $card)
+    public function manageCardAction(Card $card)
 	{
 		$customer = $card->getCustomer();
 		$em = $this->getDoctrine()->getManager();
 		$gameSession = $em->getRepository("AppBundle:GameSession")->findGameSessionsOfCustomer($card);
+		$cardManager = $this->get('app.card.manager');
+        $cardsOffers = $cardManager->getValidCardsOffersOfCustomer($card);
+        $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
 		return $this->render('staff/card.html.twig',[
 			'customer' => $customer,
 			'card'     => $card,
 			'gameSessions' => $gameSession,
-			'cardsOffers'   => $card->getCardsOffers()
+			'cardsOffers'   => $cardsOffers,
+            "lockedOffers" => $lockedOffers
 		]);
 	}
+
+    public function useCardOfferAction(CardsOffers $cardOffer, Request $request)
+    {
+        $cardOffer->setUsed(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($cardOffer);
+        $entityManager->flush();
+        $this->addFlash('success', "The offer ".$cardOffer->getOffer()->getName()." has been used.");
+        return $this->redirect($request->headers->get('referer'));
+    }
 
     public function newGameSessionAction(Request $request)
     {
@@ -164,6 +179,22 @@ class StaffController extends Controller
         $entityManager->persist($offer);
         $entityManager->flush();
         return $this->redirectToRoute('staff_offers_list');
+    }
+
+    public function offersModifyAction(Request $request, Offer $offer)
+    {
+        $form = $this->createForm(OfferType::class, $offer);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offer);
+            $entityManager->flush();
+            $this->addFlash('success', "The offer ".$offer->getName()." has been modified");
+            return $this->redirectToRoute('staff_offers_list');
+        }
+        return $this->render('staff/offers_modify.html.twig', array(
+            "form" => $form->createView()
+        ));
     }
 
 }

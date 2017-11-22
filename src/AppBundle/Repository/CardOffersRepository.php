@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * CardOffersRepository
@@ -10,4 +11,13 @@ namespace AppBundle\Repository;
  */
 class CardOffersRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findValidCardsOffersOfCustomer($card)
+    {
+        return $this->createQueryBuilder("co")
+            ->innerJoin("co.offer", "o", Join::WITH, 'o.isActive = true')
+            ->where('co.card = :card')
+            ->setParameter("card", $card)
+            ->getQuery()
+            ->getResult();
+    }
 }
