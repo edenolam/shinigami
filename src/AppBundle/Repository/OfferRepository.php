@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * OfferRepository
@@ -10,4 +11,29 @@ namespace AppBundle\Repository;
  */
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findUsableOffersByCustomer($type, $card, $count)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.cardsOffers', "co", Join::WITH, "co.card = :card")
+            ->where('o.offerType = :type')
+            ->andWhere('o.count <= :count')
+            ->andWhere('o.isActive = true')
+            ->setParameters(array(
+                "card" => $card,
+                "type" => $type,
+                "count" => $count
+            ))
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findLockedOffersForCustomer($card)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.cardsOffers', "co", Join::WITH, "co.card = :card")
+            ->where("o.isActive = true")
+            ->setParameter("card", $card)
+            ->getQuery()
+            ->getResult();
+    }
 }

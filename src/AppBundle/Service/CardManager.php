@@ -9,7 +9,9 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Event\CustomerAddCardEvent;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardManager
@@ -18,11 +20,16 @@ class CardManager
     private $entityManager;
 
     private $session;
+    /**
+     * @var EventDispatcher
+     */
+    private $dispatcher;
 
-    public function __construct(ObjectManager $em, Session $session)
+    public function __construct(ObjectManager $em, Session $session, EventDispatcher $dispatcher)
     {
         $this->entityManager = $em;
         $this->session = $session;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -48,7 +55,6 @@ class CardManager
     public function addCardToCustomer($number, $customer)
     {
         $number = intval($number);
-//exit(dump($number));
         if($number){
             if(strlen((string)$number) != 9){
                 $this->session->getFlashBag()->add('error', 'The card number your entered is not valid.');
@@ -63,6 +69,8 @@ class CardManager
                 $this->entityManager->persist($card);
                 $this->entityManager->flush();
                 $this->session->getFlashBag()->add('success', 'Success ! You have a new card !');
+                $addCardEvent = new CustomerAddCardEvent($card);
+                $this->dispatcher->dispatch(CustomerAddCardEvent::NAME, $addCardEvent);
 				return;
             }else{
                 $this->session->getFlashBag()->add('error', 'The card number your entered doesn\'t exist.');
@@ -73,6 +81,20 @@ class CardManager
             return;
         }
 
+    }
+
+    public function getValidCardsOffersOfCustomer($card)
+    {
+        if($card){
+            return $this->entityManager->getRepository("AppBundle:CardsOffers")->findValidCardsOffersOfCustomer($card);
+        }else{
+            return null;
+        }
+    }
+
+    public function getLockedOffersOfCustomer($card)
+    {
+        return $this->entityManager->getRepository('AppBundle:Offer')->findLockedOffersForCustomer($card);
     }
 
 }

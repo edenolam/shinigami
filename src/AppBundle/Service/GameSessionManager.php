@@ -84,6 +84,7 @@ class GameSessionManager
             $card->addGameSession($gameSession);
             $gameSession->getGameScores()[$gameScoreKey]->setCard($card);
             $gameSession->addCard($card);
+
             $this->entityManager->persist($card);
 
     }
