@@ -3,11 +3,11 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CustomerType extends AbstractType
+class NewsletterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,17 +15,21 @@ class CustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('nickname')
-            ->add('adress')
-            ->add('phone')
-            ->add('birthday', TextType::class, array(
-            	'attr' => [
-            		'class' => 'datepicker'
-				],
-				"mapped" => FALSE
-			));
+			->add('name')
+			->add('title')
+			->add('content')
+			->add('theme', ChoiceType::class, array(
+				'choices' => array(
+					'Red' => 'red',
+					'Blue' => 'blue',
+					'Green' => 'green',
+					'Yellow' => 'yellow'
+				),
+				'attr' => array(
+					'class' => 'browser-default'
+				)
+			))
+		;
     }
     
     /**
@@ -34,7 +38,7 @@ class CustomerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Customer'
+            'data_class' => 'AppBundle\Entity\Newsletter'
         ));
     }
 
@@ -43,7 +47,7 @@ class CustomerType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_customer';
+        return 'appbundle_newsletter';
     }
 
 

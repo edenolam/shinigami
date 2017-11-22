@@ -6,4 +6,9 @@
 {% endblock %}
 
 {% block nav %}
+        <li><a href="{{ path('logout') }}" id="logout">logout</a></li>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

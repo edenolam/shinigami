@@ -1,0 +1,25 @@
+<style>
+    {% block stylesheet %}
+    {% endblock %}
+</style>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <h1 style="">{{ title }} </h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {% block content %}
+
+                {% endblock %}
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+

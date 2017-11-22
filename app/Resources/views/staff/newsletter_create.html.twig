@@ -1,0 +1,14 @@
+{% extends 'staff/staff.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn waves-effect waves-light" type="submit" id="submit" class="btn">Submit</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

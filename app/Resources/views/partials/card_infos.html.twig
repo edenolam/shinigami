@@ -1,7 +1,11 @@
 <div class="card card-infos">
-    <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-card" href="{{ path("staff_edit_card", {'number':card.number }) }}">
-        <i class="large material-icons">mode_edit</i>
-    </a>
+    {% if is_granted('ROLE_CUSTOMER') %}
+    {% else %}
+        <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-card" href="{{ path("staff_edit_card", {'number':card.number }) }}">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+    {% endif %}
+
     <h2>Customer card </h2>
     {% if customer.card %}
         <p>Card n° {{ card.number }} </p>
