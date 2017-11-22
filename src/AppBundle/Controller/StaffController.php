@@ -3,14 +3,17 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
 use AppBundle\Entity\GameSession;
+use AppBundle\Entity\Newsletter;
 use AppBundle\Form\CardType;
 use AppBundle\Form\CustomerType;
 use AppBundle\Entity\Offer;
 use AppBundle\Form\GameSessionType;
+use AppBundle\Form\NewsletterType;
 use AppBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\SearchCustomerType;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class StaffController extends Controller
 {
@@ -112,13 +115,19 @@ class StaffController extends Controller
 		$form->handleRequest($request);
 
 		if($form->isSubmitted() && $form->isValid()){
+			$birthday = $request->request->get('appbundle_customer')['birthday'];
+			//exit(dump($birthday));
+			$anniv = new \DateTime($birthday);
+			$card->getCustomer()->setBirthday($anniv);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($this->getUser()->getCustomer());
 			$em->flush();
 
 			$this->addFlash('success', "Your informations were modified.");
 
-			return $this->redirectToRoute('staff_card');
+			return $this->redirectToRoute('staff_card', [
+				'number' => $card->getNumber()
+			]);
 		}
 
 		return $this->render('customer/modify.html.twig', array(
@@ -135,7 +144,6 @@ class StaffController extends Controller
 
     public function offersCreateAction(Request $request)
     {
-
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
@@ -151,4 +159,50 @@ class StaffController extends Controller
             "form" => $form->createView()
         ));
     }
+
+    public function newsletterCreateAction(Request $request)
+	{
+		$newsletter = new Newsletter();
+		$form = $this->createForm(NewsletterType::class, $newsletter);
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()){
+			$newsletterContent = $newsletter->getContent();
+			$newsletterName = $newsletter->getName();
+			$fileContent = $this->get('app.newsletter.manager')->saveContentInTwig($newsletterContent, $newsletterName, $newsletter->getTheme());
+			$newsletter->setFile($fileContent);
+			$newsletter->setCreateAt(new \DateTime('now'));
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($newsletter);
+			$entityManager->flush();
+			$this->addFlash('success', "the newsletter" .$newsletter->getName()."has been sent");
+			return $this->redirectToRoute('staff_newsletter_list');
+		}
+		return $this->render('staff/newsletter_create.html.twig', array(
+			"form" => $form->createView()
+		));
+
+	}
+
+	public function newsletterListAction()
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$newsletter = $entityManager->getRepository('AppBundle:Newsletter')->findAll();
+
+		return $this->render('staff/newsletter_list.html.twig', array('newsletters' => $newsletter));
+	}
+
+
+	public function newsletterPreviewAction(Newsletter $newsletter)
+	{
+		return $this->render($newsletter->getFile(), array(
+			"title" => $newsletter->getTitle()
+		));
+	}
+
+
+	public function newsletterSendAction(Newsletter $newsletter)
+	{
+		$this->get('app.newsletter.manager')->sendNewsletter($newsletter);
+		return $this->redirectToRoute('staff_newsletter_list');
+	}
 }

@@ -37,6 +37,10 @@ services:
           class: AppBundle\Service\CardManager
           public: true
 
+    app.newsletter.manager:
+          class : AppBundle\Service\NewsletterManager
+          public : true
+
     app.gamesession.manager:
           class: AppBundle\Service\GameSessionManager
           public: true

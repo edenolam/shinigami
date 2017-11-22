@@ -48,10 +48,29 @@ staff_card:
     requirements:
           number:     \d+
 
-staff_newsletter:
-    path: /staff/newsletter
+staff_newsletter_create:
+    path: /staff/newsletter/create
     defaults:
-        _controller: AppBundle:Staff:manageNewsletter
+        _controller: AppBundle:Staff:newsletterCreate
+
+staff_newsletter_list:
+    path: /staff/newsletter/list
+    defaults:
+        _controller: AppBundle:Staff:newsletterList
+
+staff_newsletter_preview:
+    path: /staff/newsletter/view/{id}
+    defaults:
+        _controller: AppBundle:Staff:newsletterPreview
+    requirements:
+        id: \d+
+
+staff_newsletter_send:
+    path: /staff/newsletter/send/{id}
+    defaults:
+        _controller: AppBundle:Staff:newsletterSend
+    requirements:
+        id: \d+
 
 staff_gamesession:
     path: /staff/gamesession

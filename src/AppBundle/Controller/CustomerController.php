@@ -28,7 +28,8 @@ class CustomerController extends Controller
         return $this->render('customer/panel.html.twig', array(
             "customer" => $customer,
             "card" => $card,
-            "offers" => null
+            "offers" => null,
+			'gameSessions' => null
         ));
     }
 
@@ -37,7 +38,11 @@ class CustomerController extends Controller
         $form = $this->createForm(CustomerType::class, $this->getUser()->getCustomer());
         $form->handleRequest($request);
 
+		//exit(dump($this->getUser()->getCustomer()));
         if($form->isSubmitted() && $form->isValid()){
+			$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
+			$anniv = new \DateTime($birthday);
+			$this->getUser()->getCustomer()->setBirthday($anniv);
             $em = $this->getDoctrine()->getManager();
             $em->persist($this->getUser()->getCustomer());
             $em->flush();

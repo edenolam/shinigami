@@ -25,12 +25,17 @@ class SecurityController extends Controller
         $form = $this->createForm(AccountType::class, $user);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
                 $user->setIsActive(true);
                 $user->setRoles(array('ROLE_CUSTOMER'));
+
+				$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
+				$anniv = new \DateTime($birthday);
+				$user->getCustomer()->setBirthday($anniv);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);

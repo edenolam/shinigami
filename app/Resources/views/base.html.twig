@@ -15,16 +15,18 @@
     </head>
     <body>
         <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo">SHINIGAMI</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                    {% block nav %}
-                        <li><a href="{{ path('register') }}" id="register">register</a></li>
-                        <li><a href="{{ path('login') }}" id="login">login</a></li>
-                    {% endblock %}
-                </ul>
-            </div>
+           <div class="container">
+               <div class="nav-wrapper">
+                   <a href="#" class="brand-logo">SHINIGAMI</a>
+                   <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                   <ul id="nav-mobile" class="right hide-on-med-and-down">
+                       {% block nav %}
+                           <li><a href="{{ path('register') }}" id="register">register</a></li>
+                           <li><a href="{{ path('login') }}" id="login">login</a></li>
+                       {% endblock %}
+                   </ul>
+               </div>
+           </div>
         </nav>
 
         <main class="container">
@@ -67,13 +69,16 @@
             </div>
         </footer>
         <!-- fin footer -->
+
         {% block javascripts %}
-            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-            <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
-            <script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+
+        <script>
 				$(".button-collapse").sideNav();
-            </script>
+        </script>
         {% endblock %}
+
     </body>
 
 </html>

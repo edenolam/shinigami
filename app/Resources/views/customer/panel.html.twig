@@ -1,112 +1,36 @@
 {% extends 'customer/customer.html.twig' %}
 
 {% block body %}
-
     <div class="row customer-card-infos">
-        <div class="card customer-infos col s3">
-            <span class="card-title col s12">
-                {{ customer.nickname }}
-                <a class="btn-floating btn-large waves-effect waves-light red" id="modify" href="{{ path("customer_modify_infos") }}">
-                    <i class="large material-icons">mode_edit</i>
-                </a>
-            </span>
-            <table>
-                <tr>
-                    <td>Firstname</td>
-                    <td>{{ customer.firstname }}</td>
-                </tr>
-                <tr>
-                    <td>Lastname</td>
-                    <td>{{ customer.lastname }}</td>
-                </tr>
-                <tr>
-                    <td>Adress</td>
-                    <td>{{ customer.adress }}</td>
-                </tr>
-                <tr>
-                    <td>Phone</td>
-                    <td>{{ customer.phone }}</td>
-                </tr>
-                <tr>
-                    <td>Birthday</td>
-                    <td>{{ customer.birthday|date('d M y') }}</td>
-                </tr>
-            </table>
 
+        <div class="col s3">
+            {% include 'partials/customer_infos.html.twig' %}
         </div>
 
-
-        <div class="card card-infos col s9">
-            <h2>My card</h2>
+        <div class="col s9">
+            {% include 'partials/card_infos.html.twig' %}
             {% if customer.card %}
-                <p>Card n° {{ card.number }} </p>
-                <table>
-                    <tr>
-                        <td>Visits</td>
-                        <td>Total score</td>
-                    </tr>
-                    <tr>
-                        <td>{{ card.visits }}</td>
-                        <td>{{ card.score }}</td>
-                    </tr>
-                </table>
-                <h3>My game sessions</h3>
-                <ul class="collection">
-                    <li class="collection-item avatar">
-                        <img src="images/yuna.jpg" alt="" class="circle">
-                        <span class="title">Title</span>
-                        <p>First Line <br>
-                            Second Line
-                        </p>
-                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                    <li class="collection-item avatar">
-                        <i class="material-icons circle">folder</i>
-                        <span class="title">Title</span>
-                        <p>First Line <br>
-                            Second Line
-                        </p>
-                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                    <li class="collection-item avatar">
-                        <i class="material-icons circle green">insert_chart</i>
-                        <span class="title">Title</span>
-                        <p>First Line <br>
-                            Second Line
-                        </p>
-                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                    <li class="collection-item avatar">
-                        <i class="material-icons circle red">play_arrow</i>
-                        <span class="title">Title</span>
-                        <p>First Line <br>
-                            Second Line
-                        </p>
-                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                </ul>
-            {% else %}
-                <form method="post">
-                    <label for="addcard">Add card</label>
-                    <input type="text" name="number" id="addcard" placeholder="Must be a number of 10 characters" />
-                    <button type="submit" name="submit">Validate</button>
-                </form>
+                <div class="card">
+                    <div class="card-tabs">
+                        <ul class="tabs tabs-fixed-width">
+                            <li class="tab"><a class="active" href="#game-sessions-card">Game Sessions</a></li>
+                            <li class="tab"><a href="#offers-card">Offers</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-content grey lighten-4">
+                        <div id="game-sessions-card">
+                            {% include 'partials/game_sessions_infos.html.twig' %}
+                        </div>
+                        <div id="offers-card">
+                            {% include 'partials/offers_infos.html.twig' %}
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </div>
     </div>
-
-    <div class="card row offers-infos">
-        <h2>My offers</h2>
-        {% if card %}
-            {% if offers %}
-            {% else %}
-                <p>There is no available offers.</p>
-            {% endif %}
-        {% else %}
-            <p>You must have a card to access to our offers.</p>
-        {% endif %}
-    </div>
-
 
 
 {% endblock %}
+
+

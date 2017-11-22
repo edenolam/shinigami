@@ -12,20 +12,55 @@ Feature: Staff
     And I should see "Search by card"
 
   @staff
-  Scenario: Search customer by card
+  Scenario: Search customer by card number
     Given I am on "/login"
     And I fill in "username" with "staff"
     And I fill in "password" with "staff"
     And I press "submit"
     Then I should be on "/staff"
     And the response status code should be 200
-    And I fill in "search_field" with "123456"
+    And I fill in "search_field" with "234567899"
     And I press "Search"
-    Then I should be on "/staff/card/123456"
+    Then I should be on "/staff/card/234567899"
     And the response status code should be 200
-    And the ".firstname" element should contain "julien"
-    And the ".lastname" element should contain "basquin"
-    And the ".nickname" element should contain "staff"
+    And the ".firstname" element should contain "michel"
+    And the ".lastname" element should contain "varuk"
+    And the ".nickname" element should contain "mimi"
+
+  @staff
+  Scenario: Search customer by name
+    Given I am on "/login"
+    And I fill in "username" with "staff"
+    And I fill in "password" with "staff"
+    And I press "submit"
+    Then I should be on "/staff"
+    And the response status code should be 200
+    And I fill in "search_customer_firstname" with "michel"
+    And I fill in "search_customer_lastname" with "varuk"
+    And I fill in "search_customer_phone" with "0664659887"
+    And I press "Search"
+    Then I should be on "/staff/card/234567899"
+    And the response status code should be 200
+    And the ".nickname" element should contain "mimi"
+    And the ".firstname" element should contain "michel"
+    And the ".lastname" element should contain "varuk"
+
+  @staff
+  Scenario: edit profile customer
+    Given I am on "/staff/card/234567899"
+    And I press "#modify-profile"
+    Then I should be on "/staff/card/234567899/editcustomer"
+    And the response status code should be 200
+
+  @staff
+  Scenario: edit profile customer
+    Given I am on "/staff/card/234567899"
+    And I press "#modify-profile"
+    Then I should be on "/staff/card/234567899/editcustomer"
+    And the response status code should be 200
+
+
+
 
   @staff
   Scenario: From panel to new game session
