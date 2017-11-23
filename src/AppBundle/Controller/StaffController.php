@@ -183,6 +183,7 @@ class StaffController extends Controller
 		$form = $this->createForm(NewsletterType::class, $newsletter);
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()){
+			$this->get('app.newsletter.manager')->uploadImage($newsletter);
 			$newsletterContent = $newsletter->getContent();
 			$newsletterName = $newsletter->getName();
 			$fileContent = $this->get('app.newsletter.manager')->saveContentInTwig($newsletterContent, $newsletterName, $newsletter->getTheme());

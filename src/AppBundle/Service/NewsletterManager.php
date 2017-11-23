@@ -8,10 +8,12 @@
 
 namespace AppBundle\Service;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Template;
+use AppBundle\Entity\Newsletter;
 
 class NewsletterManager
 {
@@ -35,13 +37,19 @@ class NewsletterManager
 	 */
 	private $session;
 
+	/**
+	 * @var ContainerInterface
+	 */
+	private $container;
 
-	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session)
+
+	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session, ContainerInterface $container)
 {
 	$this->kernel = $kernel;
 	$this->mailer = $mailer;
 	$this->template = $template;
 	$this->session = $session;
+	$this->container = $container;
 }
 
 
@@ -66,7 +74,7 @@ class NewsletterManager
 		return $path.$filename;
 	}
 
-	public function sendNewsletter($newsletter)
+	public function sendNewsletter(Newsletter $newsletter)
 	{
 		$message = (new \Swift_Message($newsletter->getTitle()))
 			->setFrom('newsletter@shinigamilaser.com')
@@ -84,5 +92,13 @@ class NewsletterManager
 			$this->session->getFlashBag()->add('error', "The email has not been sent ! :( ");
 		}
 
+	}
+
+	public function uploadImage(Newsletter $newsletter)
+	{
+		$file = $newsletter->getImage();
+		$fileName = md5(uniqid()).'.'.$file->guessExtension();
+		$file->move( $this->container->getParameter('images_directory'), $fileName );
+		$newsletter->setImage($fileName);
 	}
 }
