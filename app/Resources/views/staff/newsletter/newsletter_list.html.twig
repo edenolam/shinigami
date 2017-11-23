@@ -13,6 +13,7 @@
             <td>Title</td>
             <td>Text</td>
             <td>Created at</td>
+            <td>Modify</td>
             <td>Preview</td>
             <td>Send email</td>
         </tr>
@@ -24,6 +25,8 @@
                 <td>{{ newsletter.title }}</td>
                 <td>{{ newsletter.content }}</td>
                 <td>{{ newsletter.createAt|date("m/d/Y")  }}</td>
+                <td><a href="{{ path('staff_newsletter_modify', {'id' : newsletter.id}) }}"><i class="material-icons">edit</i></a>
+                </td>
                 <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank"><i class="material-icons">remove_red_eye</i></a>
                 </td>
                 <td><a href="{{ path('staff_newsletter_send', {'id' : newsletter.id}) }}"><i class="material-icons">email</i></a>
@@ -37,6 +40,3 @@
 
 {% endblock %}
 
-{% block javascripts %}
-
-{% endblock %}

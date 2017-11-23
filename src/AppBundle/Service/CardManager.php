@@ -9,6 +9,7 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Entity\Card;
 use AppBundle\Event\CustomerAddCardEvent;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -46,7 +47,7 @@ class CardManager
     /**
      * Add a card to a customer
      *
-     * The card number must be an integer of 10 characters.
+     * The card number must be an integer of 9 characters.
      * The card must be inactive and has no linked customer
      *
      * @param $number The card you want to add to the customer
@@ -97,4 +98,35 @@ class CardManager
         return $this->entityManager->getRepository('AppBundle:Offer')->findLockedOffersForCustomer($card);
     }
 
+    public function getGameSessionsOfCustomer($card)
+    {
+        return $this->entityManager->getRepository("AppBundle:GameSession")->findGameSessionsOfCustomer($card);
+    }
+
+    public function searchCustomerWithoutCard($data)
+    {
+        $customer = $this->entityManager->getRepository('AppBundle:Customer')
+            ->findCustomerWithoutCard(
+                $data["firstname"],
+                $data["lastname"],
+                $data['phone']
+            );
+
+        if($customer) {
+            return $customer->getCard();
+        }else{
+            return null;
+        }
+    }
+
+    public function searchCustomerByCardNumber($number)
+    {
+        return $this->getCardRepository()->findValidCardByNumber($number);
+    }
+
+    public function save($card){
+        $this->entityManager->persist($card);
+        $this->entityManager->flush();
+        $this->session->getFlashBag()->add('success', 'The card has been updated');
+    }
 }

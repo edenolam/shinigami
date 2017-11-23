@@ -8,6 +8,7 @@
 
 namespace AppBundle\Service;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -34,43 +35,40 @@ class NewsletterManager
 	 * @var Session
 	 */
 	private $session;
+    /**
+     * @var ObjectManager
+     */
+    private $entityManager;
 
 
-	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session)
+    public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session, ObjectManager $entityManager)
 {
 	$this->kernel = $kernel;
 	$this->mailer = $mailer;
 	$this->template = $template;
 	$this->session = $session;
+    $this->entityManager = $entityManager;
 }
 
+    public function createNewsletter($newsletter)
+    {
+        $fileContent = $this->saveContentInTwig($newsletter->getContent(), $newsletter->getName(), $newsletter->getTheme());
+        $newsletter->setFile($fileContent);
+        $newsletter->setCreateAt(new \DateTime('now'));
+        $this->save($newsletter);
+    }
 
-	public function saveContentInTwig($content, $name, $theme)
-	{
-		$rootDir = $this->kernel->getRootDir();
-		$path = "emails/templates/";
-		$name = strtolower($name);
-		$name = str_replace(" ", "_", $name);
-		$filename = $name.".html.twig";
 
-		$debut = "{% extends 'emails/base_email.html.twig' %}".PHP_EOL;
-
-		$style = file_get_contents($rootDir.'/Resources/views/emails/styles/'.$theme.'.css');
-		$style = "{% block stylesheet %}".$style."{% endblock %}".PHP_EOL.'{% block content %}'.PHP_EOL;
-
-		$end = PHP_EOL."{% endblock %}";
-		$file = fopen($rootDir.'/Resources/views/'.$path.$filename, 'w');
-		fwrite($file, $debut.$style.$content.$end);
-		fclose($file);
-
-		return $path.$filename;
-	}
-
-	public function sendNewsletter($newsletter)
+    /**
+     * Sends a newsletter to all customers registered in Shinigami Laser website
+     *
+     * @param $newsletter
+     */
+    public function sendNewsletter($newsletter)
 	{
 		$message = (new \Swift_Message($newsletter->getTitle()))
 			->setFrom('newsletter@shinigamilaser.com')
-			->setTo('julienbasquin@hotmail.fr')
+			->setTo($this->getAllCustomersEmails())
 			->setBody(
 				$this->template->render($newsletter->getFile(), array('title' => $newsletter->getTitle())),
 				'text/html'
@@ -85,4 +83,55 @@ class NewsletterManager
 		}
 
 	}
+
+    /**
+     * Gives the emails of all the customers registered in Shinigami Laser website
+     *
+     * @return array
+     */
+    private function getAllCustomersEmails()
+    {
+        $accounts = $this->entityManager->getRepository("AppBundle:Account")->findCustomerAccounts();
+        $emails = array();
+        foreach($accounts as $account){
+            $emails[$account->getEmail()] = $account->getCustomer()->getNickname();
+        }
+        return $emails;
+    }
+
+    /**
+     * Generates a twig file with the content of a newsletter
+     *
+     * @param $content
+     * @param $name
+     * @param $theme
+     * @return string
+     */
+    private function saveContentInTwig($content, $name, $theme)
+    {
+        $rootDir = $this->kernel->getRootDir();
+        $path = "emails/templates/";
+        $name = strtolower($name);
+        $name = str_replace(" ", "_", $name);
+        $filename = $name.".html.twig";
+
+        $debut = "{% extends 'emails/base_email.html.twig' %}".PHP_EOL;
+
+        $style = file_get_contents($rootDir.'/Resources/views/emails/styles/'.$theme.'.css');
+        $style = "{% block stylesheet %}".$style."{% endblock %}".PHP_EOL.'{% block content %}'.PHP_EOL;
+
+        $end = PHP_EOL."{% endblock %}";
+        $file = fopen($rootDir.'/Resources/views/'.$path.$filename, 'w');
+        fwrite($file, $debut.$style.$content.$end);
+        fclose($file);
+
+        return $path.$filename;
+    }
+
+    private function save($newsletter)
+    {
+        $this->entityManager->persist($newsletter);
+        $this->entityManager->flush();
+        $this->session->getFlashBag()->add('success', "the newsletter " .$newsletter->getName()." has been saved");
+    }
 }

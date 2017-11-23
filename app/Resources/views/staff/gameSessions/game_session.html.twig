@@ -8,14 +8,6 @@
         {{ form_row(form.time) }}
         {{ form_row(form.numberPlayers) }}
         {{ form_row(form.gameScores, {"data-prototype": form.gameScores.vars.prototype|e}) }}
-        {#<ul id="gamescore-fields-list" data-prototype="{{ form_widget(form.gameScores.vars.prototype)|e }}">#}
-            {#{% for gamescoreField in form.gameScores %}#}
-                {#<li>#}
-                    {#{{ form_errors(gamescoreField) }}#}
-                    {#{{ form_widget(gamescoreField) }}#}
-                {#</li>#}
-            {#{% endfor %}#}
-        {#</ul>#}
         <button class="btn" type="submit">Submit</button>
     {{ form_end(form) }}
 

@@ -52,6 +52,14 @@ class GameSessionManager
         return $hydratedGameSession;
     }
 
+    public function save($gameSession)
+    {
+        $this->entityManager = $this->getDoctrine()->getManager();
+        $this->entityManager->persist($gameSession);
+        $this->entityManager->flush();
+        $this->session->getFlashBag()->add('success', 'The game session has been saved !');
+    }
+
     private function gameSessionsHydratation($request, $gameSession)
     {
         // Hydratation of unmapped datas (cards, datetime)
@@ -67,7 +75,7 @@ class GameSessionManager
                     $this->addCardNumberToGameScore($card, $gameSession, $i);
                 }else{
                     $this->session->getFlashBag()->add('error', "The number card ".$gameScore["card"]." is not valid.");
-                    return;
+                    return null;
                 }
             }
             $i++;

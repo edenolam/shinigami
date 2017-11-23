@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class AccountRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findCustomerAccounts()
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.roles LIKE :roleCustomer')
+            ->setParameter('roleCustomer', "%ROLE_CUSTOMER%")
+            ->getQuery()
+            ->getResult();
+    }
 }
