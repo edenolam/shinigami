@@ -10,4 +10,9 @@ namespace AppBundle\Repository;
  */
 class NewsletterRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllNewsletterQuery()
+    {
+        return $this->createQueryBuilder('n')
+            ->getQuery();
+    }
 }

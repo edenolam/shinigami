@@ -1,22 +1,25 @@
 {% extends 'staff/staff.html.twig' %}
 
 {% block body %}
+<div style="height: 650px">
+    <div class="center">
+        <h1>Offers</h1>
+        <a href="{{ path('staff_offers_create') }}" class="btn" id="new-offer">Create new offer</a>
+    </div>
 
-    <h1>Offers</h1>
-    <a href="{{ path('staff_offers_create') }}" class="btn" id="new-offer">Create new offer</a>
 
-    <table>
+    <table style="margin: 25px">
         <thead>
             <tr>
-                <td>ID</td>
-                <td>Code</td>
-                <td>Name</td>
-                <td>Type</td>
-                <td>Count</td>
-                <td>Level</td>
+                <td>{{ knp_pagination_sortable(offers, 'ID', ['o.id']) }}</td>
+                <td>{{ knp_pagination_sortable(offers, 'Code', ['o.code']) }}</td>
+                <td>{{ knp_pagination_sortable(offers, 'Name', ['o.name']) }}</td>
+                <td>{{ knp_pagination_sortable(offers, 'Type', ['o.offerType']) }}</td>
+                <td>{{ knp_pagination_sortable(offers, 'Count', ['o.count']) }}</td>
+                <td>{{ knp_pagination_sortable(offers, 'Level', ['o.level']) }}</td>
                 <td>Description</td>
                 <td>Modify</td>
-                <td>Active</td>
+                <td>{{ knp_pagination_sortable(offers, 'Active', ['o.isActive']) }}</td>
             </tr>
         </thead>
         {% for offer in offers %}
@@ -42,8 +45,9 @@
         {% endfor %}
     </table>
 
+    <div class="center">{{ knp_pagination_render(offers) }}</div>
 
-
+</div>
 
 {% endblock %}
 

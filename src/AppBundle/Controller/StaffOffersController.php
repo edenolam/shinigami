@@ -21,10 +21,18 @@ class StaffOffersController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $offers = $entityManager->getRepository("AppBundle:Offer")->findAll();
+        $query = $entityManager->getRepository("AppBundle:Offer")->getAllOffersQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $offers = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
         return $this->render('staff/offers/offers_list.html.twig', array('offers' => $offers));
     }
 

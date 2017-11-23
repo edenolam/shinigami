@@ -21,12 +21,20 @@ class StaffNewsletterController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $newsletter = $entityManager->getRepository('AppBundle:Newsletter')->findAll();
 
-        return $this->render('staff/newsletter/newsletter_list.html.twig', array('newsletters' => $newsletter));
+        $entityManager = $this->getDoctrine()->getManager();
+        $query = $entityManager->getRepository("AppBundle:Newsletter")->getAllNewsletterQuery();
+
+        $paginator  = $this->get('knp_paginator');
+        $newsletters = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        return $this->render('staff/newsletter/newsletter_list.html.twig', array('newsletters' => $newsletters));
     }
 
     /**
