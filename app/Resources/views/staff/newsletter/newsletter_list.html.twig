@@ -1,18 +1,21 @@
 {% extends 'staff/staff.html.twig' %}
 
 {% block body %}
-
-    <h1>Newsletters</h1>
-    <a href="{{ path('staff_newsletter_create') }}" class="btn" id="new-newsletter">Create newsletter</a>
+<div style="height: 650px">
+    <div class="center">
+        <h1>Newsletters</h1>
+        <a href="{{ path('staff_newsletter_create') }}" class="btn" id="new-newsletter">Create newsletter</a>
+    </div>
 
     <table>
         <thead>
         <tr>
-            <td>ID</td>
-            <td>Name</td>
-            <td>Title</td>
+            <td>{{ knp_pagination_sortable(newsletters, 'ID', ['n.id']) }}</td>
+            <td>{{ knp_pagination_sortable(newsletters, 'Name', ['n.name']) }}</td>
+            <td>{{ knp_pagination_sortable(newsletters, 'Title', ['n.title']) }}</td>
             <td>Text</td>
-            <td>Created at</td>
+            <td>{{ knp_pagination_sortable(newsletters, 'Created at', ['n.createAt']) }}</td>
+            <td>Modify</td>
             <td>Preview</td>
             <td>Send email</td>
         </tr>
@@ -24,6 +27,8 @@
                 <td>{{ newsletter.title }}</td>
                 <td>{{ newsletter.content }}</td>
                 <td>{{ newsletter.createAt|date("m/d/Y")  }}</td>
+                <td><a href="{{ path('staff_newsletter_modify', {'id' : newsletter.id}) }}"><i class="material-icons">edit</i></a>
+                </td>
                 <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank"><i class="material-icons">remove_red_eye</i></a>
                 </td>
                 <td><a href="{{ path('staff_newsletter_send', {'id' : newsletter.id}) }}"><i class="material-icons">email</i></a>
@@ -32,11 +37,8 @@
         {% endfor %}
     </table>
 
-
-
-
-{% endblock %}
-
-{% block javascripts %}
+    <div class="center">{{ knp_pagination_render(newsletters) }}</div>
+</div>
 
 {% endblock %}
+
