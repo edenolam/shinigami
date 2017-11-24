@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="885bad8d-b966-4532-9585-9574bb09894e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/wf3-projet2-shinigamilaser-perle-julien.iml" afterPath="$PROJECT_DIR$/.idea/wf3-projet2-shinigamilaser-perle-julien.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/emails/base_email.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/emails/base_email.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/emails/styles/blue.css" afterPath="$PROJECT_DIR$/app/Resources/views/emails/styles/blue.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/emails/styles/green.css" afterPath="$PROJECT_DIR$/app/Resources/views/emails/styles/green.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/emails/styles/red.css" afterPath="$PROJECT_DIR$/app/Resources/views/emails/styles/red.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/emails/styles/yellow.css" afterPath="$PROJECT_DIR$/app/Resources/views/emails/styles/yellow.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/emails/templates/new_customer.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/emails/templates/new_customer.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/staff/newsletter_create.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/staff/newsletter_create.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/staff/newsletter_list.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/staff/newsletter_list.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/staff/staff.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/staff/staff.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/StaffController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/StaffController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Newsletter.php" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Newsletter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Form/NewsletterType.php" afterPath="$PROJECT_DIR$/src/AppBundle/Form/NewsletterType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Service/NewsletterManager.php" afterPath="$PROJECT_DIR$/src/AppBundle/Service/NewsletterManager.php" />
-    </list>
+    <list default="true" id="885bad8d-b966-4532-9585-9574bb09894e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -518,12 +501,12 @@
       <workItem from="1511174289601" duration="15878000" />
       <workItem from="1511254041613" duration="26825000" />
       <workItem from="1511340977021" duration="21588000" />
-      <workItem from="1511427119808" duration="23179000" />
+      <workItem from="1511427119808" duration="23309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87722000" />
+    <option name="totallyTimeSpent" value="87852000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
