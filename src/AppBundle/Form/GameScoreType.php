@@ -16,11 +16,11 @@ class GameScoreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('playerName', TextType::class, array(
-            ))
             ->add('card', TextType::class, array(
                 "mapped" => false,
                 "required" => false
+            ))
+            ->add('playerName', TextType::class, array(
             ))
             ->add('score', NumberType::class, array(
             ));

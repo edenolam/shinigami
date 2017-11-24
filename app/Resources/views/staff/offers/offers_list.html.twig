@@ -7,7 +7,6 @@
         <a href="{{ path('staff_offers_create') }}" class="btn" id="new-offer">Create new offer</a>
     </div>
 
-
     <table style="margin: 25px">
         <thead>
             <tr>
@@ -53,31 +52,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="application/javascript">
-        function active(id){
-            $.ajax({
-                type: 'get',
-                url: 'http://wf3projet2.local/app_dev.php/staff/offers/active/' + id,
-                beforeSend: function(){
-                    console.log('Loading');
-                },
-                success: function(data){
-                    button = $("#active-" + id);
-                    if(data.result){
-                        button.removeClass('red')
-                        button.addClass('green')
-                        button.find("i").remove();
-                        button.append('<i class=\"material-icons\">check</i>');
-                    }else{
-                        button.removeClass('green')
-                        button.addClass('red')
-                        button.find("i").remove();
-                        button.append('<i class=\"material-icons\">close</i>');
-                    }
-                }
-            });
-        }
-    </script>
+    <script src="{{ asset('js/ajax/activeOffer.js') }}"></script>
 {% endblock %}
 
 
