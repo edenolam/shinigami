@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Query\Expr\Join;
+
 /**
  * CustomerRepository
  *
@@ -27,4 +29,13 @@ class CustomerRepository extends \Doctrine\ORM\EntityRepository
 
 
 	}
+
+	public function findCustomerByCardNumber($number)
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.card', 'ca', Join::WITH, 'ca.number = :number')
+            ->setParameter('number', $number)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
