@@ -1,17 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block nav %}
+    <li class="nav-item nav-link app-user-username">{{ app.user.username }}</li>
     <li><a href="{{ path('staff_newsletter_list') }}" id="newsletter">Newsletter</a></li>
     <li><a href="{{ path('staff_offers_list') }}" id="offers">Offers</a></li>
     <li><a href="{{ path('staff_gamesession') }}" id="new-gamesession">New game session</a></li>
     <li><a href="{{ path('logout') }}" id="logout">logout</a></li>
 {% endblock %}
 
-    <div class="nav-item nav-link app-user-username">{{ app.user.username }}</div>
 
-    <a class="nav-item nav-link" href="{{ path('staff_newsletter') }}" id="newsletter">Newsletter</a>
-    <a class="nav-item nav-link" href="{{ path('staff_offers_list') }}" id="offers">Offers</a>
-    <a class="nav-item nav-link" href="{{ path('staff_gamesession') }}" id="new-gamesession">New game session</a>
-    <a class="nav-item nav-link" href="{{ path('logout') }}" id="logout">logout</a>
-
-{% endblock %}
