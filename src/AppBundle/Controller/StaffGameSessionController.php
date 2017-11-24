@@ -11,7 +11,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\GameSession;
 use AppBundle\Form\GameSessionType;
+use GuzzleHttp\Psr7\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class StaffGameSessionController extends Controller
@@ -40,5 +42,17 @@ class StaffGameSessionController extends Controller
         return $this->render('staff/gameSessions/game_session.html.twig', array(
             "form" => $form->createView()
         ));
+    }
+
+    public function playerNameCompletionAjaxAction($cardNumber)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $customer = $entityManager->getRepository('AppBundle:Customer')->findCustomerByCardNumber($cardNumber);
+        $response =  new JsonResponse();
+        if($customer){
+            return $response->setData(array('playerNickname' => $customer->getNickname()));
+        }else{
+            return $response->setData(null);
+        }
     }
 }

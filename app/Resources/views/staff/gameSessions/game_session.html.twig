@@ -43,7 +43,7 @@
 
 
         jQuery(document).ready(function() {
-            jQuery('#appbundle_gamesession_numberPlayers').change(function(e) {
+            jQuery('#appbundle_gamesession_numberPlayers').keyup(function(e) {
                 e.preventDefault();
 
                 $('#appbundle_gamesession_gameScores').empty();
@@ -62,10 +62,33 @@
                     var newLi = jQuery('<li class="row card"></li>').html(newWidget);
                     newLi.appendTo(gamescoreList);
 
+                    playerNameAutocompletion(i);
                 }
 
             });
-        })
+        });
+
+        function playerNameAutocompletion(i){
+            $("#appbundle_gamesession_gameScores_"+ i +"_card").keyup(function () {
+                $("#appbundle_gamesession_gameScores_"+ i +"_card").parent().find('.error-autocomplete').remove();
+                if($(this).val().length === 9){
+                    $.ajax({
+                       type: 'get',
+                       url: 'http://wf3projet2.local/app_dev.php/staff/customer/' + $(this).val(),
+                       beforeSend: function(){
+                           console.log('Loading');
+                        },
+                       success: function(data){
+                           if(data){
+                               $("#appbundle_gamesession_gameScores_"+ i +"_playerName").val(data.playerNickname);
+                           }else{
+                               $("#appbundle_gamesession_gameScores_"+ i +"_card").parent().append("<p class='error-autocomplete'>Card not found</p>");
+                           }
+                       }
+                    });
+                }
+            });
+        }
     </script>
 {% endblock %}
 

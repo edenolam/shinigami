@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Offer;
 use AppBundle\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class StaffOffersController extends Controller
@@ -66,17 +67,22 @@ class StaffOffersController extends Controller
      * @param Offer $offer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function activeAction(Offer $offer)
+    public function activeAjaxAction(Offer $offer)
     {
+        $response = new JsonResponse();
         $entityManager = $this->getDoctrine()->getManager();
+
         if($offer->getIsActive()) {
             $offer->setIsActive(false);
+            $response->setData(array("result" => false));
         }else{
             $offer->setIsActive(true);
+            $response->setData(array("result" => true));
         }
         $entityManager->persist($offer);
         $entityManager->flush();
-        return $this->redirectToRoute('staff_offers_list');
+
+        return $response;
     }
 
     /**

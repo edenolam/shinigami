@@ -109,6 +109,10 @@ staff_gamesession:
     defaults:
         _controller: AppBundle:StaffGameSession:new
 
+staff_autocomplete_customer_nickname_ajax:
+    path: /staff/customer/{cardNumber}
+    defaults:
+        _controller: AppBundle:StaffGameSession:playerNameCompletionAjax
 
 # STAFF OFFERS MANAGEMENT
 
@@ -124,10 +128,10 @@ staff_offers_create:
           _controller: AppBundle:StaffOffers:create
 
 
-staff_offers_active:
+staff_offers_active_ajax:
     path: /staff/offers/active/{id}
     defaults:
-          _controller: AppBundle:StaffOffers:active
+          _controller: AppBundle:StaffOffers:activeAjax
 
 
 staff_offers_modify:
