@@ -9,9 +9,7 @@
 namespace AppBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-=======
 use Doctrine\Common\Persistence\ObjectManager;
->>>>>>> c7e6043dc908a4ae00eaab4af0a7e293ccf1b8aa
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
