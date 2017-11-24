@@ -36,7 +36,7 @@ class Newsletter
 	private $title;
 
 	/**
-	 * @var text
+	 * @var string
 	 *
 	 * @ORM\Column(name="content", type="text")
 	 */

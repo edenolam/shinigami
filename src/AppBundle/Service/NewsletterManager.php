@@ -64,6 +64,7 @@ class NewsletterManager
         $fileContent = $this->saveContentInTwig($newsletter->getContent(), $newsletter->getName(), $newsletter->getTheme());
         $newsletter->setFile($fileContent);
         $newsletter->setCreateAt(new \DateTime('now'));
+        $this->uploadImage($newsletter);
         $this->save($newsletter);
     }
 
