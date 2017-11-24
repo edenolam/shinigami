@@ -86,8 +86,11 @@ class StaffNewsletterController extends Controller
      */
     public function previewAction(Newsletter $newsletter)
     {
-        return $this->render($newsletter->getFile(), array(
-            "title" => $newsletter->getTitle()
+    	$theme = $newsletter->getTheme();
+		$style = file_get_contents($this->get('kernel')->getRootDir().'/Resources/views/emails/styles/'.$theme.'.css');
+        return $this->render('emails/base_email.html.twig', array(
+            "newsletter" => $newsletter,
+			'style' => $style
         ));
     }
 

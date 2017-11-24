@@ -42,12 +42,6 @@ class Newsletter
 	 */
 	private $content;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="file", type="string", length=255)
-	 */
-	private $file;
 
 	/**
 	 * @var string
@@ -177,23 +171,6 @@ class Newsletter
         return $this->content;
     }
 
-
-	/**
-	 * @return string
-	 */
-	public function getFile()
-	{
-		return $this->file;
-	}
-
-
-	/**
-	 * @param string $file
-	 */
-	public function setFile($file)
-	{
-		$this->file = $file;
-	}
 
 
 	/**
