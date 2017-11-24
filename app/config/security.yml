@@ -36,5 +36,7 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
     access_control:
+        - { path: ^/staff, roles: ROLE_STAFF }
+        - { path: ^/customer, roles: ROLE_CUSTOMER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 

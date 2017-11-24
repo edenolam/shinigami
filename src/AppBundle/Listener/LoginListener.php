@@ -51,7 +51,7 @@ class LoginListener implements AuthenticationSuccessHandlerInterface
         if(array_search("ROLE_CUSTOMER", $token->getUser()->getRoles()) !== false){
             return 'customer_panel';
         } elseif(array_search("ROLE_STAFF", $token->getUser()->getRoles()) !== false){
-            return 'staff_panel';
+            return 'staff_search';
         } else {
             return 'homepage';
         }

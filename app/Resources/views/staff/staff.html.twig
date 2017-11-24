@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block nav %}
-    <li class="nav-item nav-link app-user-username">{{ app.user.username }}</li>
+
+    <li><a href="{{ path('staff_search') }}" id="search">Search customer</a></li>
     <li><a href="{{ path('staff_newsletter_list') }}" id="newsletter">Newsletter</a></li>
     <li><a href="{{ path('staff_offers_list') }}" id="offers">Offers</a></li>
     <li><a href="{{ path('staff_gamesession') }}" id="new-gamesession">New game session</a></li>
-    <li><a href="{{ path('logout') }}" id="logout">logout</a></li>
+    {{ parent() }}
+
 {% endblock %}
-
-

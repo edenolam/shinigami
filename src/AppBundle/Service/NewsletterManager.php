@@ -9,6 +9,9 @@
 namespace AppBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+=======
+use Doctrine\Common\Persistence\ObjectManager;
+>>>>>>> c7e6043dc908a4ae00eaab4af0a7e293ccf1b8aa
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -36,6 +39,10 @@ class NewsletterManager
 	 * @var Session
 	 */
 	private $session;
+    /**
+     * @var ObjectManager
+     */
+    private $entityManager;
 
 	/**
 	 * @var ContainerInterface
@@ -43,17 +50,72 @@ class NewsletterManager
 	private $container;
 
 
-	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session, ContainerInterface $container)
-{
-	$this->kernel = $kernel;
-	$this->mailer = $mailer;
-	$this->template = $template;
-	$this->session = $session;
-	$this->container = $container;
-}
+
+	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session, ContainerInterface $container, ObjectManager $entityManager)
+	{
+		$this->kernel = $kernel;
+		$this->mailer = $mailer;
+		$this->template = $template;
+		$this->session = $session;
+		$this->container = $container;
+		$this->entityManager = $entityManager;
+	}
+
+    public function createNewsletter($newsletter)
+    {
+        $fileContent = $this->saveContentInTwig($newsletter->getContent(), $newsletter->getName(), $newsletter->getTheme());
+        $newsletter->setFile($fileContent);
+        $newsletter->setCreateAt(new \DateTime('now'));
+        $this->save($newsletter);
+    }
 
 
-	public function saveContentInTwig($content, $name, $theme)
+    /**
+     * Sends a newsletter to all customers registered in Shinigami Laser website
+     *
+     * @param $newsletter
+     */
+    public function sendNewsletter($newsletter)
+	{
+		$message = (new \Swift_Message($newsletter->getTitle()))
+			->setFrom('newsletter@shinigamilaser.com')
+			->setTo($this->getAllCustomersEmails())
+			->setBody(
+				$this->template->render($newsletter->getFile(), array('title' => $newsletter->getTitle())),
+				'text/html'
+			);
+
+		$send = $this->mailer->send($message);
+		if($send){
+			$this->session->getFlashBag()->add('success', "The email has been sent ! ");
+		}else{
+			$this->session->getFlashBag()->add('error', "The email has not been sent ! :( ");
+		}
+
+	}
+	/**
+	 * Gives the emails of all the customers registered in Shinigami Laser website
+	 *
+	 * @return array
+	 */
+	private function getAllCustomersEmails()
+	{
+		$accounts = $this->entityManager->getRepository("AppBundle:Account")->findCustomerAccounts();
+		$emails = array();
+		foreach($accounts as $account){
+			$emails[$account->getEmail()] = $account->getCustomer()->getNickname();
+		}
+		return $emails;
+	}
+	/**
+	 * Generates a twig file with the content of a newsletter
+	 *
+	 * @param $content
+	 * @param $name
+	 * @param $theme
+	 * @return string
+	 */
+	private function saveContentInTwig($content, $name, $theme)
 	{
 		$rootDir = $this->kernel->getRootDir();
 		$path = "emails/templates/";
@@ -74,24 +136,11 @@ class NewsletterManager
 		return $path.$filename;
 	}
 
-	public function sendNewsletter(Newsletter $newsletter)
+	private function save($newsletter)
 	{
-		$message = (new \Swift_Message($newsletter->getTitle()))
-			->setFrom('newsletter@shinigamilaser.com')
-			->setTo('julienbasquin@hotmail.fr')
-			->setBody(
-				$this->template->render($newsletter->getFile(), array('title' => $newsletter->getTitle())),
-				'text/html'
-			);
-
-		$send = $this->mailer->send($message);
-		if($send){
-
-			$this->session->getFlashBag()->add('success', "The email has been sent ! ");
-		}else{
-			$this->session->getFlashBag()->add('error', "The email has not been sent ! :( ");
-		}
-
+		$this->entityManager->persist($newsletter);
+		$this->entityManager->flush();
+		$this->session->getFlashBag()->add('success', "the newsletter " .$newsletter->getName()." has been saved");
 	}
 
 	public function uploadImage(Newsletter $newsletter)

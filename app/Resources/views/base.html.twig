@@ -21,8 +21,15 @@
                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                    <ul id="nav-mobile" class="right hide-on-med-and-down">
                        {% block nav %}
-                           <li><a href="{{ path('register') }}" id="register">register</a></li>
-                           <li><a href="{{ path('login') }}" id="login">login</a></li>
+                           {% if app.user is null %}
+                               <li><a href="{{ path('register') }}" id="register">register</a></li>
+                               <li><a href="{{ path('login') }}" id="login">login</a></li>
+                           {% else %}
+
+                               <li><i class="material-icons">perm_identity</i></li>
+                               <li>{{ app.user.username }}</li>
+                               <li><a href="{{ path('logout') }}" id="logout">Logout</a></li>
+                           {% endif %}
                        {% endblock %}
                    </ul>
                </div>
@@ -71,12 +78,13 @@
         <!-- fin footer -->
 
         {% block javascripts %}
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+            <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
 
-        <script>
-				$(".button-collapse").sideNav();
-        </script>
+            <script>
+                    $(".button-collapse").sideNav();
+            </script>
+
         {% endblock %}
 
     </body>

@@ -36,4 +36,11 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getAllOffersQuery()
+    {
+        return $this->createQueryBuilder('o')
+            ->orderBy('o.code', "ASC")
+            ->getQuery();
+    }
 }

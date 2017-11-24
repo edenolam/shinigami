@@ -53,7 +53,7 @@ services:
           tags:
               - { name: kernel.event_listener, event: app.gamesession_created.event, method: onGameSessionCreation }
 
-    app.customer.listener:
+    app.offer.listener:
           class: AppBundle\Listener\OfferListener
           tags:
               - { name: kernel.event_listener, event: app.customer_add_card.event, method: onCustomerAddCard }

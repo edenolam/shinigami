@@ -19,6 +19,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends Controller
 {
 
+    /**
+     * Registration of a customer
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new Account();
@@ -34,8 +41,7 @@ class SecurityController extends Controller
                 $user->setRoles(array('ROLE_CUSTOMER'));
 
 				$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
-				$anniv = new \DateTime($birthday);
-				$user->getCustomer()->setBirthday($anniv);
+				$user->getCustomer()->setBirthday(new \DateTime($birthday));
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
@@ -55,7 +61,13 @@ class SecurityController extends Controller
         );
     }
 
-
+    /**
+     * Login
+     *
+     * @param Request $request
+     * @param AuthenticationUtils $authUtils
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction(Request $request, AuthenticationUtils $authUtils)
 	{
         // get the login error if there is one

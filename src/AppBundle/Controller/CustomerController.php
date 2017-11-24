@@ -15,6 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends Controller
 {
+    /**
+     * Customer's panel
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function panelAction(Request $request)
     {
         $customer = $this->getUser()->getCustomer();
@@ -27,28 +33,35 @@ class CustomerController extends Controller
         $card = $customer->getCard();
         $cardsOffers = $cardManager->getValidCardsOffersOfCustomer($card);
         $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
+        $gameSessions = $cardManager->getGameSessionsOfCustomer($card);
 
         return $this->render('customer/panel.html.twig', array(
             "customer" => $customer,
             "card" => $card,
             "cardsOffers" => $cardsOffers,
-            "lockedOffers" => $lockedOffers
+            "lockedOffers" => $lockedOffers,
+            "gameSessions" => $gameSessions
         ));
     }
 
+    /**
+     * Edit of the customer's informations
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function modifyAction(Request $request)
     {
         $form = $this->createForm(CustomerType::class, $this->getUser()->getCustomer());
         $form->handleRequest($request);
 
-		//exit(dump($this->getUser()->getCustomer()));
         if($form->isSubmitted() && $form->isValid()){
+            $customer = $this->getUser()->getCustomer();
 			$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
-			$anniv = new \DateTime($birthday);
-			$this->getUser()->getCustomer()->setBirthday($anniv);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($this->getUser()->getCustomer());
-            $em->flush();
+			$customer->setBirthday(new \DateTime($birthday));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($customer);
+            $entityManager->flush();
 
             $this->addFlash('success', "Your informations were modified.");
 

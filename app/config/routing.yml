@@ -34,88 +34,104 @@ customer_modify_infos:
 
 
 
-# STAFF
+# STAFF CARD MANAGEMENT
 
-staff_panel:
+staff_search:
     path: /staff
     defaults:
-        _controller: AppBundle:Staff:panel
+        _controller: AppBundle:StaffCard:search
 
-staff_card:
+staff_card_view:
     path: /staff/card/{number}
     defaults:
-        _controller: AppBundle:Staff:manageCard
+        _controller: AppBundle:StaffCard:cardView
     requirements:
           number:     \d+
-
-staff_newsletter_create:
-    path: /staff/newsletter/create
-    defaults:
-        _controller: AppBundle:Staff:newsletterCreate
-
-staff_newsletter_list:
-    path: /staff/newsletter/list
-    defaults:
-        _controller: AppBundle:Staff:newsletterList
-
-staff_newsletter_preview:
-    path: /staff/newsletter/view/{id}
-    defaults:
-        _controller: AppBundle:Staff:newsletterPreview
-    requirements:
-        id: \d+
-
-staff_newsletter_send:
-    path: /staff/newsletter/send/{id}
-    defaults:
-        _controller: AppBundle:Staff:newsletterSend
-    requirements:
-        id: \d+
-
-staff_gamesession:
-    path: /staff/gamesession
-    defaults:
-        _controller: AppBundle:Staff:newGameSession
-
 
 staff_edit_profile:
     path: /staff/card/{number}/editcustomer
     defaults:
-           _controller: AppBundle:Staff:editCustomer
+           _controller: AppBundle:StaffCard:editCustomer
     requirements:
           number:     \d+
 
 staff_edit_card:
     path: /staff/card/{number}/editcard
     defaults:
-           _controller: AppBundle:Staff:editCard
+           _controller: AppBundle:StaffCard:editCard
     requirements:
           number:     \d+
 
 staff_customer_offers_use:
     path: /staff/cardoffer/use/{id}
     defaults:
-         _controller: AppBundle:Staff:useCardOffer
+         _controller: AppBundle:StaffCard:useCardOffer
+
+# STAFF NEWSLETTER MANAGEMENT
+
+staff_newsletter_create:
+    path: /staff/newsletter/create
+    defaults:
+        _controller: AppBundle:StaffNewsletter:create
+
+staff_newsletter_list:
+    path: /staff/newsletter/list
+    defaults:
+        _controller: AppBundle:StaffNewsletter:list
+
+staff_newsletter_preview:
+    path: /staff/newsletter/view/{id}
+    defaults:
+        _controller: AppBundle:StaffNewsletter:preview
+    requirements:
+        id: \d+
+
+staff_newsletter_send:
+    path: /staff/newsletter/send/{id}
+    defaults:
+        _controller: AppBundle:StaffNewsletter:send
+    requirements:
+        id: \d+
+
+staff_newsletter_modify:
+    path: /staff/newsletter/modify/{id}
+    defaults:
+        _controller: AppBundle:StaffNewsletter:modify
+    requirements:
+        id: \d+
+
+
+# STAFF CREATE GAMESESSION
+
+
+staff_gamesession:
+    path: /staff/gamesession
+    defaults:
+        _controller: AppBundle:StaffGameSession:new
+
+
+# STAFF OFFERS MANAGEMENT
+
 
 staff_offers_list:
     path: /staff/offers/list
     defaults:
-          _controller: AppBundle:Staff:offersList
+          _controller: AppBundle:StaffOffers:list
 
 staff_offers_create:
     path: /staff/offers/new
     defaults:
-          _controller: AppBundle:Staff:offersCreate
+          _controller: AppBundle:StaffOffers:create
 
 
 staff_offers_active:
     path: /staff/offers/active/{id}
     defaults:
-          _controller: AppBundle:Staff:offersActive
+          _controller: AppBundle:StaffOffers:active
 
 
 staff_offers_modify:
     path: /staff/offers/modify/{id}
     defaults:
-          _controller: AppBundle:Staff:offersModify
+          _controller: AppBundle:StaffOffers:modify
 
