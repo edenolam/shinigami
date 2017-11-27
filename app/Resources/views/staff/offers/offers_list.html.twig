@@ -33,9 +33,9 @@
                 <td><a href="{{ path('staff_offers_modify', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light blue" id="modify-{{ offer.id }}"><i class="material-icons">edit</i></a></td>
                 <td>
                     {% if offer.isActive %}
-                        <button class="btn-floating waves-effect waves-light green" id="active-{{ offer.id }}" onclick="active({{ offer.id }})"><i class="material-icons">check</i></button>
+                        <a class="btn-floating waves-effect waves-light green" id="active-{{ offer.id }}" onclick="active({{ offer.id }})"><i class="material-icons">check</i></a>
                     {% else %}
-                        <button class="btn-floating waves-effect waves-light red" id="active-{{ offer.id }}" onclick="active({{ offer.id }})" ><i class="material-icons">close</i></button>
+                        <a class="btn-floating waves-effect waves-light red" id="active-{{ offer.id }}" onclick="active({{ offer.id }})" ><i class="material-icons">close</i></a>
                     {% endif %}
                 </td>
 

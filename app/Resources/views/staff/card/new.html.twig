@@ -1,0 +1,32 @@
+{%  extends 'staff/staff.html.twig' %}
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    <a class="btn" name="generate" onclick="generateCard()">Generate</a>
+    <button class="btn" type="submit">Add</button>
+    {{ form_end(form) }}
+
+    <table>
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Center</td>
+            <td>Number</td>
+        </tr>
+        </thead>
+        {% for card in cards %}
+            <tr>
+                <td>{{ card.id }}</td>
+                <td>{{ card.center.code }}</td>
+                <td>{{ card.number }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/ajax/newCard.js') }}"></script>
+{% endblock %}

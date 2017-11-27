@@ -84,4 +84,4 @@ knp_paginator:
         filtration: '@KnpPaginator/Pagination/filtration.html.twig'  # filters template
 
 fos_js_routing:
-    routes_to_expose: [ staff_autocomplete_customer_nickname_ajax, staff_offers_active_ajax ]
+    routes_to_expose: [ staff_autocomplete_customer_nickname_ajax, staff_offers_active_ajax, staff_generate_new_card_ajax ]

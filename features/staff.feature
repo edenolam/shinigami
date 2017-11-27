@@ -7,7 +7,7 @@ Feature: Staff
     And I press "submit"
     Then I should be on "/staff"
     And the response status code should be 200
-    And I should see "Newsletter" in the "nav" element
+    And I should see "Newsletters" in the "nav" element
     And I should see "Offers" in the "nav" element
     And I should see "Search by card"
 
@@ -48,18 +48,9 @@ Feature: Staff
   @staff
   Scenario: edit profile customer
     Given I am on "/staff/card/234567899"
-    And I press "#modify-profile"
+    And I follow "#modify-profile"
     Then I should be on "/staff/card/234567899/editcustomer"
     And the response status code should be 200
-
-  @staff
-  Scenario: edit profile customer
-    Given I am on "/staff/card/234567899"
-    And I press "#modify-profile"
-    Then I should be on "/staff/card/234567899/editcustomer"
-    And the response status code should be 200
-
-
 
 
   @staff
@@ -157,14 +148,16 @@ Feature: Staff
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
-    Then I follow "disable-1"
+    Then I follow "ID"
+    And I follow "#active-1"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
-    And I should see an "#activate-1" element
-    Then I follow "activate-1"
+    And I follow "ID"
+    And I should see an "#active-1" element
+    Then I follow "#active-1"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
-    And I should see an "#disable-1" element
+    And I should see an "#active-1" element
 
   @staff
   Scenario: Modify an offer
@@ -177,7 +170,8 @@ Feature: Staff
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
-    Then I follow "modify-1"
+    Then I follow "ID"
+    And I follow "modify-1"
     Then I should be on "/staff/offers/modify/1"
     And I fill in "appbundle_offer_code" with "SCR50"
     And I fill in "appbundle_offer_count" with "50"
@@ -189,3 +183,20 @@ Feature: Staff
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
     And I should see "Baby"
+
+  @staff
+  Scenario: Create new empty card
+    Given I am on "/login"
+    And I fill in "username" with "staff"
+    And I fill in "password" with "staff"
+    And I press "submit"
+    Then I should be on "/staff"
+    And the response status code should be 200
+    Then I follow "New card"
+    Then I should be on "/staff/new-card"
+    And the response status code should be 200
+    Then I select "123" from "center"
+    And I press "submit"
+    Then I should be on "/staff/new-card"
+    And the response status code should be 200
+    Then I should see "The card has been registered."
