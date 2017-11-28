@@ -32,4 +32,14 @@ class CardRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+
+    public function findAllInactiveCards()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.customer IS NULL')
+            ->andWhere('c.isActive = false')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -3,9 +3,10 @@
 {% block nav %}
 
     <li><a href="{{ path('staff_search') }}" id="search">Search customer</a></li>
-    <li><a href="{{ path('staff_newsletter_list') }}" id="newsletter">Newsletter</a></li>
-    <li><a href="{{ path('staff_offers_list') }}" id="offers">Offers</a></li>
     <li><a href="{{ path('staff_gamesession') }}" id="new-gamesession">New game session</a></li>
+    <li><a href="{{ path('staff_new_card') }}" id="new-card">New card</a></li>
+    <li><a href="{{ path('staff_offers_list') }}" id="offers">Offers</a></li>
+    <li><a href="{{ path('staff_newsletter_list') }}" id="newsletters">Newsletters</a></li>
     {{ parent() }}
 
 {% endblock %}
