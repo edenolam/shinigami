@@ -56,7 +56,7 @@
                                 <td class="w30"  width="30"></td>
                                 <td  class="w580"  width="580" valign="middle" align="left">
                                     <div class="pagetoplogo-content">
-                                        <img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}" alt="image">
+                                        <img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}" style="width: 30%" alt="image">
                                     </div>
                                 </td>
                                 <td class="w30"  width="30"></td>
@@ -88,9 +88,7 @@
 
                                                 <div align="left" class="article-content">
                                                     <p>
-                                                        {% block content %}
                                                             {{ newsletter.content }}
-                                                        {% endblock %}
                                                     </p>
                                                 </div>
                                             </td>
