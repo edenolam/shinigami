@@ -120,6 +120,10 @@ class NewsletterManager
 
 	public function uploadImage(Newsletter $newsletter)
 	{
+		if(null == $newsletter->getImage())
+		{
+			return;
+		}
 		$file = $newsletter->getImage();
 		$fileName = md5(uniqid()).'.'.$file->guessExtension();
 		$file->move( $this->container->getParameter('images_directory'), $fileName );

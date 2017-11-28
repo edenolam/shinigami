@@ -21,7 +21,8 @@ class NewsletterType extends AbstractType
 			->add('content')
 			->add('image', FileType::class, array(
 				'label' => 'Image (jpg file)',
-				'data_class' => null
+				'data_class' => null,
+				'required' => FALSE
 			))
 			->add('theme', ChoiceType::class, array(
 				'choices' => array(
