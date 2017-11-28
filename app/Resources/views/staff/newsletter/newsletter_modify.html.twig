@@ -4,6 +4,7 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
+    <img src="{{ asset('uploads/images/'~newsletter.image) }}" />
     <button class="btn" type="submit" id="submit">Submit</button>
     {{ form_end(form) }}
 

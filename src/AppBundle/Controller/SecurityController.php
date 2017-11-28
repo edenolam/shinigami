@@ -48,6 +48,7 @@ class SecurityController extends Controller
                 $em->flush();
 
                 $this->addFlash("success", "All right ! You've been registered !");
+                return $this->redirectToRoute('login');
 
             }else{
                 $this->addFlash("error", "The informations you entered were not valid.");

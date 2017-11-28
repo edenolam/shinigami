@@ -61,8 +61,6 @@ class NewsletterManager
 
     public function createNewsletter($newsletter)
     {
-        $fileContent = $this->saveContentInTwig($newsletter->getContent(), $newsletter->getName(), $newsletter->getTheme());
-        $newsletter->setFile($fileContent);
         $newsletter->setCreateAt(new \DateTime('now'));
         $this->uploadImage($newsletter);
         $this->save($newsletter);
@@ -76,11 +74,17 @@ class NewsletterManager
      */
     public function sendNewsletter($newsletter)
 	{
+		$theme = $newsletter->getTheme();
+		$style = file_get_contents($this->kernel->getRootDir().'/Resources/views/emails/styles/'.$theme.'.css');
+
 		$message = (new \Swift_Message($newsletter->getTitle()))
 			->setFrom('newsletter@shinigamilaser.com')
 			->setTo($this->getAllCustomersEmails())
 			->setBody(
-				$this->template->render($newsletter->getFile(), array('title' => $newsletter->getTitle())),
+				$this->template->render('emails/base_email.html.twig', array(
+					"newsletter" => $newsletter,
+					'style' => $style
+				)),
 				'text/html'
 			);
 
@@ -106,34 +110,6 @@ class NewsletterManager
 		}
 		return $emails;
 	}
-	/**
-	 * Generates a twig file with the content of a newsletter
-	 *
-	 * @param $content
-	 * @param $name
-	 * @param $theme
-	 * @return string
-	 */
-	private function saveContentInTwig($content, $name, $theme)
-	{
-		$rootDir = $this->kernel->getRootDir();
-		$path = "emails/templates/";
-		$name = strtolower($name);
-		$name = str_replace(" ", "_", $name);
-		$filename = $name.".html.twig";
-
-		$debut = "{% extends 'emails/base_email.html.twig' %}".PHP_EOL;
-
-		$style = file_get_contents($rootDir.'/Resources/views/emails/styles/'.$theme.'.css');
-		$style = "{% block stylesheet %}".$style."{% endblock %}".PHP_EOL.'{% block content %}'.PHP_EOL;
-
-		$end = PHP_EOL."{% endblock %}";
-		$file = fopen($rootDir.'/Resources/views/'.$path.$filename, 'w');
-		fwrite($file, $debut.$style.$content.$end);
-		fclose($file);
-
-		return $path.$filename;
-	}
 
 	private function save($newsletter)
 	{
@@ -144,6 +120,10 @@ class NewsletterManager
 
 	public function uploadImage(Newsletter $newsletter)
 	{
+		if(null == $newsletter->getImage())
+		{
+			return;
+		}
 		$file = $newsletter->getImage();
 		$fileName = md5(uniqid()).'.'.$file->guessExtension();
 		$file->move( $this->container->getParameter('images_directory'), $fileName );

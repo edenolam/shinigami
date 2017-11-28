@@ -67,6 +67,7 @@ class StaffNewsletterController extends Controller
      */
     public function modifyAction(Request $request, Newsletter $newsletter)
     {
+    	//exit(dump($newsletter));
         $form = $this->createForm(NewsletterType::class, $newsletter);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
@@ -74,7 +75,8 @@ class StaffNewsletterController extends Controller
             return $this->redirectToRoute('staff_newsletter_list');
         }
         return $this->render('staff/newsletter/newsletter_modify.html.twig', array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+			"newsletter" => $newsletter
         ));
     }
 
@@ -86,8 +88,11 @@ class StaffNewsletterController extends Controller
      */
     public function previewAction(Newsletter $newsletter)
     {
-        return $this->render($newsletter->getFile(), array(
-            "title" => $newsletter->getTitle()
+    	$theme = $newsletter->getTheme();
+		$style = file_get_contents($this->get('kernel')->getRootDir().'/Resources/views/emails/styles/'.$theme.'.css');
+        return $this->render('emails/base_email.html.twig', array(
+            "newsletter" => $newsletter,
+			'style' => $style
         ));
     }
 

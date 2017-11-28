@@ -57,7 +57,7 @@ class CustomerController extends Controller
 
         if($form->isSubmitted() && $form->isValid()){
             $customer = $this->getUser()->getCustomer();
-			$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
+			$birthday = $request->request->get('appbundle_customer')['birthday'];
 			$customer->setBirthday(new \DateTime($birthday));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($customer);

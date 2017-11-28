@@ -21,9 +21,12 @@ class NewsletterType extends AbstractType
 			->add('title')
 			->add('image', FileType::class, array(
 				'label' => 'Image (jpg file)',
+				'data_class' => null,
+				'required' => FALSE
                 'attr' => array(
                     "class" => "btn"
                 )
+>>>>>>> src/AppBundle/Form/NewsletterType.php
 			))
 			->add('theme', ChoiceType::class, array(
 				'choices' => array(
