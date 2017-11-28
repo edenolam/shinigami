@@ -10,6 +10,16 @@ form{
 form button[type=submit]{
     margin:0 auto;
     display:block;
+    background-color: #F13280;
+}
+
+form button[type=submit]:hover{
+    background-color: #F84981;
+}
+
+form select.browser-default{
+    color: white;
+    background-color: transparent;
 }
 
 .container .card-player{
@@ -24,6 +34,8 @@ form button[type=submit]{
     border-radius: 15px;
     display: block;
     margin: 40px auto;
+    -webkit-box-shadow: 0 6px 6px 0 rgba(41,181,173,0.10), 0 4px 12px 0 rgba(41,181,173,0.08), 0 8px 4px -6px rgba(41,181,173,0.16);
+    box-shadow: 0 6px 6px 0 rgba(41,181,173,0.10), 0 4px 12px 0 rgba(41,181,173,0.08), 0 8px 4px -6px rgba(41,181,173,0.16);
 }
 
 .add-card form{
