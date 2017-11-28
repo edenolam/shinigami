@@ -64,7 +64,7 @@ class Card
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="cardsOffers", mappedBy="card")
+     * @ORM\OneToMany(targetEntity="CardsOffers", mappedBy="card")
      */
     private $cardsOffers;
 
@@ -75,9 +75,16 @@ class Card
      */
     private $isActive;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="given", type="boolean")
+	 */
+    private $given;
+
     /**
      * Many Cards have Many GameSessions.
-     * @ORM\ManyToMany(targetEntity="GameSession", inversedBy="cards")
+     * @ORM\ManyToMany(targetEntity="GameSession", inversedBy="cards", cascade={"persist"})
      * @ORM\JoinTable(name="cards_gameSessions")
      */
     private $gameSessions;
