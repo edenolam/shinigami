@@ -12,18 +12,18 @@
                 <li class="tab"><a href="#by-name">Search by name</a></li>
             </ul>
         </div>
-        <div class="card-content grey lighten-4">
+        <div class="card-content">
             <div id="by-card">
                 <form action="" method="post">
                     <label for="">Search by card</label>
                     <input type="text" name="search_field">
-                    <input type="submit" value="Search" class="waves-effect waves-light btn">
+                    <input type="submit" value="Search" class="waves-effect waves-light btn retro-rose">
                 </form>
             </div>
             <div id="by-name">
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                <button type="submit" class="waves-effect waves-light btn">Search</button>
+                <button type="submit" class="waves-effect waves-light btn retro-rose">Search</button>
                 {{ form_end(form) }}
             </div>
         </div>
