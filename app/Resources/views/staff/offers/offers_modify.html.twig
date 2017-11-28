@@ -2,10 +2,34 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-    <button type="submit" id="submit">Submit</button>
-    {{ form_end(form) }}
+    <h1>Edit offer</h1>
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col xl9">
+                {{ form_row(form.name) }}
+            </div>
+            <div class="col xl3">
+                {{ form_row(form.code) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col xl4">
+                {{ form_row(form.offerType) }}
+            </div>
+            <div class="col xl4">
+                {{ form_row(form.count) }}
+            </div>
+            <div class="col xl4">
+                {{ form_row(form.level) }}
+            </div>
+        </div>
+        <div class="row">
+            {{ form_row(form.description) }}
+        </div>
 
+        <button type="submit" id="submit" class="btn">Submit</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
 
