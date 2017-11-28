@@ -1,8 +1,13 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 
 homepage:
     path: /
     defaults:
         _controller: AppBundle:Default:index
+
+
 #SECURITY
 register:
     path: /register
@@ -21,6 +26,7 @@ logout:
 
 
 # CUSTOMER
+
 customer_panel:
     path: /customer
     defaults:
@@ -34,38 +40,40 @@ customer_modify_infos:
 
 
 
-# STAFF CARD MANAGEMENT
+# STAFF CUSTOMER MANAGEMENT
 
 staff_search:
     path: /staff
     defaults:
-        _controller: AppBundle:StaffCard:search
+        _controller: AppBundle:StaffCustomer:search
 
-staff_card_view:
+staff_customer_view:
     path: /staff/card/{number}
     defaults:
-        _controller: AppBundle:StaffCard:cardView
+        _controller: AppBundle:StaffCustomer:cardView
     requirements:
           number:     \d+
 
 staff_edit_profile:
     path: /staff/card/{number}/editcustomer
     defaults:
-           _controller: AppBundle:StaffCard:editCustomer
+           _controller: AppBundle:StaffCustomer:editCustomer
     requirements:
           number:     \d+
 
 staff_edit_card:
     path: /staff/card/{number}/editcard
     defaults:
-           _controller: AppBundle:StaffCard:editCard
+           _controller: AppBundle:StaffCustomer:editCard
     requirements:
           number:     \d+
 
 staff_customer_offers_use:
     path: /staff/cardoffer/use/{id}
     defaults:
-         _controller: AppBundle:StaffCard:useCardOffer
+         _controller: AppBundle:StaffCustomer:useCardOffer
+
+
 
 # STAFF NEWSLETTER MANAGEMENT
 
@@ -139,3 +147,15 @@ staff_offers_modify:
     defaults:
           _controller: AppBundle:StaffOffers:modify
 
+
+# STAFF NEW CARD
+
+staff_new_card:
+    path: /staff/new-card
+    defaults:
+          _controller: AppBundle:StaffCard:new
+
+staff_generate_new_card_ajax:
+    path: /staff/new-card/generate/{center}
+    defaults:
+          _controller: AppBundle:StaffCard:generateAjax

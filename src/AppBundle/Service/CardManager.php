@@ -44,6 +44,55 @@ class CardManager
         return $repository;
     }
 
+    public function initCard($card, $cardNumber)
+    {
+        $card->setNumber($cardNumber);
+        $card->setIsActive(false);
+        $card->setScore(0);
+        $card->setVisits(0);
+        return $card;
+    }
+
+    public function getCardsWithoutCustomer()
+    {
+        return $this->getCardRepository()->findAllInactiveCards();
+    }
+
+    public function newCard($centerCode)
+    {
+        $cardNumber = $this->generateCardNumber($centerCode);
+
+        while($this->isAvailable($cardNumber) === false){
+            $cardNumber = $this->generateCardNumber($centerCode);
+        }
+
+        return $cardNumber;
+    }
+
+
+    private function generateCardNumber($centerCode)
+    {
+        $number = str_pad(rand(0,99999), 5, "0", STR_PAD_LEFT);
+        $modulo =  $number % $centerCode;
+        $cardNumber = array(
+            "center" => $centerCode,
+            "number" => $number,
+            "modulo" => strval($modulo)[0]
+        );
+
+        return $cardNumber;
+    }
+
+    private function isAvailable($cardNumber)
+    {
+        if($this->getCardRepository()->findByNumber(implode("", $cardNumber))) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
     /**
      * Add a card to a customer
      *
