@@ -1,0 +1,15 @@
+table.highlight>tbody>tr:hover {
+    background-color: #1E3E52;
+}
+
+.pagination li.active{
+    background-color: #F13280;
+}
+
+.pagination li a{
+    color: white;
+}
+
+table.bordered>thead>tr, table.bordered>tbody>tr{
+    border-bottom: 2px solid rgba(41,181,173,0.16);
+}

@@ -19,12 +19,6 @@
 body {
   color: white;
   background-color: #161B32;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-main {
-  flex: 1 0 auto;
 }
 h1 {
   text-align: center;
@@ -38,47 +32,28 @@ h1 {
 }
 .main-nav a:hover {
   background-color: #29B5AD;
-  color: #161B32;
-}
-.main-nav ul li.active {
-  background-color: #34C2BA;
-}
-.main-nav ul li.active a {
-  color: #161B32;
 }
 .page-footer {
   border-top: 1px solid rgba(41, 181, 173, 0.33);
   background-color: #161B32;
 }
 .card {
-  background-color: #0E132A;
+  background-color: #161B32;
   -webkit-box-shadow: 0 3px 3px 0 rgba(41, 181, 173, 0.1), 0 2px 6px 0 rgba(41, 181, 173, 0.08), 0 4px 2px -3px rgba(41, 181, 173, 0.16);
   box-shadow: 0 3px 3px 0 rgba(41, 181, 173, 0.1), 0 2px 6px 0 rgba(41, 181, 173, 0.08), 0 4px 2px -2px rgba(41, 181, 173, 0.16);
 }
-.card .tabs {
-  background-color: #161B32;
-}
-.card .tabs .tab a {
-  color: #29B5AD;
-}
-.card .tabs .indicator {
-  background-color: #29B5AD;
-}
-table {
-  margin: 60px auto;
-}
 table .highlight > tbody > tr:hover {
   background-color: #1E3E52;
+}
+table .bordered > thead > tr,
+table .bordered > tbody > tr {
+  border-color: #29B5AD;
 }
 table thead td {
   color: #29B5AD;
 }
 table thead td a {
   color: #29B5AD;
-}
-table.bordered > thead > tr,
-table.bordered > tbody > tr {
-  border-color: rgba(41, 181, 173, 0.4);
 }
 .pagination li.active {
   background-color: #F13280;
@@ -122,23 +97,6 @@ form select.browser-default {
 .add-card form button {
   margin: 5px;
   display: inline;
-}
-.customer-infos {
-  padding: 0px 15px;
-}
-.customer-infos .card-title {
-  margin-top: 20px;
-}
-.card-infos {
-  padding: 0px 15px;
-}
-.card-infos table {
-  margin: 0;
-  line-height: 0.5;
-}
-.card-infos .card-number {
-  top: 30px;
-  position: relative;
 }
 .picker__box .picker__date-display {
   background-color: #29B5AD;
