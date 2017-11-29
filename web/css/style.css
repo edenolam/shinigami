@@ -1,67 +1,182 @@
-/* Custom Stylesheet */
-/**
- * Use this file to override Materialize files so you can update
- * the core Materialize files in the future
- *
- * Made By MaterializeCSS.com
- */
-
+.retro-rose {
+  background-color: #F13280;
+}
+.retro-rose:hover {
+  background-color: #F84981;
+}
+.retro-cyan {
+  background-color: #29B5AD;
+}
+.retro-cyan:hover {
+  background-color: #34C2BA;
+}
+.retro-jaune {
+  background-color: #FC985C;
+}
+.retro-jaune:hover {
+  background-color: #FCC66C;
+}
 body {
+  color: white;
+  background-color: #161B32;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
-
 main {
   flex: 1 0 auto;
 }
-
-nav ul a,
-nav .brand-logo {
-  color: #444;
+h1 {
+  text-align: center;
 }
-
-p {
-  line-height: 2rem;
+.main-nav {
+  background-color: transparent;
+  -webkit-box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
+  -moz-box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
+  box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
+  margin-bottom: 40px;
 }
-
-.button-collapse {
-  color: #26a69a;
+.main-nav a:hover {
+  background-color: #29B5AD;
+  color: #161B32;
 }
-
-.parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: rgba(255,255,255,.9);
+.main-nav ul li.active {
+  background-color: #34C2BA;
 }
-  .parallax-container .section {
-    width: 100%;
-  }
-
-@media only screen and (max-width : 992px) {
-  .parallax-container .section {
-    position: absolute;
-    top: 40%;
-  }
-  #index-banner .section {
-    top: 10%;
-  }
+.main-nav ul li.active a {
+  color: #161B32;
 }
-
-@media only screen and (max-width : 600px) {
-  #index-banner .section {
-    top: 0;
-  }
+.page-footer {
+  border-top: 1px solid rgba(41, 181, 173, 0.33);
+  background-color: #161B32;
 }
-
-.icon-block {
-  padding: 0 15px;
+.card {
+  background-color: #0E132A;
+  -webkit-box-shadow: 0 3px 3px 0 rgba(41, 181, 173, 0.1), 0 2px 6px 0 rgba(41, 181, 173, 0.08), 0 4px 2px -3px rgba(41, 181, 173, 0.16);
+  box-shadow: 0 3px 3px 0 rgba(41, 181, 173, 0.1), 0 2px 6px 0 rgba(41, 181, 173, 0.08), 0 4px 2px -2px rgba(41, 181, 173, 0.16);
 }
-.icon-block .material-icons {
-  font-size: inherit;
+.card .tabs {
+  background-color: #161B32;
 }
-
-footer.page-footer {
+.card .tabs .tab a {
+  color: #29B5AD;
+}
+.card .tabs .indicator {
+  background-color: #29B5AD;
+}
+.login-card {
+  padding: 50px;
+}
+table {
+  margin: 60px auto;
+}
+table .highlight > tbody > tr:hover {
+  background-color: #1E3E52;
+}
+table thead td {
+  color: #29B5AD;
+}
+table thead td a {
+  color: #29B5AD;
+}
+table.bordered > thead > tr,
+table.bordered > tbody > tr {
+  border-color: rgba(41, 181, 173, 0.4);
+}
+.pagination li.active {
+  background-color: #F13280;
+}
+.pagination li a {
+  color: white;
+}
+form {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+form button[type=submit] {
+  margin: 0 auto;
+  display: block;
+  background-color: #F13280;
+}
+form button[type=submit]:hover {
+  background-color: #F84981;
+}
+form select.browser-default {
+  color: white;
+  background-color: transparent;
+}
+.container .card-player {
+  margin: 20px auto;
+  width: 95%;
+  padding: 15px;
+  list-style-type: none;
+}
+.add-card {
+  width: 80%;
+  border-radius: 15px;
+  display: block;
+  margin: 40px auto;
+  -webkit-box-shadow: 0 6px 6px 0 rgba(41, 181, 173, 0.1), 0 4px 12px 0 rgba(41, 181, 173, 0.08), 0 8px 4px -6px rgba(41, 181, 173, 0.16);
+  box-shadow: 0 6px 6px 0 rgba(41, 181, 173, 0.1), 0 4px 12px 0 rgba(41, 181, 173, 0.08), 0 8px 4px -6px rgba(41, 181, 173, 0.16);
+}
+.add-card form {
+  padding: 40px;
+}
+.add-card form button {
+  margin: 5px;
+  display: inline;
+}
+.customer-infos {
+  padding: 0px 15px;
+}
+.customer-infos .card-title {
+  margin-top: 20px;
+}
+.card-infos {
+  padding: 10px 15px;
+}
+.card-infos .row {
+  position: relative;
+  left: 75px;
+}
+.card-infos table {
   margin: 0;
+  line-height: 0.5;
+}
+.card-infos .card-number {
+  top: 30px;
+  position: relative;
+}
+.collapsible,
+.collapsible-header,
+.collapsible-body {
+  border-color: #29B5AD;
+  background-color: #161B32;
+}
+.collapsible table,
+.collapsible-header table,
+.collapsible-body table {
+  margin: 0;
+}
+.picker__box .picker__date-display {
+  background-color: #29B5AD;
+}
+.picker__box .picker__container__wrapper {
+  background-color: #161B32;
+}
+.picker__box .clockpicker-plate {
+  background-color: #585d72;
+  color: white;
+}
+.picker__box .clockpicker-tick {
+  color: white;
+}
+.picker__box .picker__day {
+  color: white;
+}
+.picker__box .picker__close {
+  color: #F13280;
+}
+.picker__box .picker__clear {
+  color: #FC985C;
 }

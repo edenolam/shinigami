@@ -1,0 +1,215 @@
+@retro-rose: #F13280;
+@retro-rose-lighten: #F84981;
+@retro-cyan: #29B5AD;
+@retro-cyan-lighten: #34C2BA;
+@retro-jaune: #FC985C;
+@retro-jaune-lighten:#FCC66C;
+@retro-noir: #161B32;
+
+
+.retro-rose{
+  background-color: @retro-rose;
+  &:hover{
+    background-color: @retro-rose-lighten;
+  }
+}
+.retro-cyan{
+  background-color: @retro-cyan;
+  &:hover{
+    background-color: @retro-cyan-lighten;
+  }
+}
+.retro-jaune{
+  background-color: @retro-jaune;
+  &:hover{
+    background-color: @retro-jaune-lighten;
+  }
+}
+
+body{
+  color: white;
+  background-color: @retro-noir;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+h1{
+  text-align: center;
+}
+
+.main-nav{
+  background-color: transparent;
+  -webkit-box-shadow: 0px 6px 14px -2px rgba(41,181,173,0.250);
+  -moz-box-shadow: 0px 6px 14px -2px rgba(41,181,173,0.250);
+  box-shadow: 0px 6px 14px -2px rgba(41,181,173,0.250);
+  margin-bottom: 40px;
+  a:hover{
+    background-color: @retro-cyan;
+    color: @retro-noir;
+  }
+  ul li.active{
+    background-color: @retro-cyan-lighten;
+    a{
+      color: @retro-noir;
+    }
+  }
+}
+
+.page-footer{
+  border-top: 1px solid rgba(41,181,173,0.33);
+  background-color: #161B32;
+}
+
+.card{
+  background-color: #0E132A;
+  -webkit-box-shadow: 0 3px 3px 0 rgba(41,181,173,0.10), 0 2px 6px 0 rgba(41,181,173,0.08), 0 4px 2px -3px rgba(41,181,173,0.16);
+  box-shadow: 0 3px 3px 0 rgba(41,181,173,0.10), 0 2px 6px 0 rgba(41,181,173,0.08), 0 4px 2px -2px rgba(41,181,173,0.16);
+  .tabs{
+    background-color: @retro-noir;
+    .tab{
+      a{
+        color: @retro-cyan;
+      }
+    }
+    .indicator{
+      background-color: @retro-cyan;
+    }
+  }
+}
+
+.login-card{
+  padding: 50px;
+}
+
+table{
+  margin: 60px auto;
+  .highlight>tbody>tr:hover {
+    background-color: #1E3E52;
+  }
+  thead td{
+    color: @retro-cyan;
+    a{
+      color: @retro-cyan;
+    }
+  }
+}
+
+table.bordered > thead > tr, table.bordered > tbody > tr{
+  border-color: rgba(41,181,173,0.4);
+}
+
+.pagination{
+  li.active{
+    background-color: @retro-rose;
+  }
+
+  li a{
+    color: white;
+  }
+}
+
+
+
+form{
+  margin-top: 40px;
+  margin-bottom: 40px;
+  button[type=submit]{
+    margin:0 auto;
+    display:block;
+    background-color: @retro-rose;
+    &:hover{
+      background-color: @retro-rose-lighten;
+    }
+  }
+  select.browser-default{
+    color: white;
+    background-color: transparent;
+  }
+}
+
+
+
+.container .card-player{
+  margin: 20px auto;
+  width: 95%;
+  padding: 15px;
+  list-style-type: none;
+}
+
+
+
+.add-card{
+  width: 80%;
+  border-radius: 15px;
+  display: block;
+  margin: 40px auto;
+  -webkit-box-shadow: 0 6px 6px 0 rgba(41,181,173,0.10), 0 4px 12px 0 rgba(41,181,173,0.08), 0 8px 4px -6px rgba(41,181,173,0.16);
+  box-shadow: 0 6px 6px 0 rgba(41,181,173,0.10), 0 4px 12px 0 rgba(41,181,173,0.08), 0 8px 4px -6px rgba(41,181,173,0.16);
+  form{
+    padding: 40px;
+    button{
+      margin: 5px;
+      display: inline;
+    }
+  }
+}
+
+.customer-infos{
+  padding: 0px 15px;
+  .card-title{
+    margin-top: 20px;
+  }
+}
+
+.card-infos{
+  padding: 10px 15px;
+  .row{
+    position: relative;
+    left: 75px;
+  }
+  table{
+    margin: 0;
+    line-height: 0.5;
+  }
+  .card-number{
+    top: 30px;
+    position: relative;
+  }
+}
+
+.collapsible, .collapsible-header, .collapsible-body{
+  border-color: @retro-cyan;
+  background-color: @retro-noir;
+  table{
+    margin: 0;
+  }
+}
+
+
+.picker__box {
+  .picker__date-display {
+    background-color: @retro-cyan;
+  }
+  .picker__container__wrapper {
+    background-color: @retro-noir;
+  }
+  .clockpicker-plate {
+    background-color: #585d72;
+    color: white;
+  }
+  .clockpicker-tick {
+    color: white;
+  }
+  .picker__day {
+    color: white;
+  }
+  .picker__close {
+    color: @retro-rose;
+  }
+  .picker__clear {
+    color: @retro-jaune;
+  }
+}
