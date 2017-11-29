@@ -8,17 +8,12 @@
             <!--Import Google Icon Font-->
             <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"  media="screen,projection"/>
 
             <!--Import materialize.css-->
-<<<<<<< HEAD
+
             <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
             <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"  media="screen,projection"/>
-=======
-            <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}" media="screen,projection"/>
-            <link type="text/css" rel="stylesheet" href="{{ asset('css/form.css') }}"/>
-            <link type="text/css" rel="stylesheet" href="{{ asset('css/colors.css') }}"/>
->>>>>>> c07717deb29dcf93954e53f4024b59027e81e68b
+
         {% endblock %}
 
     </head>
@@ -28,18 +23,20 @@
                <div class="nav-wrapper">
                    <a href="#" class="brand-logo">SHINIGAMI</a>
                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                   <ul id="nav-mobile" class="right hide-on-med-and-down">
+                   <ul class="right hide-on-med-and-down">
                        {% block nav %}
                            {% if app.user is null %}
-                               <li><a href="{{ path('register') }}" id="register">register</a></li>
-                               <li><a href="{{ path('login') }}" id="login">login</a></li>
+                               <li><a href="{{ path('register') }}" id="register">Register</a></li>
+                               <li><a href="#modal1" class="modal-trigger" id="login">Login</a></li>
                            {% else %}
-
                                <li><i class="material-icons">perm_identity</i></li>
                                <li>{{ app.user.username }}</li>
-                               <li><a href="{{ path('logout') }}" id="logout">Logout</a></li>
+                               <li><a class="modal-trigger" href="#modal1" id="logout">Logout</a></li>
                            {% endif %}
                        {% endblock %}
+                   </ul>
+                   <ul class="side-nav" id="mobile-demo">
+                        {{ block('nav') }}
                    </ul>
                </div>
            </div>
@@ -54,6 +51,7 @@
                {% endfor %}
            </div>
            {% block body %}{% endblock %}
+           {% block modals %}{% endblock %}
        </main>
 
         <!-- footer -->
@@ -96,10 +94,7 @@
                     });
                 });
             </script>
-
         {% endblock %}
-
     </body>
-
 </html>
 

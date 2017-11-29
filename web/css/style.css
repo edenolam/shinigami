@@ -16,6 +16,18 @@
 .retro-jaune:hover {
   background-color: #FCC66C;
 }
+.retro-cyan-text {
+  color: #29B5AD;
+}
+.retro-rose-text {
+  color: #F84981;
+}
+.retro-jaune-text {
+  color: #FC985C;
+}
+hr {
+  border-color: #F13280;
+}
 body {
   color: white;
   background-color: #161B32;
@@ -31,10 +43,9 @@ h1 {
 }
 .main-nav {
   background-color: transparent;
-  -webkit-box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
-  -moz-box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
-  box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
-  margin-bottom: 40px;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(41, 181, 173, 0.33);
+  margin-bottom: 50px;
 }
 .main-nav a:hover {
   background-color: #29B5AD;
@@ -63,6 +74,10 @@ h1 {
 }
 .card .tabs .indicator {
   background-color: #29B5AD;
+}
+.login-card {
+  padding: 50px;
+  margin: 0;
 }
 table {
   margin: 60px auto;
@@ -130,7 +145,11 @@ form select.browser-default {
   margin-top: 20px;
 }
 .card-infos {
-  padding: 0px 15px;
+  padding: 10px 15px;
+}
+.card-infos .row {
+  position: relative;
+  left: 75px;
 }
 .card-infos table {
   margin: 0;
@@ -139,6 +158,46 @@ form select.browser-default {
 .card-infos .card-number {
   top: 30px;
   position: relative;
+}
+.collapsible,
+.collapsible-header,
+.collapsible-body {
+  border-color: #29B5AD;
+  background-color: #161B32;
+}
+.collapsible table,
+.collapsible-header table,
+.collapsible-body table {
+  margin: 0;
+}
+.collapsible .gamesession-center,
+.collapsible-header .gamesession-center,
+.collapsible-body .gamesession-center {
+  border-bottom: 1px solid #29B5AD;
+  font-size: medium;
+  padding: 15px;
+}
+.carousel .offer-description {
+  text-align: center;
+  padding: 20px;
+}
+.carousel .offer-status {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: larger;
+}
+.alert {
+  width: 90%;
+  display: block;
+  margin: auto;
+  margin-bottom: 25px;
+  background-color: #29B5AD;
+  color: white;
+  border-radius: 5px;
+  padding: 15px;
 }
 .picker__box .picker__date-display {
   background-color: #29B5AD;
@@ -161,4 +220,12 @@ form select.browser-default {
 }
 .picker__box .picker__clear {
   color: #FC985C;
+}
+.picker__box .picker__select--month,
+.picker__box .picker__select--year {
+  background-color: #161B32;
+}
+.picker__box .picker__nav--prev:hover,
+.picker__box .picker__nav--next:hover {
+  background-color: #161B32;
 }

@@ -26,6 +26,20 @@
   }
 }
 
+.retro-cyan-text{
+  color: @retro-cyan;
+}
+
+.retro-rose-text{
+  color: @retro-rose-lighten;
+}
+.retro-jaune-text{
+  color: @retro-jaune;
+}
+
+hr{
+  border-color: @retro-rose;
+}
 body{
   color: white;
   background-color: @retro-noir;
@@ -42,10 +56,9 @@ h1{
 
 .main-nav{
   background-color: transparent;
-  -webkit-box-shadow: 0px 6px 14px -2px rgba(41,181,173,0.250);
-  -moz-box-shadow: 0px 6px 14px -2px rgba(41,181,173,0.250);
-  box-shadow: 0px 6px 14px -2px rgba(41,181,173,0.250);
-  margin-bottom: 40px;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(41,181,173,0.33);
+  margin-bottom: 50px;
   a:hover{
     background-color: @retro-cyan;
     color: @retro-noir;
@@ -80,7 +93,10 @@ h1{
   }
 }
 
-
+.login-card{
+  padding: 50px;
+  margin: 0;
+}
 
 table{
   margin: 60px auto;
@@ -163,7 +179,11 @@ form{
 }
 
 .card-infos{
-  padding: 0px 15px;
+  padding: 10px 15px;
+  .row{
+    position: relative;
+    left: 75px;
+  }
   table{
     margin: 0;
     line-height: 0.5;
@@ -172,6 +192,47 @@ form{
     top: 30px;
     position: relative;
   }
+}
+
+
+.collapsible, .collapsible-header, .collapsible-body{
+  border-color: @retro-cyan;
+  background-color: @retro-noir;
+  table{
+    margin: 0;
+  }
+  .gamesession-center{
+    border-bottom: 1px solid @retro-cyan;
+    font-size: medium;
+    padding: 15px;
+  }
+}
+
+.carousel{
+  .offer-description{
+    text-align: center;
+    padding: 20px;
+  }
+  .offer-status{
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+  }
+
+}
+
+.alert{
+  width: 90%;
+  display: block;
+  margin: auto;
+  margin-bottom: 25px;
+  background-color: @retro-cyan;
+  color: white;
+  border-radius: 5px;
+  padding: 15px;
 }
 
 .picker__box {
@@ -196,5 +257,11 @@ form{
   }
   .picker__clear {
     color: @retro-jaune;
+  }
+  .picker__select--month, .picker__select--year{
+    background-color: @retro-noir;
+  }
+  .picker__nav--prev:hover, .picker__nav--next:hover{
+    background-color: @retro-noir;
   }
 }

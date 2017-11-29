@@ -2,10 +2,31 @@
 
 {% block body %}
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" id="submit">Edit</button>
-    {{ form_end(form) }}
+	<div class="container">
+        {{ form_start(form) }}
+		<div class="row">
+            {{ form_row(form.firstname) }}
+		</div>
+		<div class="row">
+            {{ form_row(form.lastname) }}
+		</div>
+		<div class="row">
+            {{ form_row(form.nickname) }}
+		</div>
+		<div class="row">
+            {{ form_row(form.adress) }}
+		</div>
+		<div class="row">
+			<div class="col xl6">
+                {{ form_row(form.phone) }}
+			</div>
+			<div class="col xl6">
+                {{ form_row(form.birthday) }}
+			</div>
+		</div>
+		<button class="btn waves-effect waves-light" type="submit" id="submit">Modify</button>
+        {{ form_end(form) }}
+	</div>
 
 {% endblock %}
 {% block javascripts %}
