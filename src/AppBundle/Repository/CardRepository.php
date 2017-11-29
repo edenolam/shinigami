@@ -39,6 +39,7 @@ class CardRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('c')
             ->where('c.customer IS NULL')
             ->andWhere('c.isActive = false')
+			->andWhere('c.given = false')
             ->getQuery()
             ->getResult();
     }

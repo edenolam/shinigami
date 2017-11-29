@@ -30,11 +30,16 @@ class CardGenerationType extends AbstractType
             ->add('number', TextType::class, array(
                 "mapped" => false,
                 "attr" => array(
+                	"minlength" => 5,
                     "maxlength" => 5
                 ),
             ))
             ->add('modulo', TextType::class, array(
                 "mapped" => false,
+				"attr" => array(
+					"minlength" => 1,
+					"maxlength" => 1
+				),
     ));
     }
     

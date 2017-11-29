@@ -64,6 +64,9 @@ h1 {
 .card .tabs .indicator {
   background-color: #29B5AD;
 }
+.login-card {
+  padding: 50px;
+}
 table {
   margin: 60px auto;
 }
@@ -130,7 +133,11 @@ form select.browser-default {
   margin-top: 20px;
 }
 .card-infos {
-  padding: 0px 15px;
+  padding: 10px 15px;
+}
+.card-infos .row {
+  position: relative;
+  left: 75px;
 }
 .card-infos table {
   margin: 0;
@@ -139,6 +146,17 @@ form select.browser-default {
 .card-infos .card-number {
   top: 30px;
   position: relative;
+}
+.collapsible,
+.collapsible-header,
+.collapsible-body {
+  border-color: #29B5AD;
+  background-color: #161B32;
+}
+.collapsible table,
+.collapsible-header table,
+.collapsible-body table {
+  margin: 0;
 }
 .picker__box .picker__date-display {
   background-color: #29B5AD;

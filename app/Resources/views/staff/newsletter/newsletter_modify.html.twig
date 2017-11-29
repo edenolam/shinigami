@@ -1,12 +1,33 @@
 {% extends 'staff/staff.html.twig' %}
-
 {% block body %}
+    <h1>New newsletter</h1>
+    <div class="container">
+        {{ form_start(form) }}
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <img src="{{ asset('uploads/images/'~newsletter.image) }}" />
-    <button class="btn" type="submit" id="submit">Submit</button>
-    {{ form_end(form) }}
+        <div class="row">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="row">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="row">
+            {{ form_row(form.content) }}
+        </div>
+        <div class="row">
+            <div class="col xl3">
+                {{ form_row(form.theme) }}
+            </div>
+            <div class="col xl6">
+                {{ form_row(form.image) }}
+            </div>
+            <div class="col xl3">
+                <img src="{{ asset('uploads/images/'~newsletter.image) }}" width="100%"/>
+            </div>
+        </div>
 
+        <button class="btn waves-effect waves-light" type="submit" id="submit" class="btn">Submit</button>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
+
 
