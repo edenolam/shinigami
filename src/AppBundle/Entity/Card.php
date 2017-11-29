@@ -68,6 +68,13 @@ class Card
      */
     private $cardsOffers;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="given", type="boolean")
+	 */
+    private $given;
+
     /**
      * @var bool
      *
@@ -355,5 +362,29 @@ class Card
     public function getGameScores()
     {
         return $this->gameScores;
+    }
+
+    /**
+     * Set given
+     *
+     * @param boolean $given
+     *
+     * @return Card
+     */
+    public function setGiven($given)
+    {
+        $this->given = $given;
+
+        return $this;
+    }
+
+    /**
+     * Get given
+     *
+     * @return boolean
+     */
+    public function getGiven()
+    {
+        return $this->given;
     }
 }

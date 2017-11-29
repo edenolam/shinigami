@@ -2,6 +2,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Account;
+use AppBundle\Entity\Center;
 use AppBundle\Entity\Customer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -34,10 +35,19 @@ class Fixtures extends Fixture
 		$customer->setBirthday(new \DateTime("04/02/1981"));
 
 
+		$center = new Center();
+		$center->setCode(123);
+		$center->setAdress("paris 19");
+		$center->setVisits(0);
+
+
 		$customerAccount->setCustomer($customer);
+		$manager->persist($center);
 		$manager->persist($staffAccount);
 		$manager->persist($customerAccount);
 		$manager->flush();
 
 	}
+
+
 }

@@ -45,13 +45,19 @@ class CardManager
         return $repository;
     }
 
-    public function initCard($card, $cardNumber)
+    public function initCard(Card $card, $cardNumber)
     {
-        $card->setNumber($cardNumber);
-        $card->setIsActive(false);
-        $card->setScore(0);
-        $card->setVisits(0);
-        return $card;
+    	if($this->isAvailable($cardNumber)){
+			$card->setNumber($cardNumber);
+			$card->setIsActive(FALSE);
+			$card->setGiven(FALSE);
+			$card->setScore(0);
+			$card->setVisits(0);
+			return $card;
+		}else{
+    		$this->session->getFlashBag()->add('error', "This card is already in the database.");
+    		return null;
+		}
     }
 
     public function getCardsWithoutCustomer()
@@ -63,7 +69,7 @@ class CardManager
     {
         $cardNumber = $this->generateCardNumber($centerCode);
 
-        while($this->isAvailable($cardNumber) === false){
+        while($this->isAvailable(implode("", $cardNumber)) === false){
             $cardNumber = $this->generateCardNumber($centerCode);
         }
 
@@ -86,7 +92,7 @@ class CardManager
 
     private function isAvailable($cardNumber)
     {
-        if($this->getCardRepository()->findByNumber(implode("", $cardNumber))) {
+        if($this->getCardRepository()->findByNumber($cardNumber)) {
             return false;
         }else{
             return true;
@@ -133,6 +139,12 @@ class CardManager
         }
 
     }
+
+    public function giveCard(Card $card)
+	{
+		$card->setGiven(true);
+		$this->save($card);
+	}
 
     public function getValidCardsOffersOfCustomer($card)
     {
