@@ -11,6 +11,9 @@
             {{ form_row(form.title) }}
         </div>
         <div class="row">
+            {{ form_row(form.content) }}
+        </div>
+        <div class="row">
             <div class="col xl6">
                 {{ form_row(form.theme) }}
             </div>
@@ -18,9 +21,7 @@
                 {{ form_row(form.image) }}
             </div>
         </div>
-        <div class="row">
-            {{ form_row(form.content) }}
-        </div>
+
         <button class="btn waves-effect waves-light" type="submit" id="submit" class="btn">Submit</button>
         {{ form_end(form) }}
     </div>

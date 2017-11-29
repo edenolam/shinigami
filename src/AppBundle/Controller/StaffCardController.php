@@ -29,11 +29,13 @@ class StaffCardController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             $data = $request->request->get('appbundle_card');
             $cardNumber = $data['center'].$data['number'].$data['modulo'];
-            $cardManager->initCard($card, $cardNumber);
-            $cardManager->save($card);
+			if($cardManager->initCard($card, $cardNumber)){
+				$cardManager->save($card);
+			}
         }
 
         $cards = $cardManager->getCardsWithoutCustomer();
+
 
         return $this->render('staff/card/new.html.twig', array(
             "form" => $form->createView(),
@@ -52,4 +54,12 @@ class StaffCardController extends Controller
         return $response;
 
     }
+
+    public function giveCardAjaxAction(Request $request, Card $card)
+	{
+		$cardManager = $this->get('app.card.manager');
+		$cardManager->giveCard($card);
+		$response = new JsonResponse();
+		return $response;
+	}
 }

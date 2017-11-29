@@ -1,30 +1,24 @@
-<div class="card gamesessions-infos">
-    <ul class="collapsible" data-collapsible="accordion">
-        {% for gameSession in gameSessions %}
-            <li>
-                <div class="collapsible-header">
-                    <div style="width:100%;">
-                        <i class="material-icons circle left">expand_more</i>
-                        <span class="left">Game Session of the {{ gameSession.date|date('D d M y') }}</span>
-                        <span class="right">Number of players : {{ gameSession.nbPlayers }}</span>
-                    </div>
+<ul class="collapsible" data-collapsible="accordion">
+    {% for gameSession in gameSessions %}
+        <li>
+            <div class="collapsible-header">
+                <div style="width:100%;">
+                    <i class="material-icons circle left">expand_more</i>
+                    <span class="left">Game Session of the {{ gameSession.date|date('D d M y') }}</span>
+                    <span class="right">Number of players : {{ gameSession.nbPlayers }}</span>
                 </div>
-                <div class="collapsible-body">
-                    <p>Center : {{ gameSession.center.adress }}</p>
-                    <table>
-                        {% for gameScore in gameSession.gameScores %}
-                            <tr>
-                                {% if gameScore.card %}
-                                    <td>{{ gameScore.card.customer.nickname }}'s score</td>
-                                {% else %}
-                                    <td>{{ gameScore.playerName }}'s score</td>
-                                {% endif %}
-                                <td>{{ gameScore.score }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+            </div>
+            <div class="collapsible-body">
+                <p class="gamesession-center">Center : {{ gameSession.center.adress }}</p>
+                <table class="bordered">
+                    {% for gameScore in gameSession.gameScores %}
+                        <tr>
+                            <td class="retro-rose-text">{{ gameScore.playerName }}'s score</td>
+                            <td class="retro-rose-text">{{ gameScore.score }} points</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </li>
+    {% endfor %}
+</ul>

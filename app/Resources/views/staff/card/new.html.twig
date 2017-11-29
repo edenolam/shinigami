@@ -38,13 +38,17 @@
                     <td>ID</td>
                     <td>Center</td>
                     <td>Number</td>
+                    <td>Given</td>
                 </tr>
                 </thead>
                 {% for card in cards %}
-                    <tr>
+                    <tr id="rowcard-{{ card.id }}">
                         <td>{{ card.id }}</td>
                         <td>{{ card.center.code }}</td>
                         <td>{{ card.number }}</td>
+                        <td>
+                            <a class="btn-floating waves-effect waves-light retro-rose" id="give-{{ card.id }}" onclick="giveCard({{ card.id }})"><i class="material-icons">add</i></a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -61,4 +65,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/ajax/newCard.js') }}"></script>
+    <script src="{{ asset('js/ajax/giveCard.js') }}"></script>
 {% endblock %}

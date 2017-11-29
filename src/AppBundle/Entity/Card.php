@@ -68,6 +68,13 @@ class Card
      */
     private $cardsOffers;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="given", type="boolean")
+	 */
+    private $given;
+
     /**
      * @var bool
      *

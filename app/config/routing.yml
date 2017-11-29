@@ -159,3 +159,8 @@ staff_generate_new_card_ajax:
     path: /staff/new-card/generate/{center}
     defaults:
           _controller: AppBundle:StaffCard:generateAjax
+
+staff_give_card_ajax:
+    path: /staff/give-card/give/{id}
+    defaults:
+        _controller: AppBundle:StaffCard:giveCardAjax
