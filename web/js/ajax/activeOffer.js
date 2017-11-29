@@ -8,13 +8,13 @@ function active(id){
         success: function(data){
             button = $("#active-" + id);
             if(data.result){
-                button.removeClass('red');
-                button.addClass('green');
+                button.removeClass('retro-rose');
+                button.addClass('retro-cyan');
                 button.find("i").remove();
                 button.append('<i class=\"material-icons\">check</i>');
             }else{
-                button.removeClass('green');
-                button.addClass('red');
+                button.removeClass('retro-cyan');
+                button.addClass('retro-rose');
                 button.find("i").remove();
                 button.append('<i class=\"material-icons\">close</i>');
             }

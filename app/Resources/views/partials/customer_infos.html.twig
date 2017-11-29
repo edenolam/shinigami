@@ -2,11 +2,11 @@
     <span class="card-title col s12">
         {{ customer.nickname }}
         {% if is_granted('ROLE_STAFF') %}
-            <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-profile" href="{{ path("staff_edit_profile", {'number':card.number }) }}">
+            <a class="btn-floating btn-large waves-effect waves-light retro-rose right" id="modify-profile" href="{{ path("staff_edit_profile", {'number':card.number }) }}">
             <i class="large material-icons">mode_edit</i>
         </a>
         {% elseif is_granted('ROLE_CUSTOMER') %}
-        <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-profile" href="{{ path("customer_modify_infos") }}">
+        <a class="btn-floating btn-large waves-effect waves-light retro-rose right" id="modify-profile" href="{{ path("customer_modify_infos") }}">
             <i class="large material-icons">mode_edit</i>
         </a>
         {% endif %}

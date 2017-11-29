@@ -6,15 +6,19 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <!--Import Google Icon Font-->
+            <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
             <!--Import materialize.css-->
+
             <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
             <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"  media="screen,projection"/>
+
         {% endblock %}
 
     </head>
     <body>
-        <nav>
+        <nav class="main-nav">
            <div class="container">
                <div class="nav-wrapper">
                    <a href="#" class="brand-logo">SHINIGAMI</a>
@@ -78,7 +82,14 @@
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
             <script>
-                    $(".button-collapse").sideNav();
+                $(".button-collapse").sideNav();
+                $('document').ready(function(){
+                    $('a').each(function(){
+                        if ($(this).prop('href') == window.location.href) {
+                            $(this).addClass('active'); $(this).parents('li').addClass('active');
+                        }
+                    });
+                });
             </script>
 
         {% endblock %}

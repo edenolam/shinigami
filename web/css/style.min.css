@@ -1,0 +1,122 @@
+.retro-rose {
+  background-color: #F13280;
+}
+.retro-rose:hover {
+  background-color: #F84981;
+}
+.retro-cyan {
+  background-color: #29B5AD;
+}
+.retro-cyan:hover {
+  background-color: #34C2BA;
+}
+.retro-jaune {
+  background-color: #FC985C;
+}
+.retro-jaune:hover {
+  background-color: #FCC66C;
+}
+body {
+  color: white;
+  background-color: #161B32;
+}
+h1 {
+  text-align: center;
+}
+.main-nav {
+  background-color: transparent;
+  -webkit-box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
+  -moz-box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
+  box-shadow: 0px 6px 14px -2px rgba(41, 181, 173, 0.25);
+  margin-bottom: 40px;
+}
+.main-nav a:hover {
+  background-color: #29B5AD;
+}
+.page-footer {
+  border-top: 1px solid rgba(41, 181, 173, 0.33);
+  background-color: #161B32;
+}
+.card {
+  background-color: #161B32;
+  -webkit-box-shadow: 0 3px 3px 0 rgba(41, 181, 173, 0.1), 0 2px 6px 0 rgba(41, 181, 173, 0.08), 0 4px 2px -3px rgba(41, 181, 173, 0.16);
+  box-shadow: 0 3px 3px 0 rgba(41, 181, 173, 0.1), 0 2px 6px 0 rgba(41, 181, 173, 0.08), 0 4px 2px -2px rgba(41, 181, 173, 0.16);
+}
+table .highlight > tbody > tr:hover {
+  background-color: #1E3E52;
+}
+table .bordered > thead > tr,
+table .bordered > tbody > tr {
+  border-color: #29B5AD;
+}
+table thead td {
+  color: #29B5AD;
+}
+table thead td a {
+  color: #29B5AD;
+}
+.pagination li.active {
+  background-color: #F13280;
+}
+.pagination li a {
+  color: white;
+}
+form {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+form button[type=submit] {
+  margin: 0 auto;
+  display: block;
+  background-color: #F13280;
+}
+form button[type=submit]:hover {
+  background-color: #F84981;
+}
+form select.browser-default {
+  color: white;
+  background-color: transparent;
+}
+.container .card-player {
+  margin: 20px auto;
+  width: 95%;
+  padding: 15px;
+  list-style-type: none;
+}
+.add-card {
+  width: 80%;
+  border-radius: 15px;
+  display: block;
+  margin: 40px auto;
+  -webkit-box-shadow: 0 6px 6px 0 rgba(41, 181, 173, 0.1), 0 4px 12px 0 rgba(41, 181, 173, 0.08), 0 8px 4px -6px rgba(41, 181, 173, 0.16);
+  box-shadow: 0 6px 6px 0 rgba(41, 181, 173, 0.1), 0 4px 12px 0 rgba(41, 181, 173, 0.08), 0 8px 4px -6px rgba(41, 181, 173, 0.16);
+}
+.add-card form {
+  padding: 40px;
+}
+.add-card form button {
+  margin: 5px;
+  display: inline;
+}
+.picker__box .picker__date-display {
+  background-color: #29B5AD;
+}
+.picker__box .picker__container__wrapper {
+  background-color: #161B32;
+}
+.picker__box .clockpicker-plate {
+  background-color: #585d72 ;
+  color: white;
+}
+.picker__box .clockpicker-tick {
+  color: white;
+}
+.picker__box .picker__day {
+  color: white;
+}
+.picker__box .picker__close {
+  color: #F13280;
+}
+.picker__box .picker__clear {
+  color: #FC985C;
+}

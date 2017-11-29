@@ -3,11 +3,10 @@
 {% block body %}
 <div style="height: 650px">
     <div class="center">
-        <h1>Offers</h1>
-        <a href="{{ path('staff_offers_create') }}" class="btn" id="new-offer">Create new offer</a>
+        <a href="{{ path('staff_offers_create') }}" class="btn retro-rose" id="new-offer">Create new offer</a>
     </div>
 
-    <table style="margin: 25px">
+    <table class="bordered">
         <thead>
             <tr>
                 <td>{{ knp_pagination_sortable(offers, 'ID', ['o.id']) }}</td>
@@ -30,12 +29,12 @@
                 <td>{{ offer.count }}</td>
                 <td>{{ offer.level }}</td>
                 <td>{{ offer.description }}</td>
-                <td><a href="{{ path('staff_offers_modify', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light blue" id="modify-{{ offer.id }}"><i class="material-icons">edit</i></a></td>
+                <td><a href="{{ path('staff_offers_modify', {'id': offer.id}) }}" class="btn-floating waves-effect waves-light retro-jaune" id="modify-{{ offer.id }}"><i class="material-icons">edit</i></a></td>
                 <td>
                     {% if offer.isActive %}
-                        <a class="btn-floating waves-effect waves-light green" id="active-{{ offer.id }}" onclick="active({{ offer.id }})"><i class="material-icons">check</i></a>
+                        <a class="btn-floating waves-effect waves-light retro-cyan" id="active-{{ offer.id }}" onclick="active({{ offer.id }})"><i class="material-icons">check</i></a>
                     {% else %}
-                        <a class="btn-floating waves-effect waves-light red" id="active-{{ offer.id }}" onclick="active({{ offer.id }})" ><i class="material-icons">close</i></a>
+                        <a class="btn-floating waves-effect waves-light retro-rose" id="active-{{ offer.id }}" onclick="active({{ offer.id }})" ><i class="material-icons">close</i></a>
                     {% endif %}
                 </td>
 

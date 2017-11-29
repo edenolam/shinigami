@@ -3,8 +3,7 @@
 {% block body %}
 <div style="height: 650px">
     <div class="center">
-        <h1>Newsletters</h1>
-        <a href="{{ path('staff_newsletter_create') }}" class="btn" id="new-newsletter">Create newsletter</a>
+        <a href="{{ path('staff_newsletter_create') }}" class="btn retro-rose" id="new-newsletter">Create newsletter</a>
     </div>
 
     <table>
@@ -30,16 +29,15 @@
                 <td>{{ newsletter.title }}</td>
                 <td>{{ newsletter.content }}</td>
                 <td>{{ newsletter.createAt|date("m/d/Y")  }}</td>
-                <td><a href="{{ path('staff_newsletter_modify', {'id' : newsletter.id}) }}"><i class="material-icons">edit</i></a>
+                <td><a href="{{ path('staff_newsletter_modify', {'id' : newsletter.id}) }}" class="btn-floating waves-effect waves-light retro-jaune"><i class="material-icons">edit</i></a>
                 </td>
-                <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank"><i class="material-icons">remove_red_eye</i></a>
+                <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank" class="btn-floating waves-effect waves-light retro-cyan"><i class="material-icons">remove_red_eye</i></a>
                 </td>
-                <td><a href="{{ path('staff_newsletter_send', {'id' : newsletter.id}) }}"><i class="material-icons">email</i></a>
+                <td><a href="{{ path('staff_newsletter_send', {'id' : newsletter.id}) }}" class="btn-floating waves-effect waves-light retro-rose"><i class="material-icons">email</i></a>
                 </td>
             </tr>
         {% endfor %}
     </table>
-
     <div class="center">{{ knp_pagination_render(newsletters) }}</div>
 </div>
 

@@ -1,24 +1,29 @@
 <div class="card card-infos">
-    {% if is_granted('ROLE_CUSTOMER') %}
-    {% else %}
-        <a class="btn-floating btn-large waves-effect waves-light red right" id="modify-card" href="{{ path("staff_edit_card", {'number':card.number }) }}">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-    {% endif %}
-
-    <h2>Customer card </h2>
+    <span class="card-title">
+        Customer card
+        {% if is_granted('ROLE_STAFF') %}
+            <a class="btn-floating btn-large waves-effect waves-light retro-rose right" id="modify-card" href="{{ path("staff_edit_card", {'number':card.number }) }}">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+        {% endif %}
+    </span>
     {% if customer.card %}
-        <p>Card n° {{ card.number }} </p>
-        <table>
-            <tr>
-                <td>Visits</td>
-                <td>Total score</td>
-            </tr>
-            <tr>
-                <td>{{ card.visits }}</td>
-                <td>{{ card.score }}</td>
-            </tr>
-        </table>
+        <div class="row">
+            <div class="col xl3">
+                <p class="card-number">Card n° {{ card.number }} </p></div>
+            <div class="col xl9">
+                <table>
+                    <tr>
+                        <td>Visits</td>
+                        <td>Total score</td>
+                    </tr>
+                    <tr>
+                        <td>{{ card.visits }}</td>
+                        <td>{{ card.score }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     {% else %}
         <form method="post">
             <label for="addcard">Add card</label>

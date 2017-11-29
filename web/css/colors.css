@@ -1,11 +1,20 @@
 .retro-rose{
     background-color: #F13280;
 }
+.retro-rose:hover{
+    background-color: #F84981;
+}
 .retro-cyan{
     background-color: #29B5AD;
 }
+.retro-cyan:hover{
+    background-color: #34C2BA;
+}
 .retro-jaune{
-    background-color: #FCC66C;
+    background-color: #FC985C;
+}
+.retro-jaune:hover{
+     background-color: #FCC66C;
 }
 .retro-noir{
     background-color: #19173F;
