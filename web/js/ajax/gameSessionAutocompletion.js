@@ -10,6 +10,7 @@ function playerNameAutocompletion(i){
                     console.log('Loading');
                 },
                 success: function(data){
+                    console.log(data);
                     if(data){
                         $("#appbundle_gamesession_gameScores_"+ i +"_playerName").val(data.playerNickname);
                     }else{

@@ -27,11 +27,11 @@
                        {% block nav %}
                            {% if app.user is null %}
                                <li><a href="{{ path('register') }}" id="register">Register</a></li>
-                               <li><a href="#modal1" class="modal-trigger" id="login">Login</a></li>
+                               <li><a href="{{ path('login') }}">Login</a></li>
                            {% else %}
                                <li><i class="material-icons">perm_identity</i></li>
                                <li>{{ app.user.username }}</li>
-                               <li><a class="modal-trigger" href="#modal1" id="logout">Logout</a></li>
+                               <li><a href="{{ path('logout') }}" id="logout">Logout</a></li>
                            {% endif %}
                        {% endblock %}
                    </ul>

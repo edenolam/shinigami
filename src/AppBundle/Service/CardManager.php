@@ -13,6 +13,9 @@ use AppBundle\Entity\Card;
 use AppBundle\Event\CustomerAddCardEvent;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CardManager
@@ -27,11 +30,17 @@ class CardManager
      */
     private $dispatcher;
 
-    public function __construct(ObjectManager $em, Session $session, EventDispatcher $dispatcher)
+    /**
+     * @var FormFactory
+     */
+    private $formFactory;
+
+    public function __construct(ObjectManager $em, Session $session, EventDispatcher $dispatcher, FormFactory $formFactory)
     {
         $this->entityManager = $em;
         $this->session = $session;
         $this->dispatcher = $dispatcher;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -60,9 +69,35 @@ class CardManager
 		}
     }
 
+    public function changeCardNumber($card, $number){
+        $availableCard = $this->getCardRepository()->findOneByNumber($number);
+        $this->entityManager->remove($availableCard);
+        $this->entityManager->flush();
+        $card->setNumber($number);
+        $this->save($card);
+    }
+
     public function getCardsWithoutCustomer()
     {
         return $this->getCardRepository()->findAllInactiveCards();
+    }
+
+    public function getChangeNumberCardForm(){
+        $cards = $this->getCardsWithoutCustomer();
+        $choices = array();
+        foreach ($cards as $availableCard){
+            $choices["Card n°".$availableCard->getNumber()] = $availableCard->getNumber();
+        }
+
+        $form = $this->formFactory->create()
+            ->add('number', ChoiceType::class, array(
+                "choices" => $choices,
+                'attr' => array(
+                    "class" => "browser-default"
+                )
+            ));
+
+        return $form;
     }
 
     public function newCard($centerCode)
