@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class CardManager
 {
 
+
     private $entityManager;
 
     private $session;

@@ -45,6 +45,10 @@ services:
           class: AppBundle\Service\GameSessionManager
           public: true
 
+    app.offer.manager:
+          class: AppBundle\Service\OfferManager
+          public: true
+
     app.login.listener:
           class: AppBundle\Listener\LoginListener
 

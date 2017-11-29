@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-    <h1>accueil</h1>
 {% endblock %}
-
-
+{% block modals %}
+    <div id="modal1" class="modal" style="width: 25%">
+        {% include 'security/login.html.twig' %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+{% endblock %}
