@@ -202,6 +202,9 @@ form select.browser-default {
   border-radius: 5px;
   padding: 15px;
 }
+.alert-error {
+  background-color: #F13280;
+}
 .picker__box .picker__date-display {
   background-color: #29B5AD;
 }

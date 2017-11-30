@@ -31,12 +31,13 @@ class StaffGameSessionController extends Controller
         $gameSession = new GameSession();
         $form = $this->createForm(GameSessionType::class, $gameSession);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $gameSession = $gameSessionManager->gameSessionCreation($request, $gameSession);
-            if($gameSession instanceof GameSession){
-                $gameSessionManager->save($gameSession);
-                return $this->redirectToRoute('staff_search');
+        if($form->isSubmitted()){
+            if ($form->isValid()) {
+                $gameSession = $gameSessionManager->gameSessionCreation($request, $gameSession);
+                if ($gameSession instanceof GameSession) {
+                    $gameSessionManager->save($gameSession);
+                    return $this->redirectToRoute('staff_search');
+                }
             }
         }
 
