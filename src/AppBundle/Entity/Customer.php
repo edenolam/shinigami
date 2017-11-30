@@ -27,7 +27,13 @@ class Customer
      * @Assert\NotBlank(message="Please enter your firstname.")
      *
      * @ORM\Column(name="firstname", type="string", length=255)
-     */
+	 *
+	 * @Assert\Regex(
+	 *     pattern="/\d/",
+	 *     match=false,
+	 *     message="Your firstname cannot contain a number"
+	 * )
+	 */
     private $firstname;
 
     /**
@@ -35,30 +41,46 @@ class Customer
      * @Assert\NotBlank(message="Please enter your lastname.")
      *
      * @ORM\Column(name="lastname", type="string", length=255)
+	 * @Assert\Regex(
+	 * pattern="/\d/",
+	 * match=false,
+	 * message="Your lastname cannot contain a number"
+	 * )
      */
     private $lastname;
 
     /**
      * @var string
      * @Assert\NotBlank(message="Please enter a nickname.")
+	 * @Assert\Length(min = 2, max = 15, minMessage = "2 caracteres minimum", maxMessage = "15 caracteres maximum")
      *
-     * @ORM\Column(name="nickname", type="string", length=255)
+     * @ORM\Column(name="nickname", type="string", length=255, unique=true)
      */
     private $nickname;
 
     /**
      * @var string
      * @Assert\NotBlank(message="Please enter your adress.")
-     *
+	 * @Assert\Valid
      * @ORM\Column(name="adress", type="string", length=255)
      */
     private $adress;
 
+	/**
+	 * @var string
+	 * @Assert\NotBlank(message="Please enter your city.")
+	 * @Assert\Valid
+	 * @ORM\Column(name="city", type="string", length=255)
+	 */
+    private $city;
+
     /**
      * @var string
      * @Assert\NotBlank(message="Please enter your phone.")
+	 * @Assert\Length(min = 10, max = 10, minMessage = "10 numbers minimum", maxMessage = "10 numbers maximum")
+	 * @Assert\Regex(pattern="/^[0-9]*$/", message="number_only")
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, unique=true)
      */
     private $phone;
 
@@ -254,5 +276,29 @@ class Customer
     public function getCard()
     {
         return $this->card;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Customer
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

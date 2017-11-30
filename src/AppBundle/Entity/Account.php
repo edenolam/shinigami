@@ -27,7 +27,7 @@ class Account implements UserInterface, \Serializable
      * @var string
      * @Assert\NotBlank(message="Please enter a username.")
      *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
@@ -47,7 +47,10 @@ class Account implements UserInterface, \Serializable
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Email(message="This email is not valid.")
+	 * @Assert\Email(
+	 *     message = "The email '{{ value }}' is not a valid email.",
+	 *     checkMX = true
+	 * )
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */

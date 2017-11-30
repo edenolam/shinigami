@@ -19,6 +19,7 @@ class CustomerType extends AbstractType
             ->add('lastname')
             ->add('nickname')
             ->add('adress')
+            ->add('city')
             ->add('phone')
             ->add('birthday', TextType::class, array(
             	'attr' => [
