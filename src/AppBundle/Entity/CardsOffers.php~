@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CardOffers
+ * CardsOffers
  *
  * @ORM\Table(name="cards_offers")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CardOffersRepository")
@@ -23,14 +23,14 @@ class CardsOffers
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Card", inversedBy="cardOffers")
+     * @ORM\ManyToOne(targetEntity="Card", inversedBy="cardsOffers")
      * @ORM\JoinColumn(name="card_id", nullable=false)
      */
     private $card;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Offer")
-     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Offer", inversedBy="cardsOffers")
+     * @ORM\JoinColumn(name="offer_id", nullable=false)
      */
     private $offer;
 

@@ -129,4 +129,26 @@ class NewsletterManager
 		$file->move( $this->container->getParameter('images_directory'), $fileName );
 		$newsletter->setImage($fileName);
 	}
+
+    public function sendNewOfferEmail($customer, $card, $offer)
+    {
+        $theme = "red";
+        $style = file_get_contents($this->kernel->getRootDir().'/Resources/views/emails/styles/'.$theme.'.css');
+
+        $message = (new \Swift_Message("You received a new offer !"))
+            ->setFrom('noreply@shinigamilaser.com')
+            ->setTo($customer->getAccount()->getEmail())
+            ->setBody(
+                $this->template->render('emails/offer_notification.html.twig', array(
+                    "customer" => $customer,
+                    "card" => $card,
+                    "offer" => $offer,
+                    'style' => $style
+                )),
+                'text/html'
+            );
+
+        $this->mailer->send($message);
+
+    }
 }

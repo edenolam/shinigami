@@ -363,4 +363,28 @@ class Card
     {
         return $this->gameScores;
     }
+
+    /**
+     * Set given
+     *
+     * @param boolean $given
+     *
+     * @return Card
+     */
+    public function setGiven($given)
+    {
+        $this->given = $given;
+
+        return $this;
+    }
+
+    /**
+     * Get given
+     *
+     * @return boolean
+     */
+    public function getGiven()
+    {
+        return $this->given;
+    }
 }

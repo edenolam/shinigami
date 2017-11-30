@@ -2,9 +2,11 @@
 @retro-rose-lighten: #F84981;
 @retro-cyan: #29B5AD;
 @retro-cyan-lighten: #34C2BA;
+@retro-cyan-active-transparent: rgba(41,181,173,0.33);
 @retro-jaune: #FC985C;
 @retro-jaune-lighten:#FCC66C;
 @retro-noir: #161B32;
+
 
 
 .retro-rose{
@@ -89,13 +91,13 @@ h1{
   z-index: 3;
   background-color: rgba(22,27,50,0.4);
   box-shadow: none;
-  border-bottom: 1px solid rgba(41,181,173,0.33);
+  border-bottom: 1px solid @retro-cyan-active-transparent;
   a:hover{
-    background-color: rgba(41,181,173,0.33);
+    background-color: @retro-cyan-active-transparent;
     color: white;
   }
   ul li.active{
-    background-color: rgba(41,181,173,0.33);
+    background-color: @retro-cyan-active-transparent;
     a{
       color: white;
     }
@@ -122,7 +124,7 @@ h1{
 }
 
 .page-footer{
-  border-top: 1px solid rgba(41,181,173,0.33);
+  border-top: 1px solid @retro-cyan-active-transparent;
   background-color: #161B32;
   opacity: 0.8;
 }

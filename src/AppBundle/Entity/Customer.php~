@@ -76,7 +76,12 @@ class Customer
      */
     private $card;
 
-
+    /**
+     * One Cart has One Customer.
+     * @ORM\OneToOne(targetEntity="Account", inversedBy="customer")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
+     */
+    private $account;
 
     /**
      * Get id
@@ -254,5 +259,29 @@ class Customer
     public function getCard()
     {
         return $this->card;
+    }
+
+    /**
+     * Set account
+     *
+     * @param \AppBundle\Entity\Account $account
+     *
+     * @return Customer
+     */
+    public function setAccount(\AppBundle\Entity\Account $account = null)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return \AppBundle\Entity\Account
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }
