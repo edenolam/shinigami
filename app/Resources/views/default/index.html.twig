@@ -1,9 +1,54 @@
 {% extends 'base.html.twig' %}
+{% block nav %}
+    <li><a href="#modal2" class="modal-trigger" id="register">Register</a></li>
+    <li><a href="#modal1" class="modal-trigger" id="login">Login</a></li>
+{% endblock %}
 {% block body %}
 {% endblock %}
 {% block modals %}
     <div id="modal1" class="modal" style="width: 25%">
-        {% include 'security/login.html.twig' %}
+        {% include 'security/login_modal.html.twig' %}
+    </div>
+    <div id="modal2" class="modal">
+        <div class="card login-card">
+            <span class="card-title">Registration</span>
+            <div class="container">
+                {{ form_start(form) }}
+
+                <div class="row">
+                    <div class="col xl6">
+                        {{ form_row(form.customer.firstname) }}
+                    </div>
+                    <div class="col xl6">
+                        {{ form_row(form.customer.lastname) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col xl12">{{ form_row(form.customer.adress) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col xl6">{{ form_row(form.customer.phone) }}</div>
+                    <div class="col xl6">{{ form_row(form.customer.birthday) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col xl6">{{ form_row(form.username) }}</div>
+                    <div class="col xl6">{{ form_row(form.customer.nickname) }}</div>
+                </div>
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="col xl12">{{ form_row(form.email) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col xl6">{{ form_row(form.plainPassword.first) }}</div>
+                    <div class="col xl6">{{ form_row(form.plainPassword.second) }}</div>
+                </div>
+
+                <button class="btn" id="submit" type="submit">Submit</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -14,4 +59,5 @@
             $('.modal').modal();
         });
     </script>
+    <script src="{{ asset('js/form/datepicker.js') }}"></script>
 {% endblock %}
