@@ -48,23 +48,16 @@ staff_search:
         _controller: AppBundle:StaffCustomer:search
 
 staff_customer_view:
-    path: /staff/card/{number}
+    path: /staff/customer/{number}
     defaults:
         _controller: AppBundle:StaffCustomer:cardView
     requirements:
           number:     \d+
 
 staff_edit_profile:
-    path: /staff/card/{number}/editcustomer
+    path: /staff/customer/{number}/editcustomer
     defaults:
            _controller: AppBundle:StaffCustomer:editCustomer
-    requirements:
-          number:     \d+
-
-staff_edit_card:
-    path: /staff/card/{number}/editcard
-    defaults:
-           _controller: AppBundle:StaffCustomer:editCard
     requirements:
           number:     \d+
 
@@ -118,7 +111,7 @@ staff_gamesession:
         _controller: AppBundle:StaffGameSession:new
 
 staff_autocomplete_customer_nickname_ajax:
-    path: /staff/customer/{cardNumber}
+    path: /staff/autocomplete-nickname/{cardNumber}
     defaults:
         _controller: AppBundle:StaffGameSession:playerNameCompletionAjax
 

@@ -33,11 +33,30 @@
 
 {% endblock %}
 
+{% block modals %}
+    <div id="modal1" class="modal">
+        <div class="card login-card">
+            <span class="card-title">Change card number</span>
+        {{ form_start(form) }}
+
+        {{ form_row(form.number) }}
+        <button type="submit" id="submit" class="btn">Edit</button>
+        {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script type="application/javascript">
         $(document).ready(function(){
             $('.carousel').carousel();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
         });
     </script>
 {% endblock %}

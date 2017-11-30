@@ -14,7 +14,9 @@ use AppBundle\Entity\CardsOffers;
 use AppBundle\Form\CardNumberType;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\SearchCustomerType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
 class StaffCustomerController extends Controller
@@ -59,44 +61,33 @@ class StaffCustomerController extends Controller
      * @param Card $card
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function cardViewAction(Card $card)
+    public function cardViewAction(Request $request, Card $card)
     {
         $cardManager = $this->get('app.card.manager');
         $gameSessions = $cardManager->getGameSessionsOfCustomer($card);
         $cardsOffers = $cardManager->getValidCardsOffersOfCustomer($card);
         $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
 
+        $form = $cardManager->getChangeNumberCardForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()){
+            $cardManager->changeCardNumber($card, $form->getData()['number']);
+            return $this->redirectToRoute('staff_customer_view', array(
+                'number' => $card->getNumber()
+            ));
+        }
+
         return $this->render('staff/customer/view.html.twig',[
             'customer' => $card->getCustomer(),
             'card'     => $card,
             'gameSessions' => $gameSessions,
             'cardsOffers'   => $cardsOffers,
-            "lockedOffers" => $lockedOffers
+            "lockedOffers" => $lockedOffers,
+            "form" => $form->createView()
         ]);
     }
 
-    /**
-     * Edit the number of the customer's card
-     *
-     * @param Request $request
-     * @param Card $card
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function editCardAction(Request $request, Card $card)
-    {
-        $cardManager = $this->get('app.card.manager');
-        $form = $this->createForm(CardNumberType::class, $card);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $cardManager->save($card);
-            return $this->redirectToRoute('staff_customer_view', [
-                'number' => $card->getNumber()
-            ]);
-        }
-        return $this->render('staff/customer/edit_card.html.twig', array(
-            "form" => $form->createView()
-        ));
-    }
 
     /**
      * Edit the datas of the customer
