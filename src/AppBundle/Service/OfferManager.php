@@ -10,6 +10,7 @@ namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Card;
+use AppBundle\Entity\CardsOffers;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Session\Session;
 
