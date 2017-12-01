@@ -54,8 +54,7 @@ main .container {
 .big-logo {
   z-index: 4;
   display: block;
-  margin: 0 auto;
-  margin-top: 100px;
+  margin: 100px auto;
 }
 main {
   flex: 1 0 auto;
