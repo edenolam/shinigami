@@ -245,4 +245,45 @@ class Offer
     {
         $this->code = $code;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->cardsOffers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add cardsOffer
+     *
+     * @param \AppBundle\Entity\CardsOffers $cardsOffer
+     *
+     * @return Offer
+     */
+    public function addCardsOffer(\AppBundle\Entity\CardsOffers $cardsOffer)
+    {
+        $this->cardsOffers[] = $cardsOffer;
+
+        return $this;
+    }
+
+    /**
+     * Remove cardsOffer
+     *
+     * @param \AppBundle\Entity\CardsOffers $cardsOffer
+     */
+    public function removeCardsOffer(\AppBundle\Entity\CardsOffers $cardsOffer)
+    {
+        $this->cardsOffers->removeElement($cardsOffer);
+    }
+
+    /**
+     * Get cardsOffers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCardsOffers()
+    {
+        return $this->cardsOffers;
+    }
 }

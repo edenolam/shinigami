@@ -54,7 +54,6 @@ class GameSessionManager
 
     public function save($gameSession)
     {
-        $this->entityManager = $this->getDoctrine()->getManager();
         $this->entityManager->persist($gameSession);
         $this->entityManager->flush();
         $this->session->getFlashBag()->add('success', 'The game session has been saved !');

@@ -37,7 +37,7 @@ class GameSession
 
     /**
      * Many GameSession have Many Cards.
-     * @ORM\ManyToMany(targetEntity="Card", mappedBy="gameSessions")
+     * @ORM\ManyToMany(targetEntity="Card", mappedBy="gameSessions", cascade={"persist"})
      */
     private $cards;
 

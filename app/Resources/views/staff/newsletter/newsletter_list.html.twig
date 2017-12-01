@@ -5,40 +5,40 @@
     <div class="center">
         <a href="{{ path('staff_newsletter_create') }}" class="btn retro-rose" id="new-newsletter">Create newsletter</a>
     </div>
-
-    <table>
-        <thead>
-        <tr>
-            <td>{{ knp_pagination_sortable(newsletters, 'ID', ['n.id']) }}</td>
-            <td><p>image</p></td>
-
-            <td>{{ knp_pagination_sortable(newsletters, 'Name', ['n.name']) }}</td>
-            <td>{{ knp_pagination_sortable(newsletters, 'Title', ['n.title']) }}</td>
-            <td>Text</td>
-            <td>{{ knp_pagination_sortable(newsletters, 'Created at', ['n.createAt']) }}</td>
-            <td>Modify</td>
-            <td>Preview</td>
-            <td>Send email</td>
-        </tr>
-        </thead>
-        {% for newsletter in newsletters %}
+    <div class="container">
+        <table>
+            <thead>
             <tr>
-                <td>{{ newsletter.id }}</td>
-                <td><img src="{{ asset('uploads/images/' ~ newsletter.name) }}" alt="image"></td>
-                <td>{{ newsletter.name }}</td>
-                <td>{{ newsletter.title }}</td>
-                <td>{{ newsletter.content }}</td>
-                <td>{{ newsletter.createAt|date("m/d/Y")  }}</td>
-                <td><a href="{{ path('staff_newsletter_modify', {'id' : newsletter.id}) }}" class="btn-floating waves-effect waves-light retro-jaune"><i class="material-icons">edit</i></a>
-                </td>
-                <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank" class="btn-floating waves-effect waves-light retro-cyan"><i class="material-icons">remove_red_eye</i></a>
-                </td>
-                <td><a href="{{ path('staff_newsletter_send', {'id' : newsletter.id}) }}" class="btn-floating waves-effect waves-light retro-rose"><i class="material-icons">email</i></a>
-                </td>
+                <td>{{ knp_pagination_sortable(newsletters, 'ID', ['n.id']) }}</td>
+                <td>{{ knp_pagination_sortable(newsletters, 'Name', ['n.name']) }}</td>
+                <td>{{ knp_pagination_sortable(newsletters, 'Title', ['n.title']) }}</td>
+                <td>Text</td>
+                <td>{{ knp_pagination_sortable(newsletters, 'Created at', ['n.createAt']) }}</td>
+                <td>Modify</td>
+                <td>Preview</td>
+                <td>Send email</td>
             </tr>
-        {% endfor %}
-    </table>
-    <div class="center">{{ knp_pagination_render(newsletters) }}</div>
+            </thead>
+            {% for newsletter in newsletters %}
+                <tr>
+                    <td>{{ newsletter.id }}</td>
+                    <td>{{ newsletter.name }}</td>
+                    <td>{{ newsletter.title }}</td>
+                    <td>{{ newsletter.content }}</td>
+                    <td>{{ newsletter.createAt|date("m/d/Y")  }}</td>
+                    <td><a href="{{ path('staff_newsletter_modify', {'id' : newsletter.id}) }}" class="btn-floating waves-effect waves-light retro-jaune"><i class="material-icons">edit</i></a>
+                    </td>
+                    <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank" class="btn-floating waves-effect waves-light retro-cyan"><i class="material-icons">remove_red_eye</i></a>
+                    </td>
+                    <td><a href="{{ path('staff_newsletter_send', {'id' : newsletter.id}) }}" class="btn-floating waves-effect waves-light retro-rose"><i class="material-icons">email</i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="center">{{ knp_pagination_render(newsletters) }}</div>
+    </div>
+
 </div>
 
 {% endblock %}

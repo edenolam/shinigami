@@ -36,18 +36,12 @@ class Newsletter
 	private $title;
 
 	/**
-	 * @var text
+	 * @var string
 	 *
 	 * @ORM\Column(name="content", type="text")
 	 */
 	private $content;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="file", type="string", length=255)
-	 */
-	private $file;
 
 	/**
 	 * @var string
@@ -67,7 +61,7 @@ class Newsletter
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="image", type="string", length=255)
+	 * @ORM\Column(name="image", type="string", length=255, nullable=true)
 	 */
    private $image;
 
@@ -178,23 +172,6 @@ class Newsletter
     }
 
 
-	/**
-	 * @return string
-	 */
-	public function getFile()
-	{
-		return $this->file;
-	}
-
-
-	/**
-	 * @param string $file
-	 */
-	public function setFile($file)
-	{
-		$this->file = $file;
-	}
-
 
 	/**
 	 * @return string
@@ -212,4 +189,28 @@ class Newsletter
 	{
 		$this->theme = $theme;
 	}
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Newsletter
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }

@@ -18,31 +18,34 @@
 
     </head>
     <body>
+    <div {% if app.request.attributes.get('_route')  == "homepage" %}class="navbar-fixed"{% endif %}>
         <nav class="main-nav">
-           <div class="container">
-               <div class="nav-wrapper">
-                   <a href="#" class="brand-logo">SHINIGAMI</a>
-                   <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                   <ul class="right hide-on-med-and-down">
-                       {% block nav %}
-                           {% if app.user is null %}
-                               <li><a href="{{ path('register') }}" id="register">Register</a></li>
-                               <li><a href="{{ path('login') }}">Login</a></li>
-                           {% else %}
-                               <li><i class="material-icons">perm_identity</i></li>
-                               <li>{{ app.user.username }}</li>
-                               <li><a href="{{ path('logout') }}" id="logout">Logout</a></li>
-                           {% endif %}
-                       {% endblock %}
-                   </ul>
-                   <ul class="side-nav" id="mobile-demo">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="{{ path("homepage") }}" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        {% block nav %}
+                            {% if app.user is null %}
+                                <li><a href="{{ path('register') }}" id="register">Register</a></li>
+                                <li><a href="{{ path('login') }}">Login</a></li>
+                            {% else %}
+                                <li><i class="material-icons">perm_identity</i></li>
+                                <li>{{ app.user.username }}</li>
+                                <li><a href="{{ path('logout') }}" id="logout">Logout</a></li>
+                            {% endif %}
+                        {% endblock %}
+                    </ul>
+                    <ul class="side-nav" id="mobile-demo">
                         {{ block('nav') }}
-                   </ul>
-               </div>
-           </div>
+                    </ul>
+                </div>
+            </div>
         </nav>
+    </div>
 
-        <main class="container">
+
+        <main class="container {% if app.request.attributes.get('_route')  != "homepage" %}container-frame{% endif %}">
            <div id="flashbag">
                {% for label, messages in app.flashes %}
                    {% for message in messages %}
@@ -50,7 +53,9 @@
                    {% endfor %}
                {% endfor %}
            </div>
-           {% block body %}{% endblock %}
+           <div class="content">
+               {% block body %}{% endblock %}
+           </div>
            {% block modals %}{% endblock %}
        </main>
 
