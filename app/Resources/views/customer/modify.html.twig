@@ -14,7 +14,12 @@
             {{ form_row(form.nickname) }}
         </div>
         <div class="row">
-            {{ form_row(form.adress) }}
+            <div class="col xl6">
+                {{ form_row(form.adress) }}
+            </div>
+            <div class="col xl6">
+                {{ form_row(form.city) }}
+            </div>
         </div>
         <div class="row">
             <div class="col xl6">
@@ -24,7 +29,7 @@
                 {{ form_row(form.birthday) }}
             </div>
         </div>
-		<button class="btn waves-effect waves-light" type="submit" id="submit">Modify</button>
+		<button class="btn waves-effect waves-light" type="submit" id="submit"> Modify</button>
 		{{ form_end(form) }}
 	</div>
 

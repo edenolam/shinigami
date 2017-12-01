@@ -24,7 +24,12 @@ logout:
 
 
 
+# Contact
 
+contact:
+    path: /Contact
+    defaults:
+       _controller: AppBundle:Contact:Contact
 # CUSTOMER
 
 customer_panel:

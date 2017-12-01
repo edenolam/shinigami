@@ -82,12 +82,6 @@ class Card
      */
     private $isActive;
 
-	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(name="given", type="boolean")
-	 */
-    private $given;
 
     /**
      * Many Cards have Many GameSessions.
