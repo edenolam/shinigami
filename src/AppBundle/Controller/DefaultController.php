@@ -13,15 +13,15 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DefaultController extends Controller
 {
-    public function indexAction(Request $request, AuthenticationUtils $authUtils, UserPasswordEncoderInterface $passwordEncoder)
+    public function indexAction(Request $request, AuthenticationUtils $authUtils, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
         $user = new Account();
-        $form = $this->createForm(AccountType::class, $user);
+        $formRegister = $this->createForm(AccountType::class, $user);
 
-        $form->handleRequest($request);
+        $formRegister->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if ($formRegister->isSubmitted()) {
+            if ($formRegister->isValid()) {
                 $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
                 $user->setIsActive(true);
@@ -49,40 +49,30 @@ class DefaultController extends Controller
         $lastUsername = $authUtils->getLastUsername();
         // replace this example code with whatever you need
 
-
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'last_username' => $lastUsername,
-            'error'         => $error,
-            'form' => $form->createView()
-        ]);
-    }
-
-    public function contactAction(Request $request, \Swift_Mailer $mailer)
-	{
 		$contact = new Contact();
-		$form = $this->createForm(ContactType::class, $contact);
-		$form->handleRequest($request);
-		if ($form->isSubmitted() && $form->isValid()){
+		$formContact = $this->createForm(ContactType::class, $contact);
+		$formContact->handleRequest($request);
+
+		if ($formContact->isSubmitted()){
+
 			$message = (new \Swift_Message($contact->getSubject()))
 				->setFrom($contact->getEmail())
 				->setTo('contact@shinigami.com')
-				->setBody( $this->renderView('partials/contact.html.twig',array(
-					'name' => $contact->getName(),
-					'message' => $contact->getMessage()
+				->setBody( $this->renderView('emails/contact.html.twig',array(
+					"contact" => $contact
 				)),'text/html');
 
 			$mailer->send($message);
 		}
 
+        return $this->render('default/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'last_username' => $lastUsername,
+            'error'         => $error,
+            'formRegister' => $formRegister->createView(),
+            'formContact' => $formContact->createView(),
 
-		// or, you can also fetch the mailer service this way
-		// $this->get('mailer')->send($message);
-
-		return $this->render("partials/contact.html.twig");
-
-	}
-
-
+        ]);
+    }
 
 }

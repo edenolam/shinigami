@@ -5,6 +5,9 @@ security:
         AppBundle\Entity\Account:
             algorithm: bcrypt
 
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: ROLE_STAFF
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         db_provider:
@@ -37,6 +40,7 @@ security:
             #form_login: ~
     access_control:
         - { path: ^/staff, roles: ROLE_STAFF }
+        - { path: ^/super_staff, roles: ROLE_SUPER_ADMIN }
         - { path: ^/customer, roles: ROLE_CUSTOMER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 

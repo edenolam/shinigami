@@ -1,28 +1,61 @@
 {% extends 'base.html.twig' %}
 {% block nav %}
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="#modal2" class="modal-trigger" id="register">Register</a></li>
     <li><a href="#modal1" class="modal-trigger" id="login">Login</a></li>
 {% endblock %}
+
 {% block body %}
-    <img class="big-logo" src="{{ asset('images/medium-logo.png') }}">
-    <div class="row">
-        <div class="col xl6"> <a href="#modal2" class="modal-trigger btn retro-jaune right" id="register">Join us</a></div>
-        <div class="col xl6"><a href="#modal1" class="modal-trigger btn retro-rose left" id="login">Sign in</a></div>
-    </div>
-    <div class="row fullwidth">
-        <div class="container text-container">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <div id="home" class="section scrollspy">
+        <img  class="big-logo section scrollspy" src="{{ asset('images/medium-logo.png') }}">
+        <div class="row index-btn">
+            <div class="col xs12 s12 xl6"> <a href="#modal2" class="modal-trigger btn retro-jaune right" id="register">Join us</a></div>
+            <div class="col xs12 s12 xl6"><a href="#modal1" class="modal-trigger btn retro-rose left" id="login">Sign in</a></div>
         </div>
-        <div class="container carousel-container">
-            <div class="carousel carousel-slider">
-                <a class="carousel-item" href="#one!"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
-                <a class="carousel-item" href="#two!"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
-                <a class="carousel-item" href="#two!"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+        <div class="row fullwidth section scrollspy" id="about">
+            <div class="container text-container">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="container carousel-container">
+                <div class="carousel carousel-slider">
+                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
+                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
+                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+                </div>
             </div>
         </div>
+         <div class="row fullwidth transparent section scrollspy" id="contact">
+            <div class="container text-container" style="width: 30%">
 
+            </div>
+         </div>
+         <div class="row fullwidth section scrollspy" id="contact">
+            <div class="container text-container" style="width: 30%">
+                <h2 class='page-header center'>Contact</h2>
+                {{ form_start(formContact) }}
+                <div class="row">
+                    <div class="col xl6">
+                        {{ form_row(formContact.name) }}
+                    </div>
+                    <div class="col xl6">
+                        {{ form_row(formContact.email) }}
+                    </div>
+                </div>
+                <div class="row">
+                    {{ form_row(formContact.subject) }}
+                </div>
+                <div class="row">
+                    {{ form_row(formContact.message) }}
+                </div>
+
+                <button type="submit" class="btn">Send</button>
+                {{ form_end(formContact) }}
+            </div>
+        </div>
     </div>
 {% endblock %}
+
 {% block modals %}
     <div id="modal1" class="modal" style="width: 25%">
         {% include 'security/login_modal.html.twig' %}
@@ -31,54 +64,54 @@
         <div class="card modal-card">
             <span class="card-title">Registration</span>
             <div class="container">
-                {{ form_start(form) }}
+                {{ form_start(formRegister) }}
 
                 <div class="row">
                     <div class="col xl6">
-                        {{ form_row(form.customer.firstname) }}
+                        {{ form_row(formRegister.customer.firstname) }}
                     </div>
                     <div class="col xl6">
-                        {{ form_row(form.customer.lastname) }}
+                        {{ form_row(formRegister.customer.lastname) }}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col xl12">{{ form_row(form.customer.adress) }}</div>
+                    <div class="col xl12">{{ form_row(formRegister.customer.adress) }}</div>
                 </div>
                 <div class="row">
-                    <div class="col xl6">{{ form_row(form.customer.phone) }}</div>
-                    <div class="col xl6">{{ form_row(form.customer.birthday) }}</div>
+                    <div class="col xl6">{{ form_row(formRegister.customer.phone) }}</div>
+                    <div class="col xl6">{{ form_row(formRegister.customer.birthday) }}</div>
                 </div>
 
                 <div class="row">
-                    <div class="col xl6">{{ form_row(form.username) }}</div>
-                    <div class="col xl6">{{ form_row(form.customer.nickname) }}</div>
+                    <div class="col xl6">{{ form_row(formRegister.username) }}</div>
+                    <div class="col xl6">{{ form_row(formRegister.customer.nickname) }}</div>
                 </div>
                 <div class="row">
                 </div>
                 <div class="row">
-                    <div class="col xl12">{{ form_row(form.email) }}</div>
+                    <div class="col xl12">{{ form_row(formRegister.email) }}</div>
                 </div>
                 <div class="row">
-                    <div class="col xl6">{{ form_row(form.plainPassword.first) }}</div>
-                    <div class="col xl6">{{ form_row(form.plainPassword.second) }}</div>
+                    <div class="col xl6">{{ form_row(formRegister.plainPassword.first) }}</div>
+                    <div class="col xl6">{{ form_row(formRegister.plainPassword.second) }}</div>
                 </div>
 
                 <button class="btn" id="submit" type="submit">Submit</button>
-                {{ form_end(form) }}
+                {{ form_end(formRegister) }}
             </div>
         </div>
     </div>
 {% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function(){
             // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
             $('.modal').modal();
+			$('.carousel.carousel-slider').carousel({fullWidth: true, indicators: true});
+			$('.scrollspy').scrollSpy({ scrollOffset: 80 });
         });
-
-        $('.carousel.carousel-slider').carousel({fullWidth: true, indicators: true});
-
     </script>
     <script src="{{ asset('js/form/datepicker.js') }}"></script>
 {% endblock %}

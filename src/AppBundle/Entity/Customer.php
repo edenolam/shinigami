@@ -100,7 +100,7 @@ class Customer
 
     /**
      * One Cart has One Customer.
-     * @ORM\OneToOne(targetEntity="Account", inversedBy="customer")
+     * @ORM\OneToOne(targetEntity="Account", inversedBy="customer", cascade={"persist"})
      * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
      */
     private $account;

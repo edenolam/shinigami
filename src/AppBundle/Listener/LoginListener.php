@@ -52,7 +52,9 @@ class LoginListener implements AuthenticationSuccessHandlerInterface
             return 'customer_panel';
         } elseif(array_search("ROLE_STAFF", $token->getUser()->getRoles()) !== false){
             return 'staff_search';
-        } else {
+        } elseif (array_search("ROLE_SUPER_ADMIN", $token->getUser()->getRoles()) !== false) {
+			return 'staff_search';
+		} else {
             return 'homepage';
         }
     }

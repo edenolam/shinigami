@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use LahthonyOTPAuthBundle\EventListener\Add2FactorAuthFieldListener;
 
-class AccountType extends AbstractType
+class AccountStaffType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -26,9 +26,6 @@ class AccountType extends AbstractType
                 'second_options' => array('label' => 'Repeat Password')
             ))
             ->add('email', EmailType::class)
-            ->add('customer', CustomerType::class)
-			->addEventSubscriber(new Add2FactorAuthFieldListener());
-
 		;
     }
     

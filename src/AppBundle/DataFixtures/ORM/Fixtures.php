@@ -15,7 +15,7 @@ class Fixtures extends Fixture
 		$staffAccount->setUsername('staff');
 		$staffAccount->setPassword('$2y$13$Zi1mzLOnqeDHupSMFok8xeNgmPQqJj.b69qjxXzX9GBbtgnFvT2PS');
 		$staffAccount->setEmail('staff@shinigamilaser.com');
-		$staffAccount->setRoles(["ROLE_STAFF"]);
+		$staffAccount->setRoles(["ROLE_SUPER_ADMIN"]);
 		$staffAccount->setIsActive(TRUE);
 
 		$customerAccount = new Account();
@@ -31,6 +31,7 @@ class Fixtures extends Fixture
 		$customer->setLastname("Basquin");
 		$customer->setNickname("crazykiller");
 		$customer->setAdress("70 rue de tocqueville");
+		$customer->setCity("paris");
 		$customer->setPhone("0661916148");
 		$customer->setBirthday(new \DateTime("04/02/1981"));
 

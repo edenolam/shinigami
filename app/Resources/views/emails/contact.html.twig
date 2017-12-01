@@ -5,9 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
-        {% block stylesheet %}
-        {{ style }}
-        {% endblock %}
         /* Fonts and Content */
         body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; font-size:14px; }
         body { background-color: #2A374E; margin: 0; padding: 0; -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
@@ -56,7 +53,7 @@
                                 <td class="w30"  width="30"></td>
                                 <td  class="w580"  width="580" valign="middle" align="left">
                                     <div class="pagetoplogo-content">
-                                        <img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}" style="width:30%" alt="image">
+                                        <img src="{{ absolute_url(asset('images/mini-logo.png')) }}" style="width:30%" alt="image">
                                     </div>
                                 </td>
                                 <td class="w30"  width="30"></td>
@@ -84,11 +81,12 @@
                                         <tbody>
                                         <tr>
                                             <td class="w580"  width="580">
-                                                <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">{{ newsletter.title|title }}</h2>
+                                                <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">{{ contact.subject|title }}</h2>
 
                                                 <div align="left" class="article-content">
+                                                    <p>Mail de {{ contact.name }} ({{ contact.email }})</p>
                                                     <p>
-                                                            {{ newsletter.content }}
+                                                        {{ contact.message }}
                                                     </p>
                                                 </div>
                                             </td>
@@ -99,36 +97,6 @@
                                         </tbody>
                                     </table>
                                     <!-- fin zone -->
-
-                                    <!-- une autre zone de contenu -->
-                                    <table class="w580"  width="580" cellspacing="0" cellpadding="0" border="0">
-                                        <tbody>
-                                        <tr>
-                                            <td colspan="3">
-                                                <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">
-                                                    Une zone avec deux colonnes </h2>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w275"  width="275" valign="top">
-                                                <div align="left" class="article-content">
-                                                    <p> Lemon drops icing croissant. Sweet cotton candy macaroon gingerbread chocolate bar wafer cotton candy powder sugar plum. </p>
-                                                </div>
-                                            </td>
-                                            <td class="w30"  width="30" class="w30"></td>
-                                            <td class="w275"  width="275" valign="top">
-                                                <div align="left" class="article-content">
-                                                    <p> Lemon drops icing croissant. Sweet cotton candy macaroon gingerbread chocolate bar wafer cotton candy powder sugar plum. </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3" class="w580" height="1" bgcolor="#c7c5c5"></td>
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-
 
                                 </td>
                                 <td class="w30" class="w30"  width="30"></td>
@@ -143,7 +111,7 @@
                     <td class="w640"  width="640" height="15" bgcolor="#ffffff"></td>
                 </tr>
 
-                <!-- footer -->
+                <!-- pied de page -->
                 <tr class="pagebottom">
                     <td class="w640"  width="640">
                         <table class="w640 footer"  width="640" cellpadding="0" cellspacing="0" border="0">
@@ -152,21 +120,14 @@
                                 <td colspan="5" height="10"></td>
                             </tr>
                             <tr>
-                                <td class="w30"  width="300" style="padding:10px; ">
-                                    <small>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        At, atque esse ipsam libero neque officiis quas voluptatibus.
-                                        Commodi dicta eos esse labore laboriosam maiores molestias obcaecati quaerat,
-                                        quam recusandae sint.
-                                    </small>
-                                </td>
+                                <td class="w30"  width="30"></td>
                                 <td class="w580"  width="580" valign="top">
                                     <p align="right" class="pagebottom-content-left">
                                         <a style="color:#255D5C;" href="http://localhost/wf3-projet2-shinigamilaser-perle-julien/web/app_dev.php/"><span style="color:#255D5C;">shinigami Laser</span></a>
                                     </p>
                                 </td>
 
-                                <td class="w30"  width="30">fgfgh</td>
+                                <td class="w30"  width="30"></td>
                             </tr>
                             <tr>
                                 <td colspan="5" height="10"></td>
