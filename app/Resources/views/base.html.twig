@@ -8,6 +8,8 @@
             <!--Import Google Icon Font-->
             <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <!--  -->
+            <link type="text/css" rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
 
             <!--Import materialize.css-->
 
@@ -32,6 +34,7 @@
                                <li><i class="material-icons">perm_identity</i></li>
                                <li>{{ app.user.username }}</li>
                                <li><a href="{{ path('logout') }}" id="logout">Logout</a></li>
+                               <li><a href="{{ path('Contact') }}" id="contact">Contact</a></li>
                            {% endif %}
                        {% endblock %}
                    </ul>
@@ -65,7 +68,10 @@
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text">Links</h5>
                         <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!"> <i class=" material-icons">mail</i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!"> <i class=" material-icons">phone</i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!"> <i class="fa fa-facebook fa-lg"></i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!"> <i class="fa fa-twitter fa-lg"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -73,7 +79,7 @@
             <div class="footer-copyright">
                 <div class="container">
                     © 2017 Copyright Text
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    <a class="grey-text text-lighten-4 right" href="#!"></a>
                 </div>
             </div>
         </footer>
