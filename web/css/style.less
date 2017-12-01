@@ -2,9 +2,11 @@
 @retro-rose-lighten: #F84981;
 @retro-cyan: #29B5AD;
 @retro-cyan-lighten: #34C2BA;
+@retro-cyan-active-transparent: rgba(41,181,173,0.33);
 @retro-jaune: #FC985C;
 @retro-jaune-lighten:#FCC66C;
 @retro-noir: #161B32;
+
 
 
 .retro-rose{
@@ -42,11 +44,41 @@ hr{
 }
 body{
   color: white;
-  background-color: @retro-noir;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-image: url('../../images/background.jpg');
+  background-color: @retro-noir;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: 1;
 }
+
+main{
+  .container {
+    z-index: 2;
+    height: 100%;
+    padding-top: 50px;
+  }
+}
+.container-frame {
+  background-color: rgba(22, 27, 50, 0.65);
+}
+
+.content{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+
+
+.big-logo{
+  z-index: 4;
+  display: block;
+  margin: 100px auto;
+
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -55,33 +87,53 @@ h1{
 }
 
 .main-nav{
-  background-color: transparent;
+  z-index: 3;
+  background-color: rgba(22,27,50,0.4);
   box-shadow: none;
-  border-bottom: 1px solid rgba(41,181,173,0.33);
-  margin-bottom: 50px;
+  border-bottom: 1px solid @retro-cyan-active-transparent;
   a:hover{
-    background-color: @retro-cyan;
-    color: @retro-noir;
+    background-color: @retro-cyan-active-transparent;
+    color: white;
   }
   ul li.active{
-    background-color: @retro-cyan-lighten;
+    background-color: @retro-cyan-active-transparent;
     a{
-      color: @retro-noir;
+      color: white;
     }
+  }
+  .brand-logo:hover{
+    background-color: transparent;
+  }
+}
+
+.fullwidth{
+  margin-top: 100px;
+  width: 99.225vw;
+  position: relative;
+  margin-left: -49.59vw;
+  left: -23.5%;
+  background-color: rgba(22,27,50,0.9);
+  .text-container{
+    padding-bottom: 50px;
+    width: 55%;
+  }
+  .carousel-container{
+    padding-bottom: 50px;
   }
 }
 
 .page-footer{
-  border-top: 1px solid rgba(41,181,173,0.33);
+  border-top: 1px solid @retro-cyan-active-transparent;
   background-color: #161B32;
+  opacity: 0.8;
 }
 
 .card{
-  background-color: #0E132A;
+  background-color: rgba(22,27,50,0.85);
   -webkit-box-shadow: 0 3px 3px 0 rgba(41,181,173,0.10), 0 2px 6px 0 rgba(41,181,173,0.08), 0 4px 2px -3px rgba(41,181,173,0.16);
   box-shadow: 0 3px 3px 0 rgba(41,181,173,0.10), 0 2px 6px 0 rgba(41,181,173,0.08), 0 4px 2px -2px rgba(41,181,173,0.16);
   .tabs{
-    background-color: @retro-noir;
+    background-color: #323853;
     .tab{
       a{
         color: @retro-cyan;
@@ -91,15 +143,21 @@ h1{
       background-color: @retro-cyan;
     }
   }
+
 }
 
-.login-card{
+.modal-card{
   padding: 50px;
   margin: 0;
+  background-color: @retro-noir;
+  #form_number{
+    margin-bottom: 30px;
+  }
 }
 
 table{
-  margin: 60px auto;
+  margin: 0 auto;
+  margin-bottom: 50px;
   .highlight>tbody>tr:hover {
     background-color: #1E3E52;
   }
@@ -198,7 +256,6 @@ form{
   }
 }
 
-
 .collapsible, .collapsible-header, .collapsible-body{
   border-color: @retro-cyan;
   background-color: @retro-noir;
@@ -233,9 +290,10 @@ form{
   display: block;
   margin: auto;
   margin-bottom: 25px;
+  margin-top: 25px;
   background-color: @retro-cyan;
   color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 15px;
 }
 .alert-error{

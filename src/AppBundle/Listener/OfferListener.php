@@ -10,6 +10,7 @@ namespace AppBundle\Listener;
 
 
 
+use AppBundle\Service\NewsletterManager;
 use AppBundle\Service\OfferManager;
 
 class OfferListener
@@ -19,10 +20,15 @@ class OfferListener
      * @var OfferManager
      */
     private $offerManager;
+    /**
+     * @var NewsletterManager
+     */
+    private $newsletterManager;
 
-    public function __construct(OfferManager $offerManager)
+    public function __construct(OfferManager $offerManager, NewsletterManager $newsletterManager)
 {
     $this->offerManager = $offerManager;
+    $this->newsletterManager = $newsletterManager;
 }
 
     /**
@@ -52,5 +58,12 @@ class OfferListener
     }
 
 
+    public function onAddOfferToCustomerCard($event){
+        $card = $event->getCard();
+        $offer = $event->getOffer();
+        $customer = $card->getCustomer();
+
+        $this->newsletterManager->sendNewOfferEmail($customer, $card, $offer);
+    }
 
 }

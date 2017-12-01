@@ -4,13 +4,31 @@
     <li><a href="#modal1" class="modal-trigger" id="login">Login</a></li>
 {% endblock %}
 {% block body %}
+    <img class="big-logo" src="{{ asset('images/medium-logo.png') }}">
+    <div class="row">
+        <div class="col xl6"> <a href="#modal2" class="modal-trigger btn retro-jaune right" id="register">Join us</a></div>
+        <div class="col xl6"><a href="#modal1" class="modal-trigger btn retro-rose left" id="login">Sign in</a></div>
+    </div>
+    <div class="row fullwidth">
+        <div class="container text-container">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+        <div class="container carousel-container">
+            <div class="carousel carousel-slider">
+                <a class="carousel-item" href="#one!"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
+                <a class="carousel-item" href="#two!"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
+                <a class="carousel-item" href="#two!"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
 {% block modals %}
     <div id="modal1" class="modal" style="width: 25%">
         {% include 'security/login_modal.html.twig' %}
     </div>
     <div id="modal2" class="modal">
-        <div class="card login-card">
+        <div class="card modal-card">
             <span class="card-title">Registration</span>
             <div class="container">
                 {{ form_start(form) }}
@@ -58,6 +76,9 @@
             // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
             $('.modal').modal();
         });
+
+        $('.carousel.carousel-slider').carousel({fullWidth: true, indicators: true});
+
     </script>
     <script src="{{ asset('js/form/datepicker.js') }}"></script>
 {% endblock %}

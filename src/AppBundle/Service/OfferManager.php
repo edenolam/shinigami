@@ -10,7 +10,10 @@ namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Card;
+use AppBundle\Entity\CardsOffers;
+use AppBundle\Event\AddOfferToCustomerCardEvent;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class OfferManager
@@ -23,11 +26,16 @@ class OfferManager
      * @var Session
      */
     private $session;
+    /**
+     * @var EventDispatcher
+     */
+    private $dispatcher;
 
-    public function __construct(ObjectManager $entityManager, Session $session)
+    public function __construct(ObjectManager $entityManager, Session $session, EventDispatcher $dispatcher)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -56,6 +64,10 @@ class OfferManager
             $cardOffer->setUsed(false);
             $this->entityManager->persist($cardOffer);
             $card->addCardsOffer($cardOffer);
+
+            $addOfferToCustomerCardEvent = new AddOfferToCustomerCardEvent($offer, $card);
+            $this->dispatcher->dispatch($addOfferToCustomerCardEvent::NAME, $addOfferToCustomerCardEvent);
+
         }
         $this->entityManager->persist($card);
         $this->entityManager->flush();
@@ -69,7 +81,7 @@ class OfferManager
      *
      * @param $card a Card object
      */
-    public function updateStatsOffers($card)
+    public function updateStatsOffers(Card $card)
     {
         $offers = $this->findStatsOffers($card);
         $this->addOffersToCustomerCard($offers, $card, false);
@@ -88,16 +100,15 @@ class OfferManager
     }
 
     /**
-     *
      * Finds the "visits" and "score" offers which are available for one customer
      *
-     * @param $card a Card object
-     * @return array an array of Offer objects which are available for one customer
+     * @param Card $card
+     * @return array
      */
-    private function findStatsOffers($card)
+    private function findStatsOffers(Card $card)
     {
         $visitsOffers = $this->getOffersRepository()->findUsableOffersByCustomer("visits", $card, $card->getVisits());
         $scoreOffers = $this->getOffersRepository()->findUsableOffersByCustomer("score", $card, $card->getScore());
-        return $usableOffers = array_merge($visitsOffers, $scoreOffers);
+        return array_merge($visitsOffers, $scoreOffers);
     }
 }

@@ -98,7 +98,12 @@ class Customer
      */
     private $card;
 
-
+    /**
+     * One Cart has One Customer.
+     * @ORM\OneToOne(targetEntity="Account", inversedBy="customer")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
+     */
+    private $account;
 
     /**
      * Get id

@@ -69,9 +69,9 @@ class Account implements UserInterface, \Serializable
     private $isActive;
 
     /**
-     * One account has one customer
-     * @ORM\OneToOne(targetEntity="Customer", cascade={"persist"})
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id", nullable=true)
+     * One Account has One Customer.
+     * @ORM\OneToOne(targetEntity="Customer", mappedBy="account")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;
 
