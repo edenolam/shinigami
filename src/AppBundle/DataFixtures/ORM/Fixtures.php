@@ -31,6 +31,7 @@ class Fixtures extends Fixture
 		$customer->setLastname("Basquin");
 		$customer->setNickname("crazykiller");
 		$customer->setAdress("70 rue de tocqueville");
+		$customer->setCity("Ici");
 		$customer->setPhone("0661916148");
 		$customer->setBirthday(new \DateTime("04/02/1981"));
 

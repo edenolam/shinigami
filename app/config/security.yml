@@ -24,6 +24,7 @@ security:
                 login_path: login
                 check_path: login
                 success_handler: app.login.listener
+                csrf_token_generator: security.csrf.token_manager
             logout:
                 path:   /logout
                 target: /

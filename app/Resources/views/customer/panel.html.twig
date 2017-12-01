@@ -2,7 +2,6 @@
 
 {% block body %}
     <div class="row customer-card-infos">
-
         <div class="col xs12 s12 m12 xl3">
             {% include 'partials/customer_infos.html.twig' %}
         </div>
@@ -29,14 +28,9 @@
             {% endif %}
         </div>
     </div>
-
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="application/javascript">
-        $(document).ready(function(){
-            $('.carousel').carousel();
-        });
-    </script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
 {% endblock %}
