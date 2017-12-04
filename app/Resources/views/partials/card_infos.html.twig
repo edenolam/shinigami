@@ -27,8 +27,8 @@
     {% else %}
         <form method="post">
             <label for="addcard">Add card</label>
-            <input type="text" name="number" id="addcard" placeholder="Must be a number of 10 characters" />
-            <button class="btn" type="submit" name="submit">Validate</button>
+            <input type="text" name="number" id="addcard" placeholder="Must be a number of 9 characters" maxlength="9"/>
+            <button class="btn" type="submit" name="submit">Active Card</button>
         </form>
     {% endif %}
 </div>

@@ -32,9 +32,11 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('o')
             ->leftJoin('o.cardsOffers', "co", Join::WITH, "co.card = :card")
             ->where("o.isActive = true")
+            ->andWhere('co.card IS NULL')
             ->setParameter("card", $card)
             ->getQuery()
             ->getResult();
+
     }
 
     public function getAllOffersQuery()

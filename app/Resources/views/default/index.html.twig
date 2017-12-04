@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
 {% block nav %}
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -8,11 +9,15 @@
 
 {% block body %}
     <div id="home" class="section scrollspy">
-        <img  class="big-logo section scrollspy" src="{{ asset('images/medium-logo.png') }}">
-        <div class="row index-btn">
-            <div class="col xs12 s12 xl6"> <a href="#modal2" class="modal-trigger btn retro-jaune right" id="register">Join us</a></div>
-            <div class="col xs12 s12 xl6"><a href="#modal1" class="modal-trigger btn retro-rose left" id="login">Sign in</a></div>
-        </div>
+
+    <img class="big-logo" src="{{ asset('images/medium-logo.png') }}">
+
+    <div class="row">
+        <div class="col xl6"> <a href="#modal2" class="modal-trigger btn retro-jaune right" id="register">Join us</a></div>
+        <div class="col xl6"><a href="#modal1" class="modal-trigger btn retro-rose left" id="login">Sign in</a></div>
+    </div>
+
+
         <div class="row fullwidth section scrollspy" id="about">
             <div class="container text-container">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -61,45 +66,7 @@
         {% include 'security/login_modal.html.twig' %}
     </div>
     <div id="modal2" class="modal">
-        <div class="card modal-card">
-            <span class="card-title">Registration</span>
-            <div class="container">
-                {{ form_start(formRegister) }}
-
-                <div class="row">
-                    <div class="col xl6">
-                        {{ form_row(formRegister.customer.firstname) }}
-                    </div>
-                    <div class="col xl6">
-                        {{ form_row(formRegister.customer.lastname) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col xl12">{{ form_row(formRegister.customer.adress) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col xl6">{{ form_row(formRegister.customer.phone) }}</div>
-                    <div class="col xl6">{{ form_row(formRegister.customer.birthday) }}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col xl6">{{ form_row(formRegister.username) }}</div>
-                    <div class="col xl6">{{ form_row(formRegister.customer.nickname) }}</div>
-                </div>
-                <div class="row">
-                </div>
-                <div class="row">
-                    <div class="col xl12">{{ form_row(formRegister.email) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col xl6">{{ form_row(formRegister.plainPassword.first) }}</div>
-                    <div class="col xl6">{{ form_row(formRegister.plainPassword.second) }}</div>
-                </div>
-
-                <button class="btn" id="submit" type="submit">Submit</button>
-                {{ form_end(formRegister) }}
-            </div>
-        </div>
+        {% include 'security/register_modal.html.twig' %}
     </div>
 {% endblock %}
 
@@ -113,5 +80,7 @@
 			$('.scrollspy').scrollSpy({ scrollOffset: 80 });
         });
     </script>
+    <script src="{{ asset('js/modal.js') }}"></script>
+    <script src="{{ asset('js/carousel_slide.js') }}"></script>
     <script src="{{ asset('js/form/datepicker.js') }}"></script>
 {% endblock %}

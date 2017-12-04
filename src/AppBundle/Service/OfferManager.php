@@ -58,16 +58,17 @@ class OfferManager
     public function addOffersToCustomerCard($offers, Card $card, $flash)
     {
         foreach ($offers as $offer){
-            $cardOffer = new CardsOffers();
-            $cardOffer->setCard($card);
-            $cardOffer->setOffer($offer);
-            $cardOffer->setUsed(false);
-            $this->entityManager->persist($cardOffer);
-            $card->addCardsOffer($cardOffer);
+            if($this->isUnlockableByCustomer($offer, $card)){
+                $cardOffer = new CardsOffers();
+                $cardOffer->setCard($card);
+                $cardOffer->setOffer($offer);
+                $cardOffer->setUsed(false);
+                $this->entityManager->persist($cardOffer);
+                $card->addCardsOffer($cardOffer);
 
-            $addOfferToCustomerCardEvent = new AddOfferToCustomerCardEvent($offer, $card);
-            $this->dispatcher->dispatch($addOfferToCustomerCardEvent::NAME, $addOfferToCustomerCardEvent);
-
+                $addOfferToCustomerCardEvent = new AddOfferToCustomerCardEvent($offer, $card);
+                $this->dispatcher->dispatch($addOfferToCustomerCardEvent::NAME, $addOfferToCustomerCardEvent);
+            }
         }
         $this->entityManager->persist($card);
         $this->entityManager->flush();
@@ -110,5 +111,15 @@ class OfferManager
         $visitsOffers = $this->getOffersRepository()->findUsableOffersByCustomer("visits", $card, $card->getVisits());
         $scoreOffers = $this->getOffersRepository()->findUsableOffersByCustomer("score", $card, $card->getScore());
         return array_merge($visitsOffers, $scoreOffers);
+    }
+
+    private function isUnlockableByCustomer($offer, $card)
+    {
+        $cardOffer = $this->entityManager->getRepository('AppBundle:CardsOffers')->findOneBy(array("offer"=>$offer, "card" => $card));
+        if($cardOffer){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

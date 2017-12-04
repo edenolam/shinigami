@@ -43,6 +43,7 @@ class SecurityController extends Controller
 
 				$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
 				$user->getCustomer()->setBirthday(new \DateTime($birthday));
+				$user->getCustomer()->setAccount($user);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);

@@ -63,6 +63,7 @@ main{
 }
 .container-frame {
   background-color: rgba(22, 27, 50, 0.65);
+  padding: 0 40px;
 }
 
 .content{
@@ -203,10 +204,14 @@ table.available-cards{
 .pagination{
   li.active{
     background-color: @retro-rose;
+
   }
 
   li a{
     color: white;
+    &:hover{
+      background-color: @retro-rose-lighten;
+    }
   }
 }
 
@@ -298,12 +303,13 @@ form{
     padding: 20px;
   }
   .offer-status{
-    position: absolute;
     bottom: 0;
     display: block;
     width: 100%;
     text-align: center;
     font-size: larger;
+    margin: auto;
+    margin-top: 50px;
   }
 
 }
