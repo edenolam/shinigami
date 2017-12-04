@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block nav %}
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="#modal2" class="modal-trigger" id="register">Register</a></li>
     <li><a href="#modal1" class="modal-trigger" id="login">Login</a></li>
 {% endblock %}
 
 {% block body %}
+    <div id="home" class="section scrollspy">
+
     <img class="big-logo" src="{{ asset('images/medium-logo.png') }}">
 
     <div class="row">
@@ -13,15 +17,45 @@
         <div class="col xl6"><a href="#modal1" class="modal-trigger btn retro-rose left" id="login">Sign in</a></div>
     </div>
 
-    <div class="row fullwidth">
-        <div class="container text-container">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+        <div class="row fullwidth section scrollspy" id="about">
+            <div class="container text-container">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="container carousel-container">
+                <div class="carousel carousel-slider">
+                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
+                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
+                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+                </div>
+            </div>
         </div>
-        <div class="container carousel-container">
-            <div class="carousel carousel-slider">
-                <a class="carousel-item" href="#one!"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
-                <a class="carousel-item" href="#two!"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
-                <a class="carousel-item" href="#two!"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+         <div class="row fullwidth transparent section scrollspy" id="contact">
+            <div class="container text-container" style="width: 30%">
+
+            </div>
+         </div>
+         <div class="row fullwidth section scrollspy" id="contact">
+            <div class="container text-container" style="width: 30%">
+                <h2 class='page-header center'>Contact</h2>
+                {{ form_start(formContact) }}
+                <div class="row">
+                    <div class="col xl6">
+                        {{ form_row(formContact.name) }}
+                    </div>
+                    <div class="col xl6">
+                        {{ form_row(formContact.email) }}
+                    </div>
+                </div>
+                <div class="row">
+                    {{ form_row(formContact.subject) }}
+                </div>
+                <div class="row">
+                    {{ form_row(formContact.message) }}
+                </div>
+
+                <button type="submit" class="btn">Send</button>
+                {{ form_end(formContact) }}
             </div>
         </div>
     </div>
@@ -38,6 +72,14 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+			$('.carousel.carousel-slider').carousel({fullWidth: true, indicators: true});
+			$('.scrollspy').scrollSpy({ scrollOffset: 80 });
+        });
+    </script>
     <script src="{{ asset('js/modal.js') }}"></script>
     <script src="{{ asset('js/carousel_slide.js') }}"></script>
     <script src="{{ asset('js/form/datepicker.js') }}"></script>

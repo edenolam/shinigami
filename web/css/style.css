@@ -33,7 +33,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background-image: url('../images/background.jpg');
+  background-image: url("../images/background.jpg");
   background-color: #161B32;
   background-size: cover;
   background-attachment: fixed;
@@ -50,7 +50,13 @@ main .container {
 }
 .content {
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 0px;
+}
+.section {
+  padding-bottom: 0;
+}
+.section .fullwidth {
+  padding: 0;
 }
 .big-logo {
   z-index: 4;
@@ -82,13 +88,23 @@ h1 {
 .main-nav .brand-logo:hover {
   background-color: transparent;
 }
+.drag-target {
+  z-index: 5;
+}
+#sidenav-overlay {
+  z-index: 1;
+}
+.index-btn {
+  margin-bottom: 80px;
+}
 .fullwidth {
-  margin-top: 100px;
   width: 99.225vw;
   position: relative;
   margin-left: -49.59vw;
   left: -23.5%;
   background-color: rgba(22, 27, 50, 0.9);
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .fullwidth .text-container {
   padding-bottom: 50px;
@@ -96,6 +112,9 @@ h1 {
 }
 .fullwidth .carousel-container {
   padding-bottom: 50px;
+}
+.fullwidth .transparent {
+  background-color: transparent;
 }
 .page-footer {
   border-top: 1px solid rgba(41, 181, 173, 0.33);

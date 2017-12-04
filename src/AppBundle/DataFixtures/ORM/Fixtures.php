@@ -15,7 +15,7 @@ class Fixtures extends Fixture
 		$staffAccount->setUsername('staff');
 		$staffAccount->setPassword('$2y$13$Zi1mzLOnqeDHupSMFok8xeNgmPQqJj.b69qjxXzX9GBbtgnFvT2PS');
 		$staffAccount->setEmail('staff@shinigamilaser.com');
-		$staffAccount->setRoles(["ROLE_STAFF"]);
+		$staffAccount->setRoles(["ROLE_SUPER_ADMIN"]);
 		$staffAccount->setIsActive(TRUE);
 
 		$customerAccount = new Account();

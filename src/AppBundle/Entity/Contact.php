@@ -1,38 +1,28 @@
 <?php
 namespace AppBundle\Entity;
-use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Contact
  *
- * @ORM\Table(name="contact")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ContactRepository")
  */
 
 class Contact
 {
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="id", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-
-	private $id;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="name", type="string", length=255)
 	 */
 
 	private $name;
 
 	/**
 	 * @var string
+	 * @Assert\Email(
+	 *     message = "The email '{{ value }}' is not a valid email.",
+	 *     checkMX = true
+	 * )
 	 *
-	 * @ORM\Column(name="email", type="string", length=255)
 	 */
 
 	private $email;
@@ -40,7 +30,6 @@ class Contact
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="subject", type="string", length=255)
 	 */
 
 	private $subject;
@@ -48,23 +37,12 @@ class Contact
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="message", type="string", length=255)
 	 */
 
 	private $message;
 
 
 
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set name

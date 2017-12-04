@@ -24,7 +24,11 @@
         <nav class="main-nav">
             <div class="container">
                 <div class="nav-wrapper">
+                    {% if app.request.attributes.get('_route')  != "homepage" %}
                     <a href="{{ path("homepage") }}" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
+                    {% else %}
+                        <a href="#home" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
+                    {% endif %}
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
                         {% block nav %}
@@ -95,7 +99,7 @@
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
             <script>
-                $(".button-collapse").sideNav();
+                $(".button-collapse").sideNav({closeOnClick: true, draggable: true});
                 $('document').ready(function(){
                     $('a').each(function(){
                         if ($(this).prop('href') == window.location.href) {

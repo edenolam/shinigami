@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Account;
 use AppBundle\Form\AccountType;
+use AppBundle\Form\AccountStaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -82,6 +83,39 @@ class SecurityController extends Controller
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
+	}
+
+	public function registerStaffAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+	{
+		$user = new Account();
+		$form = $this->createForm(AccountStaffType::class, $user);
+
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted()) {
+			if ($form->isValid()) {
+				$password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+				$user->setPassword($password);
+				$user->setIsActive(true);
+				$user->setRoles(array('ROLE_STAFF'));
+
+				$entityManager = $this->getDoctrine()->getManager();
+				$entityManager->persist($user);
+				$entityManager->flush();
+
+				$this->addFlash("success", "All right ! You've been registered !");
+				return $this->redirectToRoute('login');
+
+			}else{
+				$this->addFlash("error", "The informations you entered were not valid.");
+			}
+		}
+
+		return $this->render(
+			'security/registerStaff.html.twig', array(
+				'form' => $form->createView()
+			)
+		);
 	}
 
 }
