@@ -29,6 +29,7 @@ class DefaultController extends Controller
 
                 $birthday = $request->request->get('appbundle_account')['customer']['birthday'];
                 $user->getCustomer()->setBirthday(new \DateTime($birthday));
+                $user->getCustomer()->setAccount($user);
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
@@ -39,6 +40,7 @@ class DefaultController extends Controller
 
             }else{
                 $this->addFlash("error", "The informations you entered were not valid.");
+                return $this->redirectToRoute('register');
             }
         }
 
