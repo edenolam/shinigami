@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use LahthonyOTPAuthBundle\EventListener\Add2FactorAuthFieldListener;
 
 class AccountType extends AbstractType
 {
@@ -27,7 +26,6 @@ class AccountType extends AbstractType
             ))
             ->add('email', EmailType::class)
             ->add('customer', CustomerType::class)
-			->addEventSubscriber(new Add2FactorAuthFieldListener());
 
 		;
     }

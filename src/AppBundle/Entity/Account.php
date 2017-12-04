@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use LahthonyOTPAuthBundle\Model\OTPAuthInterface;
 
 /**
  * Account
@@ -13,7 +12,7 @@ use LahthonyOTPAuthBundle\Model\OTPAuthInterface;
  * @ORM\Table(name="account")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AccountRepository")
  */
-class Account implements UserInterface, \Serializable, OTPAuthInterface
+class Account implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -24,17 +23,7 @@ class Account implements UserInterface, \Serializable, OTPAuthInterface
      */
     private $id;
 
-	/**
-	 * This attribute need to stock in Database
-	 * @ORM\Column(name="secret_auth_key", type="string", length=255, nullable=true)
-	 */
-	private $secretAuthKey;
-	/**
-	 * This attribute will permits to do verification on user registration
-	 * if he accepts 2Factor Authentication
-	 * @var boolean
-	 */
-	private $OTP2Auth;
+
     /**
      * @var string
      * @Assert\NotBlank(message="Please enter a username.")
@@ -306,41 +295,5 @@ class Account implements UserInterface, \Serializable, OTPAuthInterface
     {
         $this->plainPassword = $plainPassword;
     }
-
-
-	/**
-	 * @return mixed
-	 */
-	public function getSecretAuthKey()
-	{
-		return $this->secretAuthKey;
-	}
-
-
-	/**
-	 * @param mixed $secretAuthKey
-	 */
-	public function setSecretAuthKey($secretAuthKey)
-	{
-		$this->secretAuthKey = $secretAuthKey;
-	}
-
-
-	/**
-	 * @return bool
-	 */
-	public function getOTP2Auth()
-	{
-		return $this->OTP2Auth;
-	}
-
-
-	/**
-	 * @param bool $OTP2Auth
-	 */
-	public function setOTP2Auth($OTP2Auth)
-	{
-		$this->OTP2Auth = $OTP2Auth;
-	}
 
 }
