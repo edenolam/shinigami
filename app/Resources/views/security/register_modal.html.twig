@@ -1,39 +1,39 @@
 <div class="card modal-card">
     <span class="card-title">Registration</span>
     <div class="container">
-        {{ form_start(form) }}
+        {{ form_start(formRegister) }}
         <div class="row">
             <div class="col xl6">
-                {{ form_row(form.customer.firstname) }}
+                {{ form_row(formRegister.customer.firstname) }}
             </div>
             <div class="col xl6">
-                {{ form_row(form.customer.lastname) }}
+                {{ form_row(formRegister.customer.lastname) }}
             </div>
         </div>
         <div class="row">
-            <div class="col xl9">{{ form_row(form.customer.adress) }}</div>
-            <div class="col xl3">{{ form_row(form.customer.city) }}</div>
+            <div class="col xl9">{{ form_row(formRegister.customer.adress) }}</div>
+            <div class="col xl3">{{ form_row(formRegister.customer.city) }}</div>
         </div>
         <div class="row">
-            <div class="col xl6">{{ form_row(form.customer.phone) }}</div>
-            <div class="col xl6">{{ form_row(form.customer.birthday) }}</div>
+            <div class="col xl6">{{ form_row(formRegister.customer.phone) }}</div>
+            <div class="col xl6">{{ form_row(formRegister.customer.birthday) }}</div>
         </div>
 
         <div class="row">
-            <div class="col xl6">{{ form_row(form.username) }}</div>
-            <div class="col xl6">{{ form_row(form.customer.nickname) }}</div>
+            <div class="col xl6">{{ form_row(formRegister.username) }}</div>
+            <div class="col xl6">{{ form_row(formRegister.customer.nickname) }}</div>
         </div>
         <div class="row">
         </div>
         <div class="row">
-            <div class="col xl12">{{ form_row(form.email) }}</div>
+            <div class="col xl12">{{ form_row(formRegister.email) }}</div>
         </div>
         <div class="row">
-            <div class="col xl6">{{ form_row(form.plainPassword.first) }}</div>
-            <div class="col xl6">{{ form_row(form.plainPassword.second) }}</div>
+            <div class="col xl6">{{ form_row(formRegister.plainPassword.first) }}</div>
+            <div class="col xl6">{{ form_row(formRegister.plainPassword.second) }}</div>
         </div>
 
         <button class="btn" id="submit" type="submit">Submit</button>
-        {{ form_end(form) }}
+        {{ form_end(formRegister) }}
     </div>
 </div>
