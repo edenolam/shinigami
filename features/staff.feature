@@ -1,24 +1,20 @@
 Feature: Staff
-  @staff
-  Scenario: From login to staff panel
+
+  Background:
     Given I am on "/login"
     And I fill in "username" with "staff"
     And I fill in "password" with "staff"
     And I press "submit"
     Then I should be on "/staff"
-    And the response status code should be 200
+
+  @staff
+  Scenario: From login to staff panel
     And I should see "Newsletters" in the "nav" element
     And I should see "Offers" in the "nav" element
     And I should see "Search by card"
 
   @staff
   Scenario: Search customer by card number
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     And I fill in "search_field" with "234567899"
     And I press "Search"
     Then I should be on "/staff/card/234567899"
@@ -29,12 +25,6 @@ Feature: Staff
 
   @staff
   Scenario: Search customer by name
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     And I fill in "search_customer_firstname" with "michel"
     And I fill in "search_customer_lastname" with "varuk"
     And I fill in "search_customer_phone" with "0664659887"
@@ -46,21 +36,8 @@ Feature: Staff
     And the ".lastname" element should contain "varuk"
 
   @staff
-  Scenario: edit profile customer
-    Given I am on "/staff/card/234567899"
-    And I follow "#modify-profile"
-    Then I should be on "/staff/card/234567899/editcustomer"
-    And the response status code should be 200
-
-
-  @staff
   Scenario: From panel to new game session
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
+
     Then I follow "new-gamesession"
     Then I should be on "/staff/gamesession"
     And the response status code should be 200
@@ -68,12 +45,6 @@ Feature: Staff
 
   @staff
   Scenario: From panel to new game session and making of a game session
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     Then I follow "new-gamesession"
     Then I should be on "/staff/gamesession"
     And the response status code should be 200
@@ -98,12 +69,6 @@ Feature: Staff
 
   @staff
   Scenario: From panel to offers CRUD
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
@@ -112,12 +77,6 @@ Feature: Staff
 
   @staff
   Scenario: From offers list to offers creation, creation of an offer
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
@@ -139,12 +98,6 @@ Feature: Staff
 
   @staff
   Scenario: Disable an offer and reactivate it
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
@@ -161,12 +114,6 @@ Feature: Staff
 
   @staff
   Scenario: Modify an offer
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     Then I follow "offers"
     Then I should be on "/staff/offers/list"
     And the response status code should be 200
@@ -186,12 +133,6 @@ Feature: Staff
 
   @staff
   Scenario: Create new empty card
-    Given I am on "/login"
-    And I fill in "username" with "staff"
-    And I fill in "password" with "staff"
-    And I press "submit"
-    Then I should be on "/staff"
-    And the response status code should be 200
     Then I follow "New card"
     Then I should be on "/staff/new-card"
     And the response status code should be 200

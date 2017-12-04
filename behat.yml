@@ -21,18 +21,18 @@ default:
         - Behat\MinkExtension\Context\MinkContext
     staff:
       filters:
-        tags: '@staff'
+        tags: '@javascript'
       contexts:
         - StaffContext
         - FeatureContext
-        - Behat\MinkExtension\Context\MinkContext
+#        - Behat\MinkExtension\Context\MinkContext
   extensions:
     Behat\Symfony2Extension:
         kernel:
             bootstrap: ""
     Behat\MinkExtension:
-        default_session: goutte
-        goutte: ~
-        selenium2:
-          wd_host: "http://127.0.0.1:4444/wd/hub"
         base_url: 'http://wf3projet2.local/app_dev.php'
+        browser_name: 'chrome'
+        goutte: ~
+        selenium2: ~
+
