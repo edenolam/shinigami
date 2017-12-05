@@ -1,188 +1,108 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Template mailing Alsacreations</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Newsletter Shinigami</title>
     <style type="text/css">
         {% block stylesheet %}
         {{ style }}
         {% endblock %}
-        /* Fonts and Content */
-        body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; font-size:14px; }
-        body { background-color: #2A374E; margin: 0; padding: 0; -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
-        h2{ padding-top:12px; /* ne fonctionnera pas sous Outlook 2007+ */color:#0E7693; font-size:22px; }
-
-        @media only screen and (max-width: 480px) {
-
-            table[class=w275], td[class=w275], img[class=w275] { width:135px !important; }
-            table[class=w30], td[class=w30], img[class=w30] { width:10px !important; }
-            table[class=w580], td[class=w580], img[class=w580] { width:280px !important; }
-            table[class=w640], td[class=w640], img[class=w640] { width:300px !important; }
-            img{ height:auto;}
-            /*illisible, on passe donc sur 3 lignes */
-            table[class=w180], td[class=w180], img[class=w180] {
-                width:280px !important;
-                display:block;
-            }
-            td[class=w20]{ display:none; }
-        }
-
     </style>
-
 </head>
-<body style="margin:0px; padding:0px; -webkit-text-size-adjust:none;">
+<body>
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:rgb(42, 55, 78)" >
-    <tbody>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
-        <td align="center" bgcolor="#2A374E">
-            <table  cellpadding="0" cellspacing="0" border="0">
-                <tbody>
-                <tr>
-                    <td class="w640"  width="640" height="10"></td>
-                </tr>
-                <tr>
-                    <td class="w640"  width="640" height="10"></td>
-                </tr>
-
-
-                <!-- entete -->
+        <td class="header" align="center">
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
                 <tr class="pagetoplogo">
-                    <td class="w640"  width="640">
-                        <table  class="w640 header"  width="640" cellpadding="0" cellspacing="0" border="0">
-                            <tbody>
-                            <tr>
-                                <td class="w30"  width="30"></td>
-                                <td  class="w580"  width="580" valign="middle" align="left">
-                                    <div class="pagetoplogo-content">
-                                        <img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}" style="width:30%" alt="image">
-                                    </div>
-                                </td>
-                                <td class="w30"  width="30"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <td align="center" valign="top" width="600">
+            <![endif]-->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                <tr>
+                    <td align="center" valign="top" style="padding: 40px 0px 40px 0px;">
+                        <!-- IMAGE -->
+                        <img src="{{ absolute_url(asset('images/email-ban.jpg')) }}"  style="width:100%" alt="banniere">
+                        {#<img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}"  style="width:30%" alt="image">#}
                     </td>
                 </tr>
-
-                <!-- separateur horizontal -->
                 <tr>
-                    <td  class="w640"  width="640" height="1" bgcolor="#d7d6d6"></td>
-                </tr>
-
-                <!-- contenu -->
-                <tr class="content">
-                    <td class="w640" class="w640"  width="640" bgcolor="#ffffff">
-                        <table class="w640"  width="640" cellpadding="0" cellspacing="0" border="0">
-                            <tbody>
-                            <tr>
-                                <td  class="w30"  width="30"></td>
-                                <td  class="w580"  width="580">
-                                    <!-- une zone de contenu -->
-                                    <table class="w580"  width="580" cellpadding="0" cellspacing="0" border="0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="w580"  width="580">
-                                                <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">{{ newsletter.title|title }}</h2>
-
-                                                <div align="left" class="article-content">
-                                                    <p>
-                                                            {{ newsletter.content }}
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w580"  width="580" height="1" bgcolor="#c7c5c5"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- fin zone -->
-
-                                    <!-- une autre zone de contenu -->
-                                    <table class="w580"  width="580" cellspacing="0" cellpadding="0" border="0">
-                                        <tbody>
-                                        <tr>
-                                            <td colspan="3">
-                                                <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">
-                                                    Une zone avec deux colonnes </h2>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w275"  width="275" valign="top">
-                                                <div align="left" class="article-content">
-                                                    <p> Lemon drops icing croissant. Sweet cotton candy macaroon gingerbread chocolate bar wafer cotton candy powder sugar plum. </p>
-                                                </div>
-                                            </td>
-                                            <td class="w30"  width="30" class="w30"></td>
-                                            <td class="w275"  width="275" valign="top">
-                                                <div align="left" class="article-content">
-                                                    <p> Lemon drops icing croissant. Sweet cotton candy macaroon gingerbread chocolate bar wafer cotton candy powder sugar plum. </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3" class="w580" height="1" bgcolor="#c7c5c5"></td>
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-
-
-                                </td>
-                                <td class="w30" class="w30"  width="30"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <td align="center" valign="top" style="padding: 20px 10px 20px 10px; background-color: white;">
+                        <!-- HEADLINE -->
+                        <p style="color: #728f92; font-family: sans-serif; font-size: 24px; font-weight: bold; line-height: 28px; margin: 0;">{{ newsletter.title | title }}</p>
                     </td>
                 </tr>
-
-                <!--  separateur horizontal de 15px de haut -->
-                <tr>
-                    <td class="w640"  width="640" height="15" bgcolor="#ffffff"></td>
-                </tr>
-
-                <!-- footer -->
                 <tr class="pagebottom">
-                    <td class="w640"  width="640">
-                        <table class="w640 footer"  width="640" cellpadding="0" cellspacing="0" border="0">
-                            <tbody>
-                            <tr>
-                                <td colspan="5" height="10"></td>
-                            </tr>
-                            <tr>
-                                <td class="w30"  width="300" style="padding:10px; ">
-                                    <small>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        At, atque esse ipsam libero neque officiis quas voluptatibus.
-                                        Commodi dicta eos esse labore laboriosam maiores molestias obcaecati quaerat,
-                                        quam recusandae sint.
-                                    </small>
-                                </td>
-                                <td class="w580"  width="580" valign="top">
-                                    <p align="right" class="pagebottom-content-left">
-                                        <a style="color:#255D5C;" href="http://localhost/wf3-projet2-shinigamilaser-perle-julien/web/app_dev.php/"><span style="color:#255D5C;">shinigami Laser</span></a>
-                                    </p>
-                                </td>
-
-                                <td class="w30"  width="30">fgfgh</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" height="10"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <td align="justify" valign="top" style="background-color: white; padding: 0px 10px 20px 10px;">
+                        <!-- COPY -->
+                        <p style="color: #728f92; background-color: white; font-family: sans-serif; font-size: 16px; font-weight: normal; line-height: 24px; margin: 0; padding: 10px;">{{ newsletter.content | capitalize }}</p>
                     </td>
                 </tr>
                 <tr>
-                    <td class="w640"  width="640" height="60"></td>
+                    <td align="center" valign="top" style="background-color: white; padding: 20px;">
+                        <a href="http://localhost/wf3-projet2-shinigamilaser-perle-julien/web/app_dev.php/" style="text-decoration: none;">
+                            <div style="width: 200px; border-radius: 3px; background-color: #66BB6A; padding: 10px; font-family: sans-serif; font-size: 24px; font-weight: bold; color: #fff;">Contact us</div>
+                        </a>
+                    </td>
                 </tr>
-                </tbody>
+
+                <tr>
+                    <td height="20px" style="background-color: #2f2f2f;"></td>
+                </tr>
+                <tr>
+                    <td align="center" style="background-color: #2f2f2f;">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <tbody><tr>
+                                <td style="padding-left:4px;padding-right:4px">
+                                    <a title="Twitter" style="text-decoration:none!important;color:#939496" href="">
+                                        <img style="border:none;display:block" alt="Twitter" src="https://ci4.googleusercontent.com/proxy/iFgMIMZMJc0LyLex-8fDEbE-mhD4gCwxifvfbxPFlAyqTiB0A1u_anT6Y3Qj_idZjo6YfdVQu1v3GmMxpxT2YLWj9AtCM3BghcynAtcrsb5IIDD3aKEPiGoZSgYGgL3cs7AFxy5atiUIhLM=s0-d-e1-ft#https://cdn-i2.starofservice.com/894eacb56162/images/mail/icons/footer-twitter_2x.png" class="CToWUd" width="32" height="32" border="0">
+                                    </a>
+                                </td>
+                                <td style="padding-left:4px;padding-right:4px">
+                                    <a title="Facebook" style="text-decoration:none!important;color:#939496" href="">
+                                        <img style="border:none;display:block" alt="Facebook" src="https://ci3.googleusercontent.com/proxy/NeQEHXVLdCZyBMYJc7e6s1-0Cf7Q5BLTEXyurrrXmoTpUBCdEBB_e3g2sALBegkR8BSceTrMa9AhW8t2kgC4hYbktGz8BkTjHH0X5aJ-ZwnC2xpFpBsNb-KWGGXTQlGnSMtpG4MuZBUi2wcj=s0-d-e1-ft#https://cdn-i2.starofservice.com/894eacb56162/images/mail/icons/footer-facebook_2x.png" class="CToWUd" width="32" height="32" border="0">
+                                    </a>
+                                </td>
+                                <td style="padding-left:4px;padding-right:4px">
+                                    <a title="Linkedin" style="text-decoration:none!important;color:#939496" href="">
+                                        <img style="border:none;display:block" alt="LinkedIn" src="https://ci6.googleusercontent.com/proxy/T_rqnRh8cg4O8RDgAb5v6k6lr4QvqyHuidLR7Yc96Kg5qcXBZA2tc0JU7TpT_l4BFAL7IxaYrRQ_NQz748Q8Qs33lsdCcxz-oljh5mg550DxpsU8j7LU24tah_G5risNJxt25MJMjApJFyQ=s0-d-e1-ft#https://cdn-i.starofservice.com/894eacb56162/images/mail/icons/footer-linkedin_2x.png" class="CToWUd" width="32" height="32" border="0">
+                                    </a>
+                                </td>
+                                <td style="padding-left:4px;padding-right:4px">
+                                    <a title="Pinterest" style="text-decoration:none!important;color:#939496" href="">
+                                        <img style="border:none;display:block" alt="Pinterest" src="https://ci3.googleusercontent.com/proxy/E5ddwxcpIK3r7N66_wM9CWtYOPPlyA_fz-7SHZPRlPXVNUlpahqxQmTnpA1DK00ZnIJ6rw6Yy0JVMVkqQMY0g9czIOjJbXnZreYoNi9XhEeTh5nzftDNRE7yT15g3VOs3MB63yjM3s45iPJo=s0-d-e1-ft#https://cdn-i.starofservice.com/894eacb56162/images/mail/icons/footer-pinterest_2x.png" class="CToWUd" width="32" height="32" border="0">
+                                    </a>
+                                </td>
+                                <td style="padding-left:4px;padding-right:4px">
+                                    <a title="YouTube" style="text-decoration:none!important;color:#939496" href="">
+                                        <img style="border:none;display:block" alt="YouTube" src="https://ci4.googleusercontent.com/proxy/W-BdqDzt3N34EUxCunkUf6Rzf1_x7nGTE1T3PKDYUXRks05FI9KNKHgogcZKZp0H0vFTXt9JU_DSapvTHGJNNMccTwDEG8kS6Epv2S47Vw9TF4UHON2MdpL4gAbtSoDYKqmMPcRI7PTVqg=s0-d-e1-ft#https://cdn-i.starofservice.com/894eacb56162/images/mail/icons/footer-youtube_2x.png" class="CToWUd" width="32" height="32" border="0">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td align="center" valign="top" style="padding: 10px 10px 60px 10px; background-color: #2f2f2f;">
+
+                        <small>
+                            <a style="color: #728f92; font-family: sans-serif; text-decoration: none; " href="http://localhost/wf3-projet2-shinigamilaser-perle-julien/web/app_dev.php/">Shinigami Laser</a>
+                        </small>
+                    </td>
+                </tr>
             </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
         </td>
     </tr>
-    </tbody>
 </table>
+
 </body>
 </html>

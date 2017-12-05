@@ -103,6 +103,12 @@ staff_newsletter_modify:
     requirements:
         id: \d+
 
+staff_newsletter_delete:
+    path: /staff/newsletter/delete/{id}
+    defaults:
+        _controller: AppBundle:StaffNewsletter:delete
+    requirements:
+        id: \d+
 
 # STAFF CREATE GAMESESSION
 
