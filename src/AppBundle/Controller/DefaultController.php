@@ -64,8 +64,13 @@ class DefaultController extends Controller
 					"contact" => $contact
 				)),'text/html');
 
-			$mailer->send($message);
-		}
+			if($mailer->send($message)){
+                $this->addFlash('success', "Your contact email has been sent.");
+            }else{
+                $this->addFlash('error', "Your contact email has not been sent.");
+            }
+
+        }
 
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,

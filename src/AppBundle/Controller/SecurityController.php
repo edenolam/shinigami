@@ -59,7 +59,7 @@ class SecurityController extends Controller
 
         return $this->render(
             'security/register.html.twig', array(
-                'form' => $form->createView()
+                'formRegister' => $form->createView()
             )
         );
     }

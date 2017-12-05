@@ -1,13 +1,10 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Definition\Call\Given;
+use Behat\Behat\Definition\Call\Then;
+use Behat\MinkExtension\Context\MinkContext;
 
-/**
- * Created by PhpStorm.
- * User: hello
- * Date: 17/11/2017
- * Time: 15:19
- */
 
 class StaffContext implements Context
 {

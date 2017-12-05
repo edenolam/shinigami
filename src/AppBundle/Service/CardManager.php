@@ -1,41 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hello
- * Date: 16/11/2017
- * Time: 12:01
- */
 
 namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Card;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Event\CustomerAddCardEvent;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormBuilder;
-use Symfony\Component\Form\FormFactory;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CardManager
 {
 
-
+    /**
+     * @var ObjectManager
+     */
     private $entityManager;
 
-    private $session;
     /**
-     * @var EventDispatcher
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
+     * @var EventDispatcherInterface
      */
     private $dispatcher;
 
     /**
-     * @var FormFactory
+     * @var FormFactoryInterface
      */
     private $formFactory;
 
-    public function __construct(ObjectManager $em, Session $session, EventDispatcher $dispatcher, FormFactory $formFactory)
+    public function __construct(ObjectManager $em, SessionInterface $session, EventDispatcherInterface $dispatcher, FormFactoryInterface $formFactory)
     {
         $this->entityManager = $em;
         $this->session = $session;
@@ -44,9 +43,9 @@ class CardManager
     }
 
     /**
-     * Gets the Card Entity Repository
+     * Gets the Card entity Repository
      *
-     * @return $repository The repository of Card Entity
+     * @return \AppBundle\Repository\CardRepository|\Doctrine\Common\Persistence\ObjectRepository
      */
     private function getCardRepository()
     {
@@ -54,6 +53,13 @@ class CardManager
         return $repository;
     }
 
+    /**
+     * Initialize a card
+     *
+     * @param Card $card
+     * @param $cardNumber
+     * @return Card|null
+     */
     public function initCard(Card $card, $cardNumber)
     {
     	if($this->isAvailable($cardNumber)){
@@ -69,6 +75,12 @@ class CardManager
 		}
     }
 
+    /**
+     * Changes a card's number
+     *
+     * @param $card
+     * @param $number
+     */
     public function changeCardNumber($card, $number){
         $availableCard = $this->getCardRepository()->findOneByNumber($number);
         $this->entityManager->remove($availableCard);
@@ -77,11 +89,21 @@ class CardManager
         $this->save($card);
     }
 
+    /**
+     * Looks for cards which are not related to a customer
+     *
+     * @return array
+     */
     public function getCardsWithoutCustomer()
     {
         return $this->getCardRepository()->findAllInactiveCards();
     }
 
+    /**
+     * Creates a form for card number change
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
     public function getChangeNumberCardForm(){
         $cards = $this->getCardsWithoutCustomer();
         $choices = array();
@@ -100,6 +122,13 @@ class CardManager
         return $form;
     }
 
+
+    /**
+     * Creates a new card with generated number
+     *
+     * @param $centerCode
+     * @return array
+     */
     public function newCard($centerCode)
     {
         $cardNumber = $this->generateCardNumber($centerCode);
@@ -111,7 +140,12 @@ class CardManager
         return $cardNumber;
     }
 
-
+    /**
+     * Generates a card number
+     *
+     * @param $centerCode
+     * @return array
+     */
     private function generateCardNumber($centerCode)
     {
         $number = str_pad(rand(0,99999), 5, "0", STR_PAD_LEFT);
@@ -125,6 +159,12 @@ class CardManager
         return $cardNumber;
     }
 
+    /**
+     * Verify if the card number isn't already used in the database
+     *
+     * @param $cardNumber
+     * @return bool
+     */
     private function isAvailable($cardNumber)
     {
         if($this->getCardRepository()->findByNumber($cardNumber)) {
@@ -175,12 +215,23 @@ class CardManager
 
     }
 
+    /**
+     * Sets a Card to the status "given"
+     *
+     * @param Card $card
+     */
     public function giveCard(Card $card)
 	{
 		$card->setGiven(true);
 		$this->save($card);
 	}
 
+    /**
+     * Gets all the valid Offers for a customer
+     *
+     * @param $card
+     * @return array|null
+     */
     public function getValidCardsOffersOfCustomer($card)
     {
         if($card){
@@ -190,16 +241,35 @@ class CardManager
         }
     }
 
+    /**
+     * Gets all the locked Offers for a customer
+     *
+     * @param $card
+     * @return array
+     */
     public function getLockedOffersOfCustomer($card)
     {
         return $this->entityManager->getRepository('AppBundle:Offer')->findLockedOffersForCustomer($card);
     }
 
+
+    /**
+     * Gets all the Game Sessions of a customer
+     *
+     * @param $card
+     * @return array
+     */
     public function getGameSessionsOfCustomer($card)
     {
         return $this->entityManager->getRepository("AppBundle:GameSession")->findGameSessionsOfCustomer($card);
     }
 
+    /**
+     * Finds a customer card by the customer's firstname, lastname and phone number
+     *
+     * @param $data
+     * @return null
+     */
     public function searchCustomerWithoutCard($data)
     {
         $customer = $this->entityManager->getRepository('AppBundle:Customer')
@@ -216,11 +286,23 @@ class CardManager
         }
     }
 
+    /**
+     * Finds a customer's card by his card's number
+     *
+     * @param $number
+     * @return mixed
+     */
     public function searchCustomerByCardNumber($number)
     {
         return $this->getCardRepository()->findValidCardByNumber($number);
     }
 
+
+    /**
+     * Saves the modification of a Card in the database
+     *
+     * @param $card
+     */
     public function save($card){
         $this->entityManager->persist($card);
         $this->entityManager->flush();
