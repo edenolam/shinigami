@@ -50,7 +50,7 @@ main .container {
 }
 .content {
   padding-top: 50px;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 .section {
   padding-bottom: 0;
@@ -98,17 +98,10 @@ h1 {
   margin-bottom: 80px;
 }
 .fullwidth {
-  width: 99.225vw;
-  position: relative;
-  margin-left: -49.59vw;
-  left: -23.5%;
+  width: 100%;
   background-color: rgba(22, 27, 50, 0.9);
   margin-top: 0;
   margin-bottom: 0;
-}
-.fullwidth .text-container {
-  padding-bottom: 50px;
-  width: 55%;
 }
 .fullwidth .carousel-container {
   padding-bottom: 50px;
@@ -210,7 +203,7 @@ form select.browser-default {
   display: inline;
 }
 .customer-infos {
-  padding: 0px 15px;
+  padding: 0 15px;
 }
 .customer-infos .card-title {
   margin-top: 20px;
