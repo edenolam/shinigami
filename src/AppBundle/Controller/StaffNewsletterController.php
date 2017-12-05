@@ -80,6 +80,20 @@ class StaffNewsletterController extends Controller
         ));
     }
 
+    public function deleteAction(Newsletter $newsletter)
+	{
+		if (!$newsletter){
+			throw $this->createNotFoundException('No newsletter found for id '. $newsletter->getId());
+		}
+		$entityManager = $this->getDoctrine()->getManager();
+		$entityManager->remove($newsletter);
+		$entityManager->flush();
+
+		return $this->redirectToRoute('staff_newsletter_list', [
+			'id' => $newsletter->getId()
+		]);
+	}
+
     /**
      * Preview of a newsletter
      *
