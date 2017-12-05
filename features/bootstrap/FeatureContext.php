@@ -16,7 +16,7 @@ class FeatureContext extends MinkContext implements Context
      */
     public function beforeStep()
     {
-        $this->getSession()->resizeWindow(1440, 900, 'current');
+        $this->getSession()->resizeWindow(1980, 1080, 'current');
     }
 
     /**
@@ -36,15 +36,7 @@ class FeatureContext extends MinkContext implements Context
         $element->click();
     }
 
-    /**
-     * @Given /^I pick the date "09\-04\-1997"$/
-     */
-    public function iPickTheDate($date)
-    {
-        $dateArray = explode("-", $date);
-        $this->selectOption("Select a month", $dateArray[1]);
-        $this->selectOption("Select a year", $dateArray[2]);
-    }
+
 
     /**
      * @Given /^I set in "([^"]*)" with "([^"]*)"$/
@@ -107,4 +99,31 @@ JS;
             throw new \Exception(__METHOD__ . ' failed');
         }
     }
+
+    /**
+     * @Given /^I pick the date "([^"]*)"$/
+     */
+    public function iPickTheDate($date)
+    {
+        $function = <<<JS
+    (function(){
+      $( ".datepicker" ).pickadate("picker").set('select', '$date', { format: 'dd/mm/yyyy' });
+    })()
+JS;
+        try {
+            $this->getSession()->executeScript($function);
+        } catch (Exception $e) {
+            throw new \Exception(__METHOD__ . ' failed');
+        }
+    }
+
+    /**
+     * @Given /^I wait "([^"]*)"$/
+     */
+    public function iWait($time)
+    {
+        $this->getSession()->wait($time);
+    }
+
+
 }

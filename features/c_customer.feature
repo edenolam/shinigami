@@ -1,24 +1,20 @@
 Feature: Customer
-  @customer
-  Scenario: From login to customer panel
+
+  Background:
     Given I am on "/login"
     And I fill in "username" with "toto"
     And I fill in "password" with "test"
     And I press "submit"
     Then I should be on "/customer"
-    And the response status code should be 200
+
+  @customer
+  Scenario: From login to customer panel
     And the ".customer-infos" element should contain "tata"
     And the ".customer-infos" element should contain "titi"
-    And the ".card-infos" element should contain "My card"
-    And the ".offers-infos" element should contain "My offers"
+    And the ".card-infos" element should contain "Customer card"
 
   @customer
   Scenario: Add a new card on customer panel
-    Given I am on "/login"
-    And I fill in "username" with "toto"
-    And I fill in "password" with "test"
-    And I press "submit"
-    Then I should be on "/customer"
     And I fill in "number" with "123456789"
     And I press "submit"
     Then I should be on "/customer"
@@ -28,11 +24,6 @@ Feature: Customer
 
   @customer
   Scenario: Modify customer infos
-    Given I am on "/login"
-    And I fill in "username" with "toto"
-    And I fill in "password" with "test"
-    And I press "submit"
-    Then I should be on "/customer"
     Then I follow "modify"
     Then I should be on "/customer/modify"
     And the response status code should be 200

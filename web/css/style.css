@@ -56,7 +56,7 @@ main .container {
   padding-bottom: 0;
 }
 .section .fullwidth {
-  padding: 0;
+  padding: 0 0 60px;
 }
 .big-logo {
   z-index: 4;
@@ -102,18 +102,25 @@ h1 {
   position: relative;
   margin-left: -49.59vw;
   left: -23.5%;
-  background-color: rgba(22, 27, 50, 0.9);
   margin-top: 0;
   margin-bottom: 0;
 }
 .fullwidth .text-container {
-  padding-bottom: 50px;
   width: 55%;
 }
 .fullwidth .carousel-container {
   padding-bottom: 50px;
 }
-.fullwidth .transparent {
+.bg-gradiant-1 {
+  background-color: rgba(22, 27, 50, 0.45);
+}
+.bg-gradiant-2 {
+  background-color: rgba(22, 27, 50, 0.6);
+}
+.bg-gradiant-3 {
+  background-color: rgba(22, 27, 50, 0.8);
+}
+.transparent {
   background-color: transparent;
 }
 .page-footer {
