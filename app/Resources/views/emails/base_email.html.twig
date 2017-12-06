@@ -26,13 +26,15 @@
                     <td align="center" valign="top" style="padding: 40px 0px 40px 0px;">
                         <!-- IMAGE -->
                         <img src="{{ absolute_url(asset('images/email-ban.jpg')) }}"  style="width:100%" alt="banniere">
-                        {#<img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}"  style="width:30%" alt="image">#}
+
                     </td>
                 </tr>
                 <tr>
                     <td align="center" valign="top" style="padding: 20px 10px 20px 10px; background-color: white;">
                         <!-- HEADLINE -->
                         <p style="color: #728f92; font-family: sans-serif; font-size: 24px; font-weight: bold; line-height: 28px; margin: 0;">{{ newsletter.title | title }}</p>
+
+                        <img src="{{ absolute_url(asset('uploads/images/' ~ newsletter.image)) }}" style="width: 30%; margin-top: 20px;  alt="image">
                     </td>
                 </tr>
                 <tr class="pagebottom">
