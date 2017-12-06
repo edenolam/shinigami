@@ -24,42 +24,27 @@ class SecurityController extends Controller
      * Registration of a customer
      *
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return null|\Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request)
     {
-        $user = new Account();
-        $form = $this->createForm(AccountType::class, $user);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-                $user->setPassword($password);
-                $user->setIsActive(true);
-                $user->setRoles(array('ROLE_CUSTOMER'));
-
-				$birthday = $request->request->get('appbundle_account')['customer']['birthday'];
-				$user->getCustomer()->setBirthday(new \DateTime($birthday));
-				$user->getCustomer()->setAccount($user);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
-
+        $frontService = $this->get('app.front.service');
+        $user = $frontService->newAccount();
+        $formRegister = $frontService->getCustomerRegisterForm($user);
+        $formRegister->handleRequest($request);
+        if ($formRegister->isSubmitted()) {
+            if ($formRegister->isValid()) {
+                $frontService->customerRegistration($request,$user);
                 $this->addFlash("success", "All right ! You've been registered !");
                 return $this->redirectToRoute('login');
-
             }else{
                 $this->addFlash("error", "The informations you entered were not valid.");
+                return $this->redirectToRoute('register');
             }
         }
-
         return $this->render(
             'security/register.html.twig', array(
-                'formRegister' => $form->createView()
+                'formRegister' => $formRegister->createView()
             )
         );
     }
@@ -85,32 +70,28 @@ class SecurityController extends Controller
         ));
 	}
 
-	public function registerStaffAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    /**
+     * Registration of a staff member
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+	public function registerStaffAction(Request $request)
 	{
-		$user = new Account();
-		$form = $this->createForm(AccountStaffType::class, $user);
-
-		$form->handleRequest($request);
-
-		if ($form->isSubmitted()) {
-			if ($form->isValid()) {
-				$password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-				$user->setPassword($password);
-				$user->setIsActive(true);
-				$user->setRoles(array('ROLE_STAFF'));
-
-				$entityManager = $this->getDoctrine()->getManager();
-				$entityManager->persist($user);
-				$entityManager->flush();
-
+        $frontService = $this->get('app.front.service');
+        $user = $frontService->newAccount();
+        $form = $frontService->getStaffRegisterForm($user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $frontService->customerRegistration($request,$user);
 				$this->addFlash("success", "All right ! You've been registered !");
 				return $this->redirectToRoute('login');
-
 			}else{
 				$this->addFlash("error", "The informations you entered were not valid.");
+                return $this->redirectToRoute('register_staff');
 			}
 		}
-
 		return $this->render(
 			'security/registerStaff.html.twig', array(
 				'form' => $form->createView()

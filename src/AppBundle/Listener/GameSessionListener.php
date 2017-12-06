@@ -10,17 +10,17 @@ namespace AppBundle\Listener;
 
 
 use AppBundle\Event\CustomerStatsUpdateEvent;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class GameSessionListener
 {
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $dispatcher;
 
-    public function __construct(EventDispatcher $dispatcher)
+    public function __construct(EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
     }

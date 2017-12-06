@@ -1,4 +1,4 @@
-Feature: Staff
+Feature: StaffOffersAndCards
 
   Background:
     Given I am on "/login"
@@ -12,6 +12,85 @@ Feature: Staff
     And I should see "Newsletters" in the "nav" element
     And I should see "Offers" in the "nav" element
     And I should see "Search by card"
+
+  @staff
+  Scenario: From panel to offers CRUD
+    Then I follow "offers"
+    Then I should be on "/staff/offers/list"
+    And I should see "Create new offer"
+
+  @staff
+  Scenario: From offers list to offers creation, creation of an offer
+    Then I follow "offers"
+    Then I should be on "/staff/offers/list"
+    And I should see "Create new offer"
+    And I follow "new-offer"
+    Then I should be on "/staff/offers/new"
+    And I fill in "appbundle_offer_code" with "SCR100"
+    And I fill in "appbundle_offer_count" with "100"
+    And I fill in "appbundle_offer_name" with "Beginner"
+    And I fill in "appbundle_offer_offerType" with "score"
+    And I fill in "appbundle_offer_description" with "Yey ! Welcome in the family of Shinigami Laser !"
+    And I fill in "appbundle_offer_level" with "1"
+    And I press "submit"
+    Then I should be on "/staff/offers/list"
+    And I should see "The offer Beginner has been saved"
+
+  @staff
+  Scenario: Modify an offer
+    Then I follow "offers"
+    Then I should be on "/staff/offers/list"
+    And I follow "modify-1"
+    Then I should be on "/staff/offers/modify/1"
+    And I fill in "appbundle_offer_code" with "SCR50"
+    And I fill in "appbundle_offer_count" with "50"
+    And I fill in "appbundle_offer_name" with "Baby"
+    And I fill in "appbundle_offer_offerType" with "truc"
+    And I fill in "appbundle_offer_description" with "Baby shinigami"
+    And I fill in "appbundle_offer_level" with "1"
+    And I press "submit"
+    Then I should be on "/staff/offers/list"
+    And I should see "Baby"
+
+  @staff
+  Scenario: Disable an offer and reactivate it
+    Then I follow "offers"
+    Then I click on "active-1"
+    Then the "#active-1" element should contain "close"
+    Then I click on "active-1"
+    Then the "#active-1" element should contain "check"
+
+  @javascript
+  Scenario: Create new empty card (random)
+    Given I follow "New card"
+    Then I should be on "/staff/new-card"
+    Then I select "123" from "appbundle_card_center"
+    And I click on "generate"
+    And I wait "4000"
+    And I press "submit"
+    Then I should be on "/staff/new-card"
+    Then I should see "The card has been updated"
+
+  @javascript
+  Scenario: Create new empty card manually
+    Given I follow "New card"
+    Then I should be on "/staff/new-card"
+    Then I select "123" from "appbundle_card_center"
+    And I fill in "appbundle_card_number" with "68497"
+    And I fill in "appbundle_card_modulo" with "3"
+    And I wait "4000"
+    And I press "submit"
+    Then I should be on "/staff/new-card"
+    Then I should see "The card has been updated"
+    Then I should see "123684973"
+
+  @javascript
+  Scenario: Give a card to a customer
+    Given I follow "New card"
+    And I click on "give-10"
+    And I wait "3000"
+    Then I should not see an "give-10" element
+
 
   @staff
   Scenario: Search customer by card number
@@ -67,77 +146,6 @@ Feature: Staff
     And the ".alert-success" element should contain "The game session has been saved."
 
 
-  @staff
-  Scenario: From panel to offers CRUD
-    Then I follow "offers"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    And I should see "Create new offer"
 
 
-  @staff
-  Scenario: From offers list to offers creation, creation of an offer
-    Then I follow "offers"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    And I should see "Create new offer"
-    And I follow "new-offer"
-    Then I should be on "/staff/offers/new"
-    And the response status code should be 200
-    And I fill in "appbundle_offer_code" with "SCR100"
-    And I fill in "appbundle_offer_count" with "100"
-    And I fill in "appbundle_offer_name" with "Beginner"
-    And I fill in "appbundle_offer_offerType" with "score"
-    And I fill in "appbundle_offer_description" with "Yey ! Welcome in the family of Shinigami Laser !"
-    And I fill in "appbundle_offer_level" with "1"
-    And I press "submit"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    And I should see "The offer Beginner has been saved"
 
-
-  @staff
-  Scenario: Disable an offer and reactivate it
-    Then I follow "offers"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    Then I follow "ID"
-    And I follow "#active-1"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    And I follow "ID"
-    And I should see an "#active-1" element
-    Then I follow "#active-1"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    And I should see an "#active-1" element
-
-  @staff
-  Scenario: Modify an offer
-    Then I follow "offers"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    Then I follow "ID"
-    And I follow "modify-1"
-    Then I should be on "/staff/offers/modify/1"
-    And I fill in "appbundle_offer_code" with "SCR50"
-    And I fill in "appbundle_offer_count" with "50"
-    And I fill in "appbundle_offer_name" with "Baby"
-    And I fill in "appbundle_offer_offerType" with "truc"
-    And I fill in "appbundle_offer_description" with "Baby shinigami"
-    And I fill in "appbundle_offer_level" with "1"
-    And I press "submit"
-    Then I should be on "/staff/offers/list"
-    And the response status code should be 200
-    And I should see "Baby"
-
-  @staff
-  Scenario: Create new empty card
-    Then I follow "New card"
-    Then I should be on "/staff/new-card"
-    And the response status code should be 200
-    Then I select "123" from "center"
-    And I press "submit"
-    Then I should be on "/staff/new-card"
-    And the response status code should be 200
-    Then I should see "The card has been registered."

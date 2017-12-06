@@ -11,7 +11,8 @@ class Contact
 
 	/**
 	 * @var string
-	 *
+	 * @Assert\NotBlank()
+     *
 	 */
 
 	private $name;
@@ -29,14 +30,14 @@ class Contact
 
 	/**
 	 * @var string
-	 *
+     * @Assert\NotBlank()
 	 */
 
 	private $subject;
 
 	/**
 	 * @var string
-	 *
+     * @Assert\NotBlank()
 	 */
 
 	private $message;

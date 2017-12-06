@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hello
- * Date: 29/11/2017
- * Time: 11:22
- */
 
 namespace AppBundle\Service;
 
@@ -13,8 +7,8 @@ use AppBundle\Entity\Card;
 use AppBundle\Entity\CardsOffers;
 use AppBundle\Event\AddOfferToCustomerCardEvent;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class OfferManager
 {
@@ -22,16 +16,18 @@ class OfferManager
      * @var ObjectManager
      */
     private $entityManager;
+
     /**
-     * @var Session
+     * @var SessionInterface
      */
     private $session;
+
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $dispatcher;
 
-    public function __construct(ObjectManager $entityManager, Session $session, EventDispatcher $dispatcher)
+    public function __construct(ObjectManager $entityManager, SessionInterface $session, EventDispatcherInterface $dispatcher)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;
@@ -51,14 +47,14 @@ class OfferManager
     /**
      * Adds a list of offers to a customer's card
      *
-     * @param $offers An array of Offer objects
-     * @param $card A Card object
+     * @param $offers
+     * @param $card
      * @param $flash true or false Enable the adding of a flashbag
      */
     public function addOffersToCustomerCard($offers, Card $card, $flash)
     {
         foreach ($offers as $offer){
-            if($this->isUnlockableByCustomer($offer, $card)){
+            if(!$this->isUnlockedByCustomer($offer, $card)){
                 $cardOffer = new CardsOffers();
                 $cardOffer->setCard($card);
                 $cardOffer->setOffer($offer);
@@ -80,7 +76,7 @@ class OfferManager
     /**
      * Looks for available "visits" and "score" for a customer and adds them to his card
      *
-     * @param $card a Card object
+     * @param $card
      */
     public function updateStatsOffers(Card $card)
     {
@@ -91,7 +87,7 @@ class OfferManager
     /**
      * Adds a flashbag for the adding of an offer
      *
-     * @param $offers An array of Offer objects
+     * @param $offers
      */
     private function newOfferFlashMessage($offers)
     {
@@ -113,13 +109,16 @@ class OfferManager
         return array_merge($visitsOffers, $scoreOffers);
     }
 
-    private function isUnlockableByCustomer($offer, $card)
+    /**
+     * Verify if an offer is already unlocked by a customer
+     *
+     * @param $offer
+     * @param $card
+     * @return CardsOffers|null|object
+     */
+    private function isUnlockedByCustomer($offer, $card)
     {
-        $cardOffer = $this->entityManager->getRepository('AppBundle:CardsOffers')->findOneBy(array("offer"=>$offer, "card" => $card));
-        if($cardOffer){
-            return false;
-        }else{
-            return true;
-        }
+        return $this->entityManager->getRepository('AppBundle:CardsOffers')->findOneBy(array("offer"=>$offer, "card" => $card));
+
     }
 }
