@@ -106,6 +106,9 @@ h1 {
 .fullwidth .carousel-container {
   padding-bottom: 50px;
 }
+.fullwidth .transparent {
+  background-color: transparent;
+}
 .bg-gradiant-1 {
   background-color: rgba(22, 27, 50, 0.45);
 }

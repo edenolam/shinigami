@@ -4,6 +4,10 @@ Feature: Homepage
     Given I am on "/"
 
   @javascript
+  Scenario:
+    Given Database init
+
+  @javascript
   Scenario: See the home page
     Then I should see "Welcome to Shinigami Laser"
     Then I should see "register" in the "nav" element
