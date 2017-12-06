@@ -4,6 +4,5 @@ $('.datepicker').pickadate({
     today: 'Today',
     clear: 'Clear',
     close: 'Ok',
-    closeOnSelect: false, // Close upon selecting a date,
-    editable: true
+    closeOnSelect: false // Close upon selecting a date,
 });

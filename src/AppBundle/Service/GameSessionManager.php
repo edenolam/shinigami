@@ -9,11 +9,12 @@
 namespace AppBundle\Service;
 
 
+use AppBundle\Entity\Card;
+use AppBundle\Entity\GameSession;
 use AppBundle\Event\GameSessionCreationEvent;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GameSessionManager
 {
@@ -23,15 +24,15 @@ class GameSessionManager
      */
     private $entityManager;
     /**
-     * @var Session
+     * @var SessionInterface
      */
     private $session;
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     private $dispatcher;
 
-    public function __construct(ObjectManager $entityManager, Session $session, EventDispatcher $dispatcher)
+    public function __construct(ObjectManager $entityManager, SessionInterface $session, EventDispatcherInterface $dispatcher)
     {
         $this->entityManager = $entityManager;
         $this->session = $session;
@@ -39,7 +40,14 @@ class GameSessionManager
     }
 
 
-    public function gameSessionCreation($request, $gameSession)
+    /**
+     * Creates a Game Session
+     *
+     * @param $request
+     * @param GameSession $gameSession
+     * @return GameSession|null
+     */
+    public function gameSessionCreation($request, GameSession $gameSession)
     {
         $hydratedGameSession = $this->gameSessionsHydratation($request, $gameSession);
 
@@ -52,14 +60,27 @@ class GameSessionManager
         return $hydratedGameSession;
     }
 
-    public function save($gameSession)
+    /**
+     * Saves a Game Session in the database
+     *
+     * @param GameSession $gameSession
+     */
+    public function save(GameSession $gameSession)
     {
         $this->entityManager->persist($gameSession);
         $this->entityManager->flush();
         $this->session->getFlashBag()->add('success', 'The game session has been saved !');
     }
 
-    private function gameSessionsHydratation($request, $gameSession)
+
+    /**
+     * Hydrates a Game Session Object
+     *
+     * @param $request
+     * @param GameSession $gameSession
+     * @return GameSession|null
+     */
+    private function gameSessionsHydratation($request, GameSession $gameSession)
     {
         // Hydratation of unmapped datas (cards, datetime)
         $data = $request->request->get('appbundle_gamesession');
@@ -85,18 +106,31 @@ class GameSessionManager
         return $gameSession;
     }
 
-    private function addCardNumberToGameScore($card, $gameSession, $gameScoreKey)
+    /**
+     * Link cards numbers of the players to the Game Session
+     *
+     * @param Card $card
+     * @param GameSession $gameSession
+     * @param $gameScoreKey
+     */
+    private function addCardNumberToGameScore(Card $card, GameSession $gameSession, $gameScoreKey)
     {
 
-            $card->addGameSession($gameSession);
-            $gameSession->getGameScores()[$gameScoreKey]->setCard($card);
-            $gameSession->addCard($card);
+        $card->addGameSession($gameSession);
+        $gameSession->getGameScores()[$gameScoreKey]->setCard($card);
+        $gameSession->addCard($card);
 
-            $this->entityManager->persist($card);
+        $this->entityManager->persist($card);
 
     }
 
-    private function setDateTimeToGameSession($data, $gameSession)
+    /**
+     * Sets the date of a Game Session
+     *
+     * @param $data
+     * @param GameSession $gameSession
+     */
+    private function setDateTimeToGameSession($data, GameSession $gameSession)
     {
         $date = $data['date'];
         $date = str_replace(",", "", $date);

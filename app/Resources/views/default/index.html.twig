@@ -2,6 +2,7 @@
 
 {% block nav %}
     <li><a href="#about">About</a></li>
+    <li><a href="#findus">Find us</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#modal-registration" class="modal-trigger" id="register">Register</a></li>
     <li><a href="#modal-login" class="modal-trigger" id="login">Login</a></li>
@@ -18,8 +19,8 @@
     </div>
 
 
-        <div class="row section scrollspy" id="about">
-            <div class="text-container">
+        <div class="row fullwidth bg-gradiant-1 section scrollspy " id="about">
+            <div class="container text-container">
                 <h2 class="center">Welcome to Shinigami Laser</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
@@ -31,8 +32,33 @@
                 </div>
             </div>
         </div>
-
-         <div class="section fullwidth scrollspy" id="contact">
+         <div class="row fullwidth transparent">
+         </div>
+        <div class="row fullwidth bg-gradiant-2 section scrollspy" id="findus">
+            <div class="container">
+                <h3 class="center">Find us</h3>
+                <div class="col xl6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5245.828589690126!2d2.3780009999999883!3d48.897970500000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1512405461912" width="80%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+                <div class="col xl6">
+                    <div class="col xl6">
+                        <h5>LE CARGO</h5>
+                        <p>157, boulevard MacDonald</p>
+                        <p>75019 PARIS</p>
+                    </div>
+                    <div class="col xl6">
+                        <h5>HOURS</h5>
+                        <p>TUES-THURS: 3:00PM-10:00PM</p>
+                        <p>FRI: 3:00PM-MIDNIGHT</p>
+                        <p>SAT: 10:00AM-MIDNIGHT</p>
+                        <p>SUN: 10:00AM-10:00PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row fullwidth transparent">
+        </div>
+         <div class="fullwidth bg-gradiant-3 section scrollspy" id="contact">
             <div class="container text-container">
                 <h2 class='page-header center'>Contact</h2>
                 {{ form_start(formContact) }}
@@ -54,9 +80,10 @@
                 <button type="submit" class="btn">Send</button>
                 {{ form_end(formContact) }}
             </div>
-             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5245.828589690126!2d2.3780009999999883!3d48.897970500000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1512405461912" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
 
+        </div>
+        <div class="row fullwidth transparent">
+        </div>
     </div>
 
 {% endblock %}

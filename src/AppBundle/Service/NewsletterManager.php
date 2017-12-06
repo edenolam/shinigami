@@ -8,19 +8,21 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Newsletter;
+use AppBundle\Entity\Card;
+use AppBundle\Entity\Customer;
+use AppBundle\Entity\Offer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Template;
-use AppBundle\Entity\Newsletter;
 
 class NewsletterManager
 {
-	/**
-	 * @var Kernel
-	 */
+    /**
+     * @var KernelInterface
+     */
 	private $kernel;
 
 	/**
@@ -33,9 +35,9 @@ class NewsletterManager
 	 */
 	private $template;
 
-	/**
-	 * @var Session
-	 */
+    /**
+     * @var SessionInterface
+     */
 	private $session;
     /**
      * @var ObjectManager
@@ -49,7 +51,7 @@ class NewsletterManager
 
 
 
-	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, Session $session, ContainerInterface $container, ObjectManager $entityManager)
+	public function __construct(KernelInterface $kernel, \Swift_Mailer $mailer, \Twig_Environment $template, SessionInterface $session, ContainerInterface $container, ObjectManager $entityManager)
 	{
 		$this->kernel = $kernel;
 		$this->mailer = $mailer;
@@ -59,7 +61,13 @@ class NewsletterManager
 		$this->entityManager = $entityManager;
 	}
 
-    public function createNewsletter($newsletter)
+
+    /**
+     * Creates a newsletter
+     *
+     * @param Newsletter $newsletter
+     */
+    public function createNewsletter(Newsletter $newsletter)
     {
         $newsletter->setCreateAt(new \DateTime('now'));
         $this->uploadImage($newsletter);
@@ -111,13 +119,24 @@ class NewsletterManager
 		return $emails;
 	}
 
-	private function save($newsletter)
+
+    /**
+     * Save a newsletter
+     *
+     * @param Newsletter $newsletter
+     */
+	private function save(Newsletter $newsletter)
 	{
 		$this->entityManager->persist($newsletter);
 		$this->entityManager->flush();
 		$this->session->getFlashBag()->add('success', "the newsletter " .$newsletter->getName()." has been saved");
 	}
 
+    /**
+     * Uploads an image for a newsletter
+     *
+     * @param Newsletter $newsletter
+     */
 	public function uploadImage(Newsletter $newsletter)
 	{
 		if(null == $newsletter->getImage())
@@ -130,7 +149,15 @@ class NewsletterManager
 		$newsletter->setImage($fileName);
 	}
 
-    public function sendNewOfferEmail($customer, $card, $offer)
+
+    /**
+     * Sends an email to a customer about a new offer
+     *
+     * @param Customer $customer
+     * @param Card $card
+     * @param Offer $offer
+     */
+    public function sendNewOfferEmail(Customer $customer, Card $card, Offer $offer)
     {
         $theme = "red";
         $style = file_get_contents($this->kernel->getRootDir().'/Resources/views/emails/styles/'.$theme.'.css');

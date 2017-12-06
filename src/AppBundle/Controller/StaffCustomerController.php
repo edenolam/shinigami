@@ -11,12 +11,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Card;
 use AppBundle\Entity\CardsOffers;
-use AppBundle\Form\CardNumberType;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\SearchCustomerType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
 class StaffCustomerController extends Controller
@@ -69,7 +66,6 @@ class StaffCustomerController extends Controller
         $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
 
         $form = $cardManager->getChangeNumberCardForm();
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $cardManager->changeCardNumber($card, $form->getData()['number']);

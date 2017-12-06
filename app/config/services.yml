@@ -49,6 +49,10 @@ services:
           class: AppBundle\Service\OfferManager
           public: true
 
+    app.front.service:
+          class: AppBundle\Service\FrontService
+          public: true
+
     app.login.listener:
           class: AppBundle\Listener\LoginListener
 
