@@ -73,4 +73,13 @@ Feature: StaffCustomerManagement
     And I press "submit"
     Then I should be on "/staff/customer/123584366"
 
-  The offer Welcome ! has been used.
+
+  @javascript
+  Scenario: Using the offer of a customer
+    And I am on "/staff/customer/123584366"
+    And I should see "titi"
+    And I should see "tata"
+    And I should see "red"
+    And I follow "useoffer-1"
+    Then I should be on "/staff/customer/123584366"
+    And I should see "The offer Welcome ! has been used."

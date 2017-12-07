@@ -13,7 +13,7 @@
                     <div class="card-panel retro-cyan" style="width: 250px; height: 250px;">
                         <p class="center">{{ cardsOffer.offer.name }}</p>
                         <p class="white-text offer-description">{{ cardsOffer.offer.description }}</p>
-                        {% if is_granted('ROLE_STAFF') %}<a href="{{ path('staff_customer_offers_use', { 'id' : cardsOffer.id }) }}" class="btn retro-rose offer-status">Use</a>{% endif %}
+                        {% if is_granted('ROLE_STAFF') %}<a href="{{ path('staff_customer_offers_use', { 'id' : cardsOffer.id }) }}" class="btn retro-rose offer-status" id="useoffer-{{ cardsOffer.id }}">Use</a>{% endif %}
                         {% if is_granted('ROLE_CUSTOMER') %}<span class="offer-status">Usable</span>{% endif %}
                     </div>
                 {% endif %}

@@ -6,9 +6,15 @@
 @retro-jaune: #FC985C;
 @retro-jaune-lighten:#FCC66C;
 @retro-noir: #161B32;
+@retro-noir-lighten: #474F6F;
 
 
-
+.retro-noir{
+  background-color: @retro-noir-lighten;
+  &:hover{
+    background-color: @retro-noir;
+  }
+}
 
 
 .retro-rose{
@@ -61,6 +67,14 @@ main{
     z-index: 2;
     height: 100%;
     padding-top: 50px;
+    .row{
+      .index-btn{
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 80px;
+        width: 295px;
+      }
+    }
   }
 }
 .container-frame {
@@ -124,7 +138,10 @@ h1{
 }
 
 .index-btn{
+  display: block;
+  margin: 0 auto;
   margin-bottom: 80px;
+  width: 295px;
 }
 
 section{
