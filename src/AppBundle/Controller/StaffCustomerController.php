@@ -113,7 +113,8 @@ class StaffCustomerController extends Controller
         }
 
         return $this->render('staff/customer/edit_customer.html.twig', array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "customer" => $customer
         ));
     }
 

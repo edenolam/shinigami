@@ -46,4 +46,8 @@
 			closeOnSelect: false // Close upon selecting a date,
 		});
 	</script>
+	<script type="text/javascript">
+        var customerData = "{{ customer.birthday|date('d/m/Y') }}";
+        $( ".datepicker" ).pickadate("picker").set('select', customerData, { format: 'dd/mm/yyyy' });
+	</script>
 {% endblock %}
