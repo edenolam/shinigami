@@ -1,16 +1,79 @@
 <?php
 
+use AppBundle\DataFixtures\ORM\BehatFixtures;
 use Behat\Behat\Context\Context;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\MinkExtension\Context\MinkContext;
-use Tests\AppBundle\Mink\CoreMink;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 /**
  * Defines application features from the specific context.
  */
 class FeatureContext extends MinkContext implements Context
 {
+    /**
+     * @Given /^Database init$/
+     */
+    public function databaseInit()
+    {
+        print "Drop and create dababase " . PHP_EOL;
+        $command = "php bin/console doctrine:database:drop --force";
+        $process = new Process($command);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        $command = "php bin/console doctrine:database:create";
+        $process = new Process($command);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        $command = "php bin/console doctrine:schema:update --force";
+        $process = new Process($command);
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        echo $process->getOutput();
+
+        print "Loading fixtures for test " . PHP_EOL;
+        self::loadDataFixture('src/AppBundle/DataFixtures/ORM/BehatFixtures.php', "test");
+    }
+
+    /**
+     * Load data fixtures by executing the console command
+     *
+     * @param $fixture The directory to load data fixtures from
+     * @param $env The environment name
+     */
+    public static function loadDataFixture($fixture, $env)
+    {
+        print(__DIR__) . PHP_EOL;
+        $command = "php bin/console doctrine:fixtures:load --env=".$env." --fixtures=".$fixture." -n";
+
+        $process = new Process($command);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        echo $process->getOutput();
+    }
+
     /**
      * @BeforeStep
      */
@@ -27,6 +90,8 @@ class FeatureContext extends MinkContext implements Context
         $this->assertElementOnPage($modal);
     }
 
+
+
     /**
      * @Given /^I click on "([^"]*)"$/
      */
@@ -35,8 +100,6 @@ class FeatureContext extends MinkContext implements Context
         $element = $this->getSession()->getPage()->findById($id);
         $element->click();
     }
-
-
 
     /**
      * @Given /^I set in "([^"]*)" with "([^"]*)"$/
@@ -108,6 +171,23 @@ JS;
         $function = <<<JS
     (function(){
       $( ".datepicker" ).pickadate("picker").set('select', '$date', { format: 'dd/mm/yyyy' });
+    })()
+JS;
+        try {
+            $this->getSession()->executeScript($function);
+        } catch (Exception $e) {
+            throw new \Exception(__METHOD__ . ' failed');
+        }
+    }
+
+    /**
+     * @Given /^I pick the time "([^"]*)"$/
+     */
+    public function iPickTheTime($time)
+    {
+        $function = <<<JS
+    (function(){
+      $( ".timepicker" ).pickatime("picker").set('select', '$time', { format: 'hh:mm' });
     })()
 JS;
         try {
