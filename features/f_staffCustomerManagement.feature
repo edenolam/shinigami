@@ -72,3 +72,5 @@ Feature: StaffCustomerManagement
     Then I select "123584366" from "form_number"
     And I press "submit"
     Then I should be on "/staff/customer/123584366"
+
+  The offer Welcome ! has been used.

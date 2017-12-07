@@ -5,23 +5,29 @@
            <div class="col s12 l7">
                <div class="card add-card">
                    {{ form_start(form) }}
-                           <div class="card-body">
-                                   <div class="col s12 l10 left">
-                                       {{ form_row(form.center) }}
-                                   </div>
+                       <div class="card-body">
+                           <div class="row">
+                               <div class="col s12 l10 left">
+                                   {{ form_row(form.center) }}
+                               </div>
+                               <div class="col s12 l10 right">
                                    <div class="col s12 l10">
                                        {{ form_row(form.number) }}
                                    </div>
                                    <div class="col s12 l2">
                                        {{ form_row(form.modulo) }}
                                    </div>
-
-                                   <div class="card-action">
-                                           <button class="btn retro-jaune" name="generate" id="generate" onclick="generateCard()">Generate</button>
-                                           <button class="btn" id="submit" type="submit">Add</button>
-                                   </div>
+                               </div>
                            </div>
-
+                           <div>
+                               <div class="card-action">
+                                   <div class="col s12 l7 right">
+                                       <a class="btn retro-jaune" name="generate" id="generate" onclick="generateCard()">Generate</a>
+                                       <button class="btn" id="submit" type="submit">Add</button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
                    {{ form_end(form) }}
                </div>
            </div>
