@@ -47,6 +47,11 @@ main .container {
 .container-frame {
   background-color: rgba(22, 27, 50, 0.65);
   padding: 0 40px;
+  width: 70%;
+  margin: auto;
+}
+.container-frame .container {
+  width: 85%;
 }
 .content {
   padding-top: 50px;
@@ -96,9 +101,6 @@ section {
   margin-bottom: 50px;
   padding-bottom: 20px;
 }
-.fullwidth .transparent {
-  background-color: transparent;
-}
 .bg-gradiant-1 {
   background-color: rgba(22, 27, 50, 0.45);
 }
@@ -145,10 +147,10 @@ table {
 table .highlight > tbody > tr:hover {
   background-color: #1E3E52;
 }
-table thead td {
+table thead th {
   color: #29B5AD;
 }
-table thead td a {
+table thead th a {
   color: #29B5AD;
 }
 table.bordered > thead > tr,
