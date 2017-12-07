@@ -24,6 +24,16 @@ login:
     defaults:
         _controller: AppBundle:Security:login
 
+forgot_password:
+    path: /forgot_password
+    defaults:
+        _controller: AppBundle:Security:forgotPassword
+
+reset_password:
+    path: /reset_password/{token}
+    defaults:
+        _controller: AppBundle:Security:resetPassword
+
 logout:
     path: /logout
 

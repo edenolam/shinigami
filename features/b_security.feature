@@ -48,6 +48,16 @@ Feature: Security
     Then I should be on "/customer"
 
   @javascript
+  Scenario: Forgot password
+    Given I am on "/login"
+    And I should see "Forgot Password"
+    And I follow "Forgot Password"
+    Then I should be on "/forgot_password"
+    And I fill in "emailField" with "test@toto.com"
+    And I press "reset"
+    And I should see "We've sent you an email with instructions to reset your password"
+
+  @javascript
   Scenario: Login as a customer by the login form of the login modal
     Given I am on "/"
     And I follow "Sign in"
@@ -55,6 +65,8 @@ Feature: Security
     And I fill in "password" with "staff"
     And I press "submit"
     Then I should be on "/staff"
+
+
 
 
 
