@@ -6,21 +6,27 @@
     <div class="container">
         {{ form_start(form) }}
         <div class="row">
-            {{ form_row(form.center) }}</div>
+            <div class="col s12">
+                {{ form_row(form.center) }}
+            </div>
+        </div>
         <div class="row">
-            <div class="col s5">
+            <div class="col s12 xl5">
                 {{ form_row(form.date) }}
             </div>
-            <div class="col s5">
+            <div class="col s12 xl5">
                 {{ form_row(form.time) }}
             </div>
-            <div class="col s2">
+            <div class="col s12 xl2">
                 {{ form_row(form.numberPlayers) }}
             </div>
         </div>
-        <div class="row gamescores">
-            {{ form_row(form.gameScores, {"data-prototype": form.gameScores.vars.prototype|e}) }}
-        </div>
+            <div class="row">
+                <div class="gamescores">
+                    {{ form_row(form.gameScores, {"data-prototype": form.gameScores.vars.prototype|e}) }}
+                </div>
+            </div>
+
         <button class="btn" type="submit">Submit</button>
         {{ form_end(form) }}
     </div>

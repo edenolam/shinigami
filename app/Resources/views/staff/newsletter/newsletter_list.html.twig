@@ -1,31 +1,30 @@
 {% extends 'staff/staff.html.twig' %}
 
 {% block body %}
-<div style="height: 650px">
-    <div class="center">
-        <a href="{{ path('staff_newsletter_create') }}" class="btn retro-rose" id="new-newsletter">Create newsletter</a>
-    </div>
     <div class="container">
-        <table>
+        <p class="center-align"><a href="{{ path('staff_newsletter_create') }}" class="btn retro-rose" id="new-newsletter">Create newsletter </a></p>
+
+
+        <table class="bordered">
             <thead>
-            <tr>
-                <td>{{ knp_pagination_sortable(newsletters, 'ID', ['n.id']) }}</td>
-                <td>{{ knp_pagination_sortable(newsletters, 'Name', ['n.name']) }}</td>
-                <td>{{ knp_pagination_sortable(newsletters, 'Title', ['n.title']) }}</td>
-                <td>Text</td>
-                <td>{{ knp_pagination_sortable(newsletters, 'Created at', ['n.createAt']) }}</td>
-                <td>Preview</td>
-                <td>Send email</td>
-                <td>Modify</td>
-                <td>Delete</td>
-            </tr>
+                <tr>
+                    <th>{{ knp_pagination_sortable(newsletters, 'ID', ['n.id']) }}</th>
+                    <th>{{ knp_pagination_sortable(newsletters, 'Name', ['n.name']) }}</th>
+                    <th>{{ knp_pagination_sortable(newsletters, 'Title', ['n.title']) }}</th>
+                    <th>Text</th>
+                    <th>{{ knp_pagination_sortable(newsletters, 'Created at', ['n.createAt']) }}</th>
+                    <th><i class="material-icons">remove_red_eye</i></th>
+                    <th><i class="material-icons">email</i></th>
+                    <th><i class="material-icons">edit</i></th>
+                    <th><i class="material-icons">delete</i></th>
+                </tr>
             </thead>
             {% for newsletter in newsletters %}
                 <tr>
                     <td>{{ newsletter.id }}</td>
                     <td>{{ newsletter.name }}</td>
                     <td>{{ newsletter.title }}</td>
-                    <td>{{ newsletter.content }}</td>
+                    <td style="width: 600px">{{ newsletter.content }}</td>
                     <td>{{ newsletter.createAt|date("m/d/Y")  }}</td>
                     <td><a href="{{ path('staff_newsletter_preview', {'id' : newsletter.id}) }}" target="_blank" class="btn-floating waves-effect waves-light retro-cyan"><i class="material-icons">remove_red_eye</i></a>
                     </td>
@@ -41,7 +40,7 @@
         <div class="center">{{ knp_pagination_render(newsletters) }}</div>
     </div>
 
-</div>
+
 
 {% endblock %}
 
