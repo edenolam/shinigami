@@ -48,6 +48,7 @@ Feature: StaffGameSessionManagement
     And I press "Search"
     Then I should be on "/staff/customer/123584366"
     And I click on "tab-gamesessions"
+    And I wait "1000"
     And I should see "Game Session of the Wed 06 Dec 17"
 
 
