@@ -8,8 +8,8 @@
         <span class="card-title">Find a customer</span>
         <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
-                <li class="tab"><a class="active" href="#by-card">Search by card</a></li>
-                <li class="tab"><a href="#by-name">Search by name</a></li>
+                <li class="tab"><a id="tab-bycard" class="active" href="#by-card">Search by card</a></li>
+                <li class="tab"><a id="tab-byname" href="#by-name">Search by name</a></li>
             </ul>
         </div>
         <div class="card-content">
@@ -23,7 +23,7 @@
             <div id="by-name">
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                <button type="submit" class="waves-effect waves-light btn retro-rose">Search</button>
+                <button id="search" type="submit" class="waves-effect waves-light btn retro-rose">Search</button>
                 {{ form_end(form) }}
             </div>
         </div>

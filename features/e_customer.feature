@@ -7,32 +7,34 @@ Feature: Customer
     And I press "submit"
     Then I should be on "/customer"
 
-  @customer
+  @javascript
   Scenario: From login to customer panel
     And the ".customer-infos" element should contain "tata"
     And the ".customer-infos" element should contain "titi"
     And the ".card-infos" element should contain "Customer card"
 
-  @customer
+  @javascript
   Scenario: Add a new card on customer panel
-    And I fill in "number" with "123456789"
+    And I fill in "number" with "123684973"
     And I press "submit"
     Then I should be on "/customer"
-    And the response status code should be 200
     And the ".alert-success" element should contain "Success ! You have a new card !"
     And I should see "Hey ! You can now use the offer Welcome !"
+    And I should see "123684973"
 
-  @customer
+  @javascript
   Scenario: Modify customer infos
-    Then I follow "modify"
+    Then I follow "modify-profile"
     Then I should be on "/customer/modify"
-    And the response status code should be 200
-    And I fill in "appbundle_customer_nickname" with "nicko"
+    And I fill in "appbundle_customer_nickname" with "red"
     And I fill in "appbundle_customer_adress" with "rue titi"
-    And I fill in "appbundle_customer_phone" with "0123454556"
+    And I fill in "appbundle_customer_city" with "Jadielle"
     And I press "submit"
     Then I should be on "/customer"
-    And the response status code should be 200
-    And the ".customer-infos" element should contain "nicko"
-    And the ".customer-infos" element should contain "0123454556"
+    And the ".customer-infos" element should contain "red"
+    And the ".customer-infos" element should contain "rue titi"
+    And the ".customer-infos" element should contain "Jadielle"
     And the ".alert-success" element should contain "Your informations were modified."
+
+
+

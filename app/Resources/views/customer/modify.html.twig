@@ -35,6 +35,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/form/datepicker.js') }}"
+    <script src="{{ asset('js/form/datepicker.js') }}"></script>
+    <script type="text/javascript">
+        var customerData = "{{ customer.birthday|date('d/m/Y') }}";
+        $( ".datepicker" ).pickadate("picker").set('select', customerData, { format: 'dd/mm/yyyy' });
+    </script>
 {% endblock %}
 

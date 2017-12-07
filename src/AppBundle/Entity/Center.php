@@ -38,7 +38,7 @@ class Center
     /**
      * @var int
      *
-     * @ORM\Column(name="visits", type="integer", unique=true)
+     * @ORM\Column(name="visits", type="integer")
      */
     private $visits;
 

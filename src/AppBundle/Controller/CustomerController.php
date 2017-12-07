@@ -69,7 +69,8 @@ class CustomerController extends Controller
         }
 
         return $this->render('customer/modify.html.twig', array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "customer" => $this->getUser()->getCustomer()
         ));
     }
 }

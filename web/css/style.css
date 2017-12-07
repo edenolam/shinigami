@@ -96,6 +96,9 @@ section {
   margin-bottom: 50px;
   padding-bottom: 20px;
 }
+.fullwidth .transparent {
+  background-color: transparent;
+}
 .bg-gradiant-1 {
   background-color: rgba(22, 27, 50, 0.45);
 }
