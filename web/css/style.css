@@ -52,12 +52,6 @@ main .container {
   padding-top: 50px;
   padding-bottom: 0;
 }
-.section {
-  padding-bottom: 0;
-}
-.section .fullwidth {
-  padding: 0 0 60px;
-}
 .big-logo {
   z-index: 4;
   display: block;
@@ -97,14 +91,10 @@ h1 {
 .index-btn {
   margin-bottom: 80px;
 }
-.fullwidth {
+section {
   width: 100%;
-  background-color: rgba(22, 27, 50, 0.9);
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.fullwidth .carousel-container {
-  padding-bottom: 50px;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
 }
 .fullwidth .transparent {
   background-color: transparent;
@@ -193,11 +183,14 @@ form select.browser-default {
   color: white;
   background-color: transparent;
 }
-.container .card-player {
+.card-player {
   margin: 20px auto;
   width: 95%;
   padding: 15px;
   list-style-type: none;
+}
+.gamescores {
+  margin-left: 50px;
 }
 .add-card {
   width: 80%;

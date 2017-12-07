@@ -1,24 +1,23 @@
 {% extends 'staff/staff.html.twig' %}
 
 {% block body %}
-<div style="height: 650px">
     <div class="center">
         <a href="{{ path('staff_offers_create') }}" class="btn retro-rose" id="new-offer">Create new offer</a>
     </div>
 <div class="container">
     <table class="bordered">
         <thead>
-        <tr>
-            <td>{{ knp_pagination_sortable(offers, 'ID', ['o.id']) }}</td>
-            <td>{{ knp_pagination_sortable(offers, 'Code', ['o.code']) }}</td>
-            <td>{{ knp_pagination_sortable(offers, 'Name', ['o.name']) }}</td>
-            <td>{{ knp_pagination_sortable(offers, 'Type', ['o.offerType']) }}</td>
-            <td>{{ knp_pagination_sortable(offers, 'Count', ['o.count']) }}</td>
-            <td>{{ knp_pagination_sortable(offers, 'Level', ['o.level']) }}</td>
-            <td>Description</td>
-            <td>Modify</td>
-            <td>{{ knp_pagination_sortable(offers, 'Active', ['o.isActive']) }}</td>
-        </tr>
+            <tr>
+                <th><span>{{ knp_pagination_sortable(offers, 'ID', ['o.id']) }}</span></th>
+                <th>{{ knp_pagination_sortable(offers, 'Code', ['o.code']) }}</th>
+                <th>{{ knp_pagination_sortable(offers, 'Name', ['o.name']) }}</th>
+                <th>{{ knp_pagination_sortable(offers, 'Type', ['o.offerType']) }}</th>
+                <th>{{ knp_pagination_sortable(offers, 'Count', ['o.count']) }}</th>
+                <th>{{ knp_pagination_sortable(offers, 'Level', ['o.level']) }}</th>
+                <th>Description</th>
+                <th>Modify</th>
+                <th>{{ knp_pagination_sortable(offers, 'Active', ['o.isActive']) }}</th>
+            </tr>
         </thead>
         {% for offer in offers %}
             <tr>
@@ -47,7 +46,6 @@
 </div>
 
 
-</div>
 
 {% endblock %}
 

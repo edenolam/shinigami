@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="nav-wrapper">
                     {% if app.request.attributes.get('_route')  != "homepage" %}
-                    <a href="{{ path("homepage") }}" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
+                    <a href="{{ path("logout") }}" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
                     {% else %}
                         <a href="#home" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
                     {% endif %}
@@ -51,7 +51,7 @@
     </div>
 
 
-        <main class="container {% if app.request.attributes.get('_route')  != "homepage" %}container-frame{% endif %}">
+        <main class=" {% if app.request.attributes.get('_route')  != "homepage" %}container-frame{% endif %}">
            <div id="flashbag">
                {% for label, messages in app.flashes %}
                    {% for message in messages %}
