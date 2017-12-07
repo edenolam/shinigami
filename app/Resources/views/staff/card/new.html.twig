@@ -1,60 +1,56 @@
 {%  extends 'staff/staff.html.twig' %}
 {% block body %}
-    <div class="row">
-        <div class="col s12 m12 l12 xl7">
-            <div class="card add-card">
-                {{ form_start(form) }}
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col s9 left">
-                            {{ form_row(form.center) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="right col s10">
-                            <div class="col s10">
-                                {{ form_row(form.number) }}
-                            </div>
-                            <div class="col s2">
-                                {{ form_row(form.modulo) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-action">
-                    <div class="row right">
-                        <a class="btn retro-jaune" name="generate" id="generate" onclick="generateCard()">Generate</a>
-                        <button class="btn" id="submit" type="submit">Add</button>
-                    </div>
-                </div>
-                {{ form_end(form) }}
-            </div>
-        </div>
-        <div class="col s12 m12 l12 xl5">
-            <p>Available cards : {{ cards|length }}</p>
-            <table class="available-cards">
-                <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Center</td>
-                    <td>Number</td>
-                    <td>Given</td>
-                </tr>
-                </thead>
-                {% for card in cards %}
-                    <tr id="rowcard-{{ card.id }}">
-                        <td>{{ card.id }}</td>
-                        <td>{{ card.center.code }}</td>
-                        <td>{{ card.number }}</td>
-                        <td>
-                            <a class="btn-floating waves-effect waves-light retro-rose" id="give-{{ card.id }}" onclick="giveCard({{ card.id }})"><i class="material-icons">add</i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
+   <div class="container">
+       <div class="row">
+           <div class="col s12 l7">
+               <div class="card add-card">
+                   {{ form_start(form) }}
+                           <div class="card-body">
+                                   <div class="col s12 l10 left">
+                                       {{ form_row(form.center) }}
+                                   </div>
+                                   <div class="col s12 l10">
+                                       {{ form_row(form.number) }}
+                                   </div>
+                                   <div class="col s12 l2">
+                                       {{ form_row(form.modulo) }}
+                                   </div>
 
+                                   <div class="card-action">
+                                           <button class="btn retro-jaune" name="generate" id="generate" onclick="generateCard()">Generate</button>
+                                           <button class="btn" id="submit" type="submit">Add</button>
+                                   </div>
+                           </div>
+
+                   {{ form_end(form) }}
+               </div>
+           </div>
+           <div class="col s12 l5">
+               <p>Available cards : {{ cards|length }}</p>
+               <table class="available-cards">
+                   <thead>
+                   <tr>
+                       <td>ID</td>
+                       <td>Center</td>
+                       <td>Number</td>
+                       <td>Given</td>
+                   </tr>
+                   </thead>
+                   {% for card in cards %}
+                       <tr id="rowcard-{{ card.id }}">
+                           <td>{{ card.id }}</td>
+                           <td>{{ card.center.code }}</td>
+                           <td>{{ card.number }}</td>
+                           <td>
+                               <a class="btn-floating waves-effect waves-light retro-rose" id="give-{{ card.id }}" onclick="giveCard({{ card.id }})"><i class="material-icons">add</i></a>
+                           </td>
+                       </tr>
+                   {% endfor %}
+               </table>
+           </div>
+       </div>
+
+   </div>
 
 
 

@@ -9,87 +9,106 @@
 {% endblock %}
 
 {% block body %}
-    <div id="home" class="section scrollspy">
+    <section id="home" class="scrollspy">
+        <div class="container">
+            <div class="row">
+                <!-- logo -->
+                <img class="big-logo responsive-img" src="{{ asset('images/medium-logo.png') }}">
+                <!-- end logo -->
 
-    <img class="big-logo responsive-img" src="{{ asset('images/medium-logo.png') }}">
-
-    <div class="row index-btn hide-on-med-and-down">
-        <div class="col xs12 s12 center-align"> <a href="#modal-registration" class="modal-trigger btn btn-large retro-jaune" name="joinus">Join us</a></div>
-        <div class="col xs12 s12 center-align"><a href="#modal-login" class="modal-trigger btn btn-large retro-rose" name="signin">Sign in</a></div>
-    </div>
-
-
-        <div class="row fullwidth bg-gradiant-1 section scrollspy " id="about">
-            <div class="container text-container">
-                <h2 class="center">Welcome to Shinigami Laser</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-            <div class="l12 carousel-container">
-                <div class="carousel carousel-slider">
-                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
-                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
-                    <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+                <!-- button join -->
+                <div class="row index-btn hide-on-med-and-down">
+                    <div class="col xs12 s12 center-align"> <a href="#modal-registration" class="modal-trigger btn btn-large retro-jaune" name="joinus">Join us</a></div>
+                    <div class="col xs12 s12 center-align"><a href="#modal-login" class="modal-trigger btn btn-large retro-rose" name="signin">Sign in</a></div>
                 </div>
+                <!-- end button join -->
             </div>
         </div>
-         <div class="row fullwidth transparent">
-         </div>
-        <div class="row fullwidth bg-gradiant-2 section scrollspy" id="findus">
+    </section>
+
+        <!-- about + carousel -->
+        <section id="about" class="bg-gradiant-1 scrollspy">
+           <div class="container">
+               <div class="row">
+                   <div class="col s12">
+                       <h2 class="center-align">Welcome to Shinigami Laser</h2>
+                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                   </div>
+
+                   <div class="col s12 carousel-container">
+                       <div class="carousel carousel-slider">
+                           <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-1.jpg') }}"></a>
+                           <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-2.jpg') }}"></a>
+                           <a class="carousel-item"><img src="{{ asset('images/index-slides/slide-3.jpg') }}"></a>
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </section>
+        <!-- end about + carousel -->
+
+        <!-- find us -->
+        <section id="findus" class="bg-gradiant-2 scrollspy">
             <div class="container">
-                <h3 class="center">Find us</h3>
-                <div class="col xl6">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5245.828589690126!2d2.3780009999999883!3d48.897970500000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1512405461912" width="80%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>
-                <div class="col xl6">
-                    <div class="col xl6">
-                        <h5>LE CARGO</h5>
-                        <p>157, boulevard MacDonald</p>
-                        <p>75019 PARIS</p>
-                    </div>
-                    <div class="col xl6">
-                        <h5>HOURS</h5>
-                        <p>TUES-THURS: 3:00PM-10:00PM</p>
-                        <p>FRI: 3:00PM-MIDNIGHT</p>
-                        <p>SAT: 10:00AM-MIDNIGHT</p>
-                        <p>SUN: 10:00AM-10:00PM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row fullwidth transparent">
-        </div>
-         <div class="fullwidth bg-gradiant-3 section scrollspy" id="contact">
-            <div class="container text-container">
-                <h2 class='page-header center'>Contact</h2>
-                {{ form_start(formContact) }}
                 <div class="row">
-                    <div class="col s12 xl6">
-                        {{ form_row(formContact.name) }}
+                    <h3 class="center">Find us</h3>
+                    <div class="col l6">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5245.828589690126!2d2.3780009999999883!3d48.897970500000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1512405461912" width="80%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
-                    <div class="col s12 xl6">
-                        {{ form_row(formContact.email) }}
+                    <div class="col l6">
+                        <div class="col l6">
+                            <h5>LE CARGO</h5>
+                            <p>157, boulevard MacDonald</p>
+                            <p>75019 PARIS</p>
+                        </div>
+                        <div class="col l6">
+                            <h5>HOURS</h5>
+                            <p>TUES-THURS: 3:00PM-10:00PM</p>
+                            <p>FRI: 3:00PM-MIDNIGHT</p>
+                            <p>SAT: 10:00AM-MIDNIGHT</p>
+                            <p>SUN: 10:00AM-10:00PM</p>
+                        </div>
                     </div>
                 </div>
-                <div class="s12">
-                    {{ form_row(formContact.subject) }}
-                </div>
-                <div class="s12">
-                    {{ form_row(formContact.message) }}
-                </div>
+            </div>
+        </section>
+        <!-- end find us -->
 
-                <button type="submit" class="btn">Send</button>
+
+        <!-- contact -->
+         <section id="contact" class="bg-gradiant-3 scrollspy" >
+            <div class="container">
+                <div class="row">
+                <h3 class="center-align">Contact</h3>
+                {{ form_start(formContact) }}
+
+                        <div class="col s12 l6">
+                            {{ form_row(formContact.name) }}
+                        </div>
+                        <div class="col s12 l6">
+                            {{ form_row(formContact.email) }}
+                        </div>
+
+                        <div class="s12 l12">
+                            {{ form_row(formContact.subject) }}
+                        </div>
+                        <div class="s12 l12">
+                            {{ form_row(formContact.message) }}
+                        </div>
+
+                <button type="submit" class="waves-effect waves-light btn">Send</button>
                 {{ form_end(formContact) }}
+                </div>
             </div>
 
-        </div>
-        <div class="row fullwidth transparent">
-        </div>
-    </div>
+        </section>
+        <!-- end contact -->
+
 
 {% endblock %}
 
 {% block modals %}
-    <div id="modal-login" class="modal" style="width: 25%">
+    <div id="modal-login" class="modal">
         {% include 'security/login_modal.html.twig' %}
     </div>
     <div id="modal-registration" class="modal">

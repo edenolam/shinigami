@@ -19,7 +19,7 @@ function addPlayers()
         newLi.appendTo(gamescoreList);
 
         playerNameAutocompletion(i);
-        $('#appbundle_gamesession_gameScores_' + i).children().addClass("col s4");
+        $('#appbundle_gamesession_gameScores_' + i).children().addClass("col s12 xl4");
     }
 }
 

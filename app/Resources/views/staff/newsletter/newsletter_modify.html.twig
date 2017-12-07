@@ -1,6 +1,6 @@
 {% extends 'staff/staff.html.twig' %}
 {% block body %}
-    <h1>New newsletter</h1>
+    <h3 class="center-align">Edit newsletter</h3>
     <div class="container">
         {{ form_start(form) }}
 
@@ -14,13 +14,13 @@
             {{ form_row(form.content) }}
         </div>
         <div class="row">
-            <div class="col xl3">
+            <div class="col l3">
                 {{ form_row(form.theme) }}
             </div>
-            <div class="col xl6">
+            <div class="col l6">
                 {{ form_row(form.image) }}
             </div>
-            <div class="col xl3">
+            <div class="col l3">
                 <img src="{{ asset('uploads/images/'~newsletter.image) }}" width="100%"/>
             </div>
         </div>
