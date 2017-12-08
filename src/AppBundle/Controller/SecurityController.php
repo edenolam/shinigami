@@ -14,6 +14,7 @@ use AppBundle\Form\AccountType;
 use AppBundle\Form\AccountStaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -69,6 +70,55 @@ class SecurityController extends Controller
             'error'         => $error,
         ));
 	}
+
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function forgotPasswordAction(Request $request, \Swift_Mailer $mailer)
+	{
+		$mailCustomer = $request->request->get('email');
+		$entityManager = $this->getDoctrine()->getManager();
+		$accountEmail = $entityManager->getRepository(Account::class)->findOneBy(['email' => $mailCustomer]);
+		//exit(dump($accountEmail));
+		if($request->isMethod('POST')){
+			if ($accountEmail){
+				$passwordToken = random_bytes(20);
+				$urlGenerate = $this->generateUrl('reset_password', array("token" => $passwordToken), UrlGeneratorInterface::ABSOLUTE_URL);
+
+				$message = (new \Swift_Message('Reset Password'))
+					->setFrom('staff@shinigami.com')
+					->setTo($mailCustomer)
+					->setBody($this->renderView('emails/reset_password.html.twig', array(
+							'urlGenerate' => $urlGenerate
+						)
+					),
+						'text/html'
+					)
+				;
+				$mailer->send($message);
+				$this->addFlash("success", "We've sent you an email with instructions to reset your password");
+		}
+		else{
+			$this->addFlash("error", "The password is not recognized ");
+		}
+
+
+		}
+
+		return $this->render("security/reset_password.html.twig");
+	}
+
+
+	/**
+	 *
+	 */
+	public function resetPasswordAction()
+	{
+
+	}
+
+
 
     /**
      * Registration of a staff member

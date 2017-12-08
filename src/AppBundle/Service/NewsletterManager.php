@@ -104,6 +104,8 @@ class NewsletterManager
 		}
 
 	}
+
+
 	/**
 	 * Gives the emails of all the customers registered in Shinigami Laser website
 	 *
