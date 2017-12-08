@@ -4,21 +4,35 @@
     <div class="container">
         {{ form_start(form) }}
         <div class="row">
-            <div class="col xl9">
+            <div class="col xl12">
                 {{ form_row(form.name) }}
-            </div>
-            <div class="col xl3">
-                {{ form_row(form.code) }}
             </div>
         </div>
         <div class="row">
-            <div class="col xl4">
+            <div class="col xl3">
+                {{ form_row(form.code) }}
+            </div>
+            <div class="col xl3">
                 {{ form_row(form.offerType) }}
             </div>
-            <div class="col xl4">
+            <div class="col xl2">
+                {{ form_row(form.startDateDate) }}
+            </div>
+            <div class="col xl1">
+                {{ form_row(form.startDateTime) }}
+            </div>
+            <div class="col xl2">
+                {{ form_row(form.endDateDate) }}
+            </div>
+            <div class="col xl1">
+                {{ form_row(form.endDateTime) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col xl6">
                 {{ form_row(form.count) }}
             </div>
-            <div class="col xl4">
+            <div class="col xl6">
                 {{ form_row(form.level) }}
             </div>
         </div>
@@ -31,4 +45,19 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false, // Close upon selecting a date,
+            //format: 'dd/mm/yyyy'
+        });
+    </script>
+    <script src="{{ asset('js/form/timepicker.js') }}"></script>
+{% endblock %}
 

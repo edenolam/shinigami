@@ -85,9 +85,12 @@ class StaffNewsletterController extends Controller
 		if (!$newsletter){
 			throw $this->createNotFoundException('No newsletter found for id '. $newsletter->getId());
 		}
+		$name = $newsletter->getName();
 		$entityManager = $this->getDoctrine()->getManager();
 		$entityManager->remove($newsletter);
 		$entityManager->flush();
+
+		$this->addFlash("success", "The newsletter ".$name." has been deleted.");
 
 		return $this->redirectToRoute('staff_newsletter_list', [
 			'id' => $newsletter->getId()
