@@ -134,8 +134,8 @@ class SecurityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $frontService->customerRegistration($request,$user);
-				$this->addFlash("success", "All right ! You've been registered !");
+                $frontService->staffRegistration($user);
+				$this->addFlash("success", "All right ! Now there's a new staff member !");
 				return $this->redirectToRoute('login');
 			}else{
 				$this->addFlash("error", "The informations you entered were not valid.");

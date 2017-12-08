@@ -66,6 +66,23 @@ Feature: Security
     And I press "submit"
     Then I should be on "/staff"
 
+  @javascript
+  Scenario: Creation of a staff member account
+    Given I am on "/login"
+    And I fill in "username" with "superstaff"
+    And I fill in "password" with "staff"
+    And I press "submit"
+    Then I should be on "/staff"
+    Then I am on "/super_staff"
+    And I fill in "appbundle_account_username" with "staff2"
+    And I fill in "appbundle_account_email" with "staff2@gmail.com"
+    And I fill in "appbundle_account_plainPassword_first" with "staff"
+    And I fill in "appbundle_account_plainPassword_second" with "staff"
+    And I press "submit"
+    Then I should be on "/login"
+    And I should see "All right ! Now there's a new staff member !" in the ".alert-success" element
+
+
 
 
 

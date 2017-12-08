@@ -49,7 +49,24 @@ class StaffOffersController extends Controller
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $startdate = $request->request->get('appbundle_offer')['startDateDate'];
+            $starttime = $request->request->get('appbundle_offer')['startDateTime'];
+            $enddate = $request->request->get('appbundle_offer')['endDateDate'];
+            $endtime = $request->request->get('appbundle_offer')['endDateTime'];
+
+            $start = new \DateTime($startdate);
+            $time = explode(":", $starttime);
+            $start->setTime($time[0], $time[1]);
+
+            $end = new \DateTime($enddate);
+            $time = explode(":", $endtime);
+            $end->setTime($time[0], $time[1]);
+
+            $offer->setStartDate($start);
+            $offer->setEndDate($end);
+
             $offer->setIsActive(true);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offer);
             $entityManager->flush();
