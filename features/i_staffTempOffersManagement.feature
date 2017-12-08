@@ -1,0 +1,38 @@
+Feature: StaffNewsletterManagement
+
+  Background:
+    Given I am on "/login"
+    And I fill in "username" with "staff"
+    And I fill in "password" with "staff"
+    And I press "submit"
+    Then I should be on "/staff"
+
+  @javascript
+  Scenario: Create a limited offer and use it
+    Then I follow "offers"
+    Then I should be on "/staff/offers/list"
+    And I should see "Create new offer"
+    And I follow "new-offer"
+    Then I should be on "/staff/offers/new"
+    And I fill in "appbundle_offer_code" with "XMAS2017"
+    And I fill in "appbundle_offer_count" with "0"
+    And I fill in "appbundle_offer_name" with "Chrismas 2017"
+    And I fill in "appbundle_offer_offerType" with "temp"
+    And I fill in "appbundle_offer_description" with "Merry Chrismas !!!"
+    And I fill in "appbundle_offer_level" with "0"
+    And I pick the date "01/12/2017" in "datepicker-start"
+    And I pick the date "31/12/2017" in "datepicker-end"
+    And I click on "appbundle_offer_startDateTime"
+    And I wait "1000"
+    And I press "OK"
+    And I wait "1000"
+    And I click on "appbundle_offer_endDateTime"
+    And I wait "1000"
+    And I press "OK"
+    And I wait "1000"
+    And I press "submit"
+    Then I should be on "/staff/offers/list"
+    And I should see "The offer Chrismas 2017 has been saved"
+    Then I am on "/staff/customer/123584366"
+    And I should see "Chrismas 2017"
+    Then I follow "useoffer-3-2"

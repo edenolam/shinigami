@@ -18,11 +18,13 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
             ->where('o.offerType = :type')
             ->andWhere('o.count <= :count')
             ->andWhere('o.isActive = true')
-            ->setParameters(array(
-                "card" => $card,
-                "type" => $type,
-                "count" => $count
-            ))
+            ->setParameters(
+                array(
+                    "card" => $card,
+                    "type" => $type,
+                    "count" => $count
+                )
+            )
             ->getQuery()
             ->getResult();
     }
@@ -32,11 +34,37 @@ class OfferRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('o')
             ->leftJoin('o.cardsOffers', "co", Join::WITH, "co.card = :card")
             ->where("o.isActive = true")
+            ->andWhere('o.offerType != :temp')
             ->andWhere('co.card IS NULL')
-            ->setParameter("card", $card)
+            ->setParameters(
+                array(
+                    "card" => $card,
+                    "temp" => 'temp'
+                )
+            )
             ->getQuery()
             ->getResult();
 
+    }
+
+    public function findUnusedCurrentTempOffers($card)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.cardsOffers', 'co', Join::WITH, "co.card = :card")
+            ->where('co.card IS NULL')
+            ->andWhere('o.offerType = :temp')
+            ->andWhere('o.startDate <= :today')
+            ->andWhere('o.endDate >= :today')
+            ->andWhere('o.isActive = true')
+            ->setParameters(
+                array(
+                    "temp" => "temp",
+                    'today' => new \DateTime('now'),
+                    "card" => $card
+                )
+            )
+            ->getQuery()
+            ->getResult();
     }
 
     public function getAllOffersQuery()

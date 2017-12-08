@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +22,7 @@ class OfferType extends AbstractType
             ->add('startDateDate', TextType::class, array(
                 "label" => "Start date",
                 "attr" => array(
-                    "class" => "datepicker"
+                    "class" => "datepicker datepicker-start"
                 ),
                 "mapped" => false,
                 "required" => false
@@ -29,7 +30,7 @@ class OfferType extends AbstractType
             ->add('startDateTime', TextType::class, array(
                 "label" => "Start time",
                 "attr" => array(
-                    "class" => "timepicker"
+                    "class" => "timepicker timepicker-start"
                 ),
                 "mapped" => false,
                 "required" => false
@@ -37,7 +38,7 @@ class OfferType extends AbstractType
             ->add('endDateDate', TextType::class, array(
                 "label" => "End date",
                 "attr" => array(
-                    "class" => "datepicker"
+                    "class" => "datepicker datepicker-end"
                 ),
                 "mapped" => false,
                 "required" => false
@@ -45,12 +46,22 @@ class OfferType extends AbstractType
             ->add('endDateTime', TextType::class, array(
                 "label" => "End time",
                 "attr" => array(
-                    "class" => "timepicker"
+                    "class" => "timepicker timepicker-end"
                 ),
                 "mapped" => false,
                 "required" => false
             ))
-            ->add('offerType')
+            ->add('offerType', ChoiceType::class, array(
+                "choices" => array(
+                    "score" => "score",
+                    "visits" => "visits",
+                    "temp" => "temp",
+                    "autre" => "other",
+                ),
+                "attr" => array(
+                    "class" => "browser-default"
+                )
+            ))
             ->add('count')
             ->add('level')
             ->add('description');

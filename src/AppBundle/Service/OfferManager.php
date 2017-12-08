@@ -74,6 +74,18 @@ class OfferManager
     }
 
     /**
+     * Adds a flashbag for the adding of an offer
+     *
+     * @param $offers
+     */
+    private function newOfferFlashMessage($offers)
+    {
+        foreach($offers as $offer){
+            $this->session->getFlashBag()->add('success', "Hey ! You can now use the offer ".$offer->getName()." !");
+        }
+    }
+
+    /**
      * Looks for available "visits" and "score" for a customer and adds them to his card
      *
      * @param $card
@@ -84,15 +96,18 @@ class OfferManager
         $this->addOffersToCustomerCard($offers, $card, false);
     }
 
-    /**
-     * Adds a flashbag for the adding of an offer
-     *
-     * @param $offers
-     */
-    private function newOfferFlashMessage($offers)
+    public function useTempOffer($offerid, $cardid)
     {
-        foreach($offers as $offer){
-            $this->session->getFlashBag()->add('success', "Hey ! You can now use the offer ".$offer->getName()." !");
+        $offer = $this->getOffersRepository()->find($offerid);
+        $card = $this->entityManager->getRepository('AppBundle:Card')->find($cardid);
+        if(!$this->isUnlockedByCustomer($offer, $card)){
+            $cardOffer = new CardsOffers();
+            $cardOffer->setOffer($offer);
+            $cardOffer->setCard($card);
+            $cardOffer->setUsed(true);
+            $this->entityManager->persist($cardOffer);
+            $this->entityManager->flush();
+            $this->session->getFlashBag()->add('success', "The offer ".$offer->getName()." has been used.");
         }
     }
 
@@ -120,5 +135,36 @@ class OfferManager
     {
         return $this->entityManager->getRepository('AppBundle:CardsOffers')->findOneBy(array("offer"=>$offer, "card" => $card));
 
+    }
+
+    /**
+     * Gets all the valid Offers for a customer
+     *
+     * @param $card
+     * @return array|null
+     */
+    public function getValidCardsOffersOfCustomer($card)
+    {
+        if($card){
+            return $this->entityManager->getRepository("AppBundle:CardsOffers")->findValidCardsOffersOfCustomer($card);
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * Gets all the locked Offers for a customer
+     *
+     * @param $card
+     * @return array
+     */
+    public function getLockedOffersOfCustomer($card)
+    {
+        return $this->entityManager->getRepository('AppBundle:Offer')->findLockedOffersForCustomer($card);
+    }
+
+    public function getCurrentTempOffers($card)
+    {
+        return $this->getOffersRepository()->findUnusedCurrentTempOffers($card);
     }
 }

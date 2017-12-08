@@ -22,7 +22,7 @@ Feature: StaffGameSessionManagement
     Then I fill in "appbundle_gamesession_numberPlayers" with "4"
     And I wait "1000"
     Then I select "2" from "appbundle_gamesession_center"
-    And I pick the date "06/12/2017"
+    And I pick the date "06/12/2017" in "datepicker"
     And I click on "appbundle_gamesession_time"
     And I wait "1000"
     And I press "OK"

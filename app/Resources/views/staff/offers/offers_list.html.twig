@@ -8,10 +8,12 @@
         <table class="bordered">
             <thead>
                 <tr>
-                    <th><span>{{ knp_pagination_sortable(offers, 'ID', ['o.id']) }}</span></th>
+                    <th>{{ knp_pagination_sortable(offers, 'ID', ['o.id']) }}</th>
                     <th>{{ knp_pagination_sortable(offers, 'Code', ['o.code']) }}</th>
                     <th>{{ knp_pagination_sortable(offers, 'Name', ['o.name']) }}</th>
                     <th>{{ knp_pagination_sortable(offers, 'Type', ['o.offerType']) }}</th>
+                    <th>{{ knp_pagination_sortable(offers, 'Start', ['o.startDate']) }}</th>
+                    <th>{{ knp_pagination_sortable(offers, 'End', ['o.endDate']) }}</th>
                     <th>{{ knp_pagination_sortable(offers, 'Count', ['o.count']) }}</th>
                     <th>{{ knp_pagination_sortable(offers, 'Level', ['o.level']) }}</th>
                     <th>Description</th>
@@ -25,6 +27,8 @@
                     <td>{{ offer.code }}</td>
                     <td>{{ offer.name }}</td>
                     <td>{{ offer.offerType }}</td>
+                    <td>{% if offer.startDate %}{{ offer.startDate|date('d/m/y - H:i') }}{% else %}null{% endif %}</td>
+                    <td>{% if offer.endDate %}{{ offer.endDate|date('d/m/y - H:i') }}{% else %}null{% endif %}</td>
                     <td>{{ offer.count }}</td>
                     <td>{{ offer.level }}</td>
                     <td>{{ offer.description }}</td>
@@ -36,12 +40,9 @@
                             <a class="btn-floating waves-effect waves-light retro-rose" id="active-{{ offer.id }}" onclick="active({{ offer.id }})" ><i class="material-icons">close</i></a>
                         {% endif %}
                     </td>
-
-
                 </tr>
             {% endfor %}
         </table>
-
         <div class="center">{{ knp_pagination_render(offers) }}</div>
     </div>
 
