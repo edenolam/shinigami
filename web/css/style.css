@@ -1,3 +1,9 @@
+.retro-noir {
+  background-color: #474F6F;
+}
+.retro-noir:hover {
+  background-color: #161B32;
+}
 .retro-rose {
   background-color: #F13280;
 }
@@ -44,9 +50,15 @@ main .container {
   height: 100%;
   padding-top: 50px;
 }
+main .container .row .index-btn {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 80px;
+  width: 295px;
+}
 .container-frame {
   background-color: rgba(22, 27, 50, 0.65);
-  padding: 0 40px;
+  padding: 0 0px;
   width: 70%;
   margin: auto;
 }
@@ -94,7 +106,10 @@ h1 {
   z-index: 1;
 }
 .index-btn {
+  display: block;
+  margin: 0 auto;
   margin-bottom: 80px;
+  width: 295px;
 }
 section {
   width: 100%;
@@ -125,6 +140,7 @@ section {
 }
 .card .tabs {
   background-color: #323853;
+  overflow-x: hidden;
 }
 .card .tabs .tab a {
   color: #29B5AD;
@@ -195,12 +211,11 @@ form select.browser-default {
   margin-left: 50px;
 }
 .add-card {
-  width: 80%;
+  width: 95%;
   border-radius: 15px;
-  display: block;
-  margin: 40px auto;
   -webkit-box-shadow: 0 6px 6px 0 rgba(41, 181, 173, 0.1), 0 4px 12px 0 rgba(41, 181, 173, 0.08), 0 8px 4px -6px rgba(41, 181, 173, 0.16);
   box-shadow: 0 6px 6px 0 rgba(41, 181, 173, 0.1), 0 4px 12px 0 rgba(41, 181, 173, 0.08), 0 8px 4px -6px rgba(41, 181, 173, 0.16);
+  display: flow-root;
 }
 .add-card form {
   padding: 40px;
