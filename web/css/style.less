@@ -64,9 +64,9 @@ body{
 
 main{
   .container {
+    padding-top: 20px;
     z-index: 2;
     height: 100%;
-    padding-top: 50px;
     .row{
       .index-btn{
         display: block;
@@ -79,12 +79,25 @@ main{
 }
 .container-frame {
   background-color: rgba(22, 27, 50, 0.65);
-  padding: 0 0px;
+  padding: 0 0;
   width: 70%;
   margin: auto;
 
   .container{
     width: 85%;
+    padding-bottom: 80px;
+    form{
+      padding-top: 50px;
+      width: 80%;
+      margin: auto;
+      display: block;
+    }
+    .add-card{
+      form{
+        width: 100%;
+      }
+    }
+
   }
 }
 
@@ -198,8 +211,7 @@ section{
 }
 
 table{
-  margin: 0 auto;
-  margin-bottom: 50px;
+  margin: 30px auto;
   .highlight>tbody>tr:hover {
     background-color: #1E3E52;
   }
@@ -229,6 +241,7 @@ table.available-cards{
     color: white;
     &:hover{
       background-color: @retro-rose-lighten;
+      border-radius: 2px;
     }
   }
 }

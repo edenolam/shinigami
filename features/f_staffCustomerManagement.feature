@@ -54,7 +54,6 @@ Feature: StaffCustomerManagement
     And I wait "4000"
     And I press "submit"
     Then I should be on "/staff/new-card"
-    Then I should see "The card has been updated"
     Then I should see "123584366"
     Then I follow "search"
     And I click on "tab-byname"

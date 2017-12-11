@@ -1,25 +1,38 @@
 {% extends 'staff/staff.html.twig' %}
 
 {% block body %}
-
     <div class="container">
         {{ form_start(form) }}
         <div class="row">
-            <div class="col xl9">
+            <div class="col xl12">
                 {{ form_row(form.name) }}
-            </div>
-            <div class="col xl3">
-                {{ form_row(form.code) }}
             </div>
         </div>
         <div class="row">
-            <div class="col xl4">
+            <div class="col xl3">
+                {{ form_row(form.code) }}
+            </div>
+            <div class="col xl3">
                 {{ form_row(form.offerType) }}
             </div>
-            <div class="col xl4">
+            <div class="col xl2">
+                {{ form_row(form.startDateDate) }}
+            </div>
+            <div class="col xl1">
+                {{ form_row(form.startDateTime) }}
+            </div>
+            <div class="col xl2">
+                {{ form_row(form.endDateDate) }}
+            </div>
+            <div class="col xl1">
+                {{ form_row(form.endDateTime) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col xl6">
                 {{ form_row(form.count) }}
             </div>
-            <div class="col xl4">
+            <div class="col xl6">
                 {{ form_row(form.level) }}
             </div>
         </div>
@@ -30,5 +43,48 @@
         <button type="submit" id="submit" class="btn">Submit</button>
         {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false, // Close upon selecting a date,
+            //format: 'dd/mm/yyyy'
+        });
+
+        $( ".timepicker-start" ).pickatime({
+            default: "{{ offer.startDate|date('h:i') }}", // Set default time: 'now', '1:30AM', '16:30'
+            fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+            twelvehour: false, // Use AM/PM or 24-hour format
+            donetext: 'OK', // text for done-button
+            cleartext: 'Clear', // text for clear-button
+            canceltext: 'Cancel', // Text for cancel-button
+            autoclose: false, // automatic close timepicker
+            ampmclickable: true, // make AM PM clickable
+            aftershow: function(){} //Function for after opening timepicker
+        });
+        $( ".timepicker-end" ).pickatime({
+            default: "{{ offer.endDate|date('h:i') }}", // Set default time: 'now', '1:30AM', '16:30'
+            fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+            twelvehour: false, // Use AM/PM or 24-hour format
+            donetext: 'OK', // text for done-button
+            cleartext: 'Clear', // text for clear-button
+            canceltext: 'Cancel', // Text for cancel-button
+            autoclose: false, // automatic close timepicker
+            ampmclickable: true, // make AM PM clickable
+            aftershow: function(){} //Function for after opening timepicker
+        });
+
+        var offerDataStart = "{{ offer.startDate|date('d/m/Y') }}";
+        var offerDataEnd = "{{ offer.endDate|date('d/m/Y') }}";
+        $( ".datepicker-start" ).pickadate("picker").set('select', offerDataStart, { format: 'dd/mm/yyyy' });
+        $( ".datepicker-end" ).pickadate("picker").set('select', offerDataEnd, { format: 'dd/mm/yyyy' });
+    </script>
 {% endblock %}
 

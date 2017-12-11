@@ -86,7 +86,7 @@ class CardManager
         $this->entityManager->remove($availableCard);
         $this->entityManager->flush();
         $card->setNumber($number);
-        $this->save($card);
+        $this->save($card, true);
     }
 
     /**
@@ -223,34 +223,9 @@ class CardManager
     public function giveCard(Card $card)
 	{
 		$card->setGiven(true);
-		$this->save($card);
+		$this->save($card, false);
 	}
 
-    /**
-     * Gets all the valid Offers for a customer
-     *
-     * @param $card
-     * @return array|null
-     */
-    public function getValidCardsOffersOfCustomer($card)
-    {
-        if($card){
-            return $this->entityManager->getRepository("AppBundle:CardsOffers")->findValidCardsOffersOfCustomer($card);
-        }else{
-            return null;
-        }
-    }
-
-    /**
-     * Gets all the locked Offers for a customer
-     *
-     * @param $card
-     * @return array
-     */
-    public function getLockedOffersOfCustomer($card)
-    {
-        return $this->entityManager->getRepository('AppBundle:Offer')->findLockedOffersForCustomer($card);
-    }
 
 
     /**
@@ -297,15 +272,16 @@ class CardManager
         return $this->getCardRepository()->findValidCardByNumber($number);
     }
 
-
     /**
      * Saves the modification of a Card in the database
      *
      * @param $card
      */
-    public function save($card){
+    public function save($card, $message){
         $this->entityManager->persist($card);
         $this->entityManager->flush();
-        $this->session->getFlashBag()->add('success', 'The card has been updated');
+        if($message){
+            $this->session->getFlashBag()->add('success', 'The card has been updated');
+        }
     }
 }

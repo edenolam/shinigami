@@ -53,18 +53,18 @@ class StaffOffersController extends Controller
             $starttime = $request->request->get('appbundle_offer')['startDateTime'];
             $enddate = $request->request->get('appbundle_offer')['endDateDate'];
             $endtime = $request->request->get('appbundle_offer')['endDateTime'];
+            if($startdate && $starttime && $enddate && $endtime){
+                $start = new \DateTime($startdate);
+                $stime = explode(":", $starttime);
+                $start->setTime($stime[0], $stime[1]);
 
-            $start = new \DateTime($startdate);
-            $time = explode(":", $starttime);
-            $start->setTime($time[0], $time[1]);
+                $end = new \DateTime($enddate);
+                $etime = explode(":", $endtime);
+                $end->setTime($etime[0], $etime[1]);
 
-            $end = new \DateTime($enddate);
-            $time = explode(":", $endtime);
-            $end->setTime($time[0], $time[1]);
-
-            $offer->setStartDate($start);
-            $offer->setEndDate($end);
-
+                $offer->setStartDate($start);
+                $offer->setEndDate($end);
+            }
             $offer->setIsActive(true);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -114,6 +114,22 @@ class StaffOffersController extends Controller
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $startdate = $request->request->get('appbundle_offer')['startDateDate'];
+            $starttime = $request->request->get('appbundle_offer')['startDateTime'];
+            $enddate = $request->request->get('appbundle_offer')['endDateDate'];
+            $endtime = $request->request->get('appbundle_offer')['endDateTime'];
+            if($startdate && $starttime && $enddate && $endtime){
+                $start = new \DateTime($startdate);
+                $stime = explode(":", $starttime);
+                $start->setTime($stime[0], $stime[1]);
+
+                $end = new \DateTime($enddate);
+                $etime = explode(":", $endtime);
+                $end->setTime($etime[0], $etime[1]);
+
+                $offer->setStartDate($start);
+                $offer->setEndDate($end);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offer);
             $entityManager->flush();
@@ -121,7 +137,8 @@ class StaffOffersController extends Controller
             return $this->redirectToRoute('staff_offers_list');
         }
         return $this->render('staff/offers/offers_modify.html.twig', array(
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "offer" => $offer
         ));
     }
 }

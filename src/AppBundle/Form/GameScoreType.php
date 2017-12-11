@@ -17,6 +17,7 @@ class GameScoreType extends AbstractType
     {
         $builder
             ->add('card', TextType::class, array(
+                "label" => "Card n°",
                 "mapped" => false,
                 "required" => false,
                 "attr" => array(

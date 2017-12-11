@@ -78,6 +78,10 @@ staff_customer_offers_use:
     defaults:
          _controller: AppBundle:StaffCustomer:useCardOffer
 
+staff_customer_offers_use_temp:
+    path: /staff/cardoffer/use/{offerid}/{cardid}
+    defaults:
+         _controller: AppBundle:StaffCustomer:useCardOfferTemp
 
 
 # STAFF NEWSLETTER MANAGEMENT

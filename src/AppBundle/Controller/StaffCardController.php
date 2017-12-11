@@ -30,7 +30,7 @@ class StaffCardController extends Controller
             $data = $request->request->get('appbundle_card');
             $cardNumber = $data['center'].$data['number'].$data['modulo'];
 			if($cardManager->initCard($card, $cardNumber)){
-				$cardManager->save($card);
+				$cardManager->save($card, false);
 			}
         }
 

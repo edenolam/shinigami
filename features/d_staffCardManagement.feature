@@ -16,7 +16,6 @@ Feature: StaffCardManagement
     And I wait "4000"
     And I press "submit"
     Then I should be on "/staff/new-card"
-    Then I should see "The card has been updated"
 
   @javascript
   Scenario: Create new empty card manually
@@ -28,7 +27,6 @@ Feature: StaffCardManagement
     And I wait "4000"
     And I press "submit"
     Then I should be on "/staff/new-card"
-    Then I should see "The card has been updated"
     Then I should see "123684973"
 
   @javascript

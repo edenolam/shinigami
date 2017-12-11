@@ -31,16 +31,22 @@ class CustomerController extends Controller
         }
 
         $card = $customer->getCard();
-        $cardsOffers = $cardManager->getValidCardsOffersOfCustomer($card);
-        $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
+
+        $cardManager = $this->get('app.card.manager');
+        $offersManager = $this->get('app.offer.manager');
+
         $gameSessions = $cardManager->getGameSessionsOfCustomer($card);
+        $cardsOffers = $offersManager->getValidCardsOffersOfCustomer($card);
+        $lockedOffers = $offersManager->getLockedOffersOfCustomer($card);
+        $tempUnusedOffers = $offersManager->getCurrentTempOffers($card);
 
         return $this->render('customer/panel.html.twig', array(
             "customer" => $customer,
             "card" => $card,
             "cardsOffers" => $cardsOffers,
             "lockedOffers" => $lockedOffers,
-            "gameSessions" => $gameSessions
+            "gameSessions" => $gameSessions,
+            "tempUnusedOffers" => $tempUnusedOffers
         ));
     }
 
