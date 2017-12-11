@@ -6,11 +6,14 @@
         {% endif %}
 
         <form action="{{ path('login') }}" method="post">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="_password" />
+            <div class="input-field col s12">
+                <input type="text" id="username" class="validate" name="_username" value="{{ last_username }}" />
+                <label for="username">Username</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="password" id="password" class="validate" name="_password" />
+                <label for="password">Password</label>
+            </div>
 
             {#
                 If you want to control the URL the user
@@ -18,9 +21,7 @@
                 <input type="hidden" name="_target_path" value="/account" />
             #}
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 
             <button class="btn" name="submit" type="submit">login</button>
