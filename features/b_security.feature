@@ -54,7 +54,7 @@ Feature: Security
     And I should see "Forgot Password"
     And I follow "Forgot Password"
     Then I should be on "/forgot_password"
-    And I fill in "emailField" with "test@toto.com"
+    And I fill in "emailField" with "toto@toto.com"
     And I press "reset"
     And I should see "We've sent you an email with instructions to reset your password"
 
