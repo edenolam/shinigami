@@ -14,7 +14,8 @@ class CardOffersRepository extends \Doctrine\ORM\EntityRepository
     public function findValidCardsOffersOfCustomer($card)
     {
         return $this->createQueryBuilder("co")
-            ->innerJoin("co.offer", "o", Join::WITH, 'o.isActive = true')
+            ->leftJoin("co.offer", "o", Join::WITH, 'o.isActive = true')
+            ->andWhere('o.isActive = true')
             ->where('co.card = :card')
             ->setParameter("card", $card)
             ->getQuery()

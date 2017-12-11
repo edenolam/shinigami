@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Shinigami Laser{% endblock %}</title>
         {% block stylesheets %}
             <!--Import Google Icon Font-->
             <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
@@ -70,16 +70,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                        <a href="#home" class="brand-logo"><img src="{{ asset('images/mini-flat-logo.png') }}"></a>
+                        <p class="grey-text text-lighten-4">Wellcome to the future of the 80's.</p>
                     </div>
                     <div class="col l4 offset-l2 s12">
                         <h5 class="white-text">Links</h5>
+
                         <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!"> <i class=" material-icons">mail</i></a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!"> <i class=" material-icons">phone</i></a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!"> <i class="fa fa-facebook fa-lg"></i></a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!"> <i class="fa fa-twitter fa-lg"></i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="{{ path('homepage')~"/#contact" }}"> <i class=" material-icons">mail</i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="{{ path('homepage')~"/#contact" }}"> <i class=" material-icons">phone</i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/"> <i class="fa fa-facebook fa-lg"></i></a></li>
+                            <li><a class="grey-text text-lighten-3" href="https://twitter.com/"> <i class="fa fa-twitter fa-lg"></i></a></li>
                         </ul>
                     </div>
                 </div>
