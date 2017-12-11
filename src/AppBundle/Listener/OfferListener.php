@@ -39,7 +39,6 @@ class OfferListener
     public function onCustomerAddCard($event)
     {
         $card = $event->getCard();
-        // "welcome" offers
         $repository = $this->offerManager->getOffersRepository();
         $offers = $repository->findByOfferType('welcome');
 
