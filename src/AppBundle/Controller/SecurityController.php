@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Account;
+use AppBundle\Entity\ResetPasswordToken;
 use AppBundle\Form\AccountType;
 use AppBundle\Form\AccountStaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class SecurityController extends Controller
 {
@@ -80,41 +82,69 @@ class SecurityController extends Controller
 		$mailCustomer = $request->request->get('email');
 		$entityManager = $this->getDoctrine()->getManager();
 		$accountEmail = $entityManager->getRepository(Account::class)->findOneBy(['email' => $mailCustomer]);
-		//exit(dump($accountEmail));
 		if($request->isMethod('POST')){
 			if ($accountEmail){
-				$passwordToken = random_bytes(20);
+				$passwordToken = bin2hex(random_bytes(20));
+				$resetPasswordToken = new ResetPasswordToken();
+				$resetPasswordToken->setToken($passwordToken);
+				$resetPasswordToken->setCreatedAt(new \DateTime('now'));
+				$resetPasswordToken->setAccount($accountEmail);
+				$resetPasswordToken->setIsActive(TRUE);
+				$entityManager->persist($resetPasswordToken);
+				$entityManager->flush();
 				$urlGenerate = $this->generateUrl('reset_password', array("token" => $passwordToken), UrlGeneratorInterface::ABSOLUTE_URL);
 
 				$message = (new \Swift_Message('Reset Password'))
 					->setFrom('staff@shinigami.com')
 					->setTo($mailCustomer)
-					->setBody($this->renderView('emails/reset_password.html.twig', array(
-							'urlGenerate' => $urlGenerate
-						)
-					),
-						'text/html'
-					)
-				;
+					->setBody($this->renderView('emails/reset_password.html.twig', array('urlGenerate' => $urlGenerate)),'text/html');
 				$mailer->send($message);
 				$this->addFlash("success", "We've sent you an email with instructions to reset your password");
-		}
-		else{
-			$this->addFlash("error", "The password is not recognized ");
-		}
+
+			}
+			else{
+				$this->addFlash("error", "The email is not recognized ");
+			}
 
 
 		}
 
-		return $this->render("security/reset_password.html.twig");
+		return $this->render("security/forgot_password.html.twig");
+
 	}
+
 
 
 	/**
 	 *
 	 */
-	public function resetPasswordAction()
+	public function resetPasswordAction(Request $request, ResetPasswordToken $resetPasswordToken, UserPasswordEncoderInterface $passwordEncoder)
 	{
+		$entityManager  = $this->getDoctrine()->getManager();
+		if($resetPasswordToken->getIsActive()){
+			if ($request->isMethod('POST')) {
+				$passwordCustomer = $request->request->get('password');
+				$passwordRepeatCustomer = $request->request->get('passwordRepeat');
+				if ($passwordCustomer != $passwordRepeatCustomer) {
+					$this->addFlash("error", "The passwords are not the same.");
+				} else {
+					$account = $resetPasswordToken->getAccount();// recup compte
+					$account->setPlainPassword($passwordCustomer);// mdp brut dans compte
+					$passwordCustomer = $passwordEncoder->encodePassword($account, $account->getPlainPassword());// hash mdp
+					$account->setPassword($passwordCustomer);
+					$resetPasswordToken->setIsActive(FALSE);
+					$entityManager->persist($account);
+					$entityManager->persist($resetPasswordToken);
+					$entityManager->flush();
+					$this->addFlash("success", "Your password has been updated");
+					return $this->redirectToRoute('login');
+				}
+			}
+			return $this->render("security/reset_password.html.twig");
+		}else{
+			$this->addFlash("error", "This reset password link in not valid.");
+			return $this->redirectToRoute('homepage');
+		}
 
 	}
 

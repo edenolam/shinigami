@@ -5,6 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
+        .header, .footer {
+            background-color: #e74c3c;
+        }
         /* Fonts and Content */
         body, td { font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif; font-size:14px; }
         body { background-color: #2A374E; margin: 0; padding: 0; -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
@@ -53,7 +56,7 @@
                                 <td class="w30"  width="30"></td>
                                 <td  class="w580"  width="580" valign="middle" align="left">
                                     <div class="pagetoplogo-content">
-                                        <img src="{{ absolute_url(asset('images/mini-logo.png')) }}" style="width:30%" alt="image">
+                                        <img src="{{ absolute_url(asset('images/mini-logo.png')) }}" alt="image">
                                     </div>
                                 </td>
                                 <td class="w30"  width="30"></td>
@@ -82,12 +85,9 @@
                                         <tr>
                                             <td class="w580"  width="580">
                                                 <h2 style="color:#0E7693; font-size:22px; padding-top:12px;">{{ contact.subject|title }}</h2>
-
                                                 <div align="left" class="article-content">
                                                     <p>Mail de {{ contact.name }} ({{ contact.email }})</p>
-                                                    <p>
-                                                        {{ contact.message }}
-                                                    </p>
+                                                    <p>{{ contact.message }}!</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -97,6 +97,35 @@
                                         </tbody>
                                     </table>
                                     <!-- fin zone -->
+
+                                    <!-- une autre zone de contenu -->
+                                    <table class="w580"  width="580" cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="3">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="w275"  width="275" valign="top">
+                                                <div align="left" class="article-content">
+
+                                                </div>
+                                            </td>
+                                            <td class="w30"  width="30" class="w30"></td>
+                                            <td class="w275"  width="275" valign="top">
+                                                <div align="left" class="article-content">
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="w580" height="1" bgcolor="#c7c5c5"></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
 
                                 </td>
                                 <td class="w30" class="w30"  width="30"></td>
@@ -147,3 +176,6 @@
 </table>
 </body>
 </html>
+
+
+
