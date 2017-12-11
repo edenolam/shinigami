@@ -4,7 +4,7 @@ Feature: Security
   Scenario: register form of /register page
     Given I am on "/register"
     And I fill in "appbundle_account_customer_city" with "paris"
-    And I pick the date "09/04/1997"
+    And I pick the date "09/04/1997" in "datepicker"
     And I fill in "appbundle_account_customer_lastname" with "tata"
     And I fill in "appbundle_account_customer_firstname" with "titi"
     And I fill in "appbundle_account_customer_nickname" with "nicki"
@@ -14,7 +14,8 @@ Feature: Security
     And I fill in "appbundle_account_email" with "toto@toto.com"
     And I fill in "appbundle_account_plainPassword_first" with "test"
     And I fill in "appbundle_account_plainPassword_second" with "test"
-    And I press "submit"
+    And I scroll down
+    And I click on "submit"
     Then I should be on "/login"
     And I should see "All right ! You've been registered !" in the ".alert-success" element
 
@@ -29,12 +30,12 @@ Feature: Security
     And I fill in "appbundle_account_customer_adress" with "rue titi"
     And I fill in "appbundle_account_customer_phone" with "9876543210"
     And I fill in "appbundle_account_customer_city" with "paris"
-    And I pick the date "25/10/2012"
+    And I pick the date "25/10/2012" in "datepicker"
     And I fill in "appbundle_account_username" with "test"
     And I fill in "appbundle_account_email" with "test@toto.com"
     And I fill in "appbundle_account_plainPassword_first" with "toto"
     And I fill in "appbundle_account_plainPassword_second" with "toto"
-    And I scroll "#submit" into view
+    And I scroll down
     And I press "submit"
     Then I should be on "/login"
     And I should see "All right ! You've been registered !" in the ".alert-success" element

@@ -1,6 +1,16 @@
 
 {% if card %}
     <div class="carousel">
+        {% for tempUnusedOffer in tempUnusedOffers %}
+            <div class="carousel-item">
+                <div class="card-panel retro-cyan" style="width: 250px; height: 250px;">
+                    <p class="center">{{ tempUnusedOffer.name }}</p>
+                    <p class="white-text offer-description">{{ tempUnusedOffer.description }}</p>
+                    {% if is_granted('ROLE_STAFF') %}<a href="{{ path('staff_customer_offers_use_temp', { 'offerid' : tempUnusedOffer.id, 'cardid' : card.id }) }}" class="btn retro-rose offer-status" id="useoffer-{{ tempUnusedOffer.id }}-{{ card.id }}" >Use</a>{% endif %}
+                    {% if is_granted('ROLE_CUSTOMER') %}<span class="offer-status">Usable</span>{% endif %}
+                </div>
+            </div>
+        {% endfor %}
         {% for cardsOffer in cardsOffers %}
             <div class="carousel-item">
                 {% if cardsOffer.used %}
