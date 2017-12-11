@@ -60,13 +60,19 @@ class StaffCustomerController extends Controller
      */
     public function cardViewAction(Request $request, Card $card)
     {
+        //exit(dump($card->getCustomer()));
+
         $cardManager = $this->get('app.card.manager');
+        $offersManager = $this->get('app.offer.manager');
+
         $gameSessions = $cardManager->getGameSessionsOfCustomer($card);
-        $cardsOffers = $cardManager->getValidCardsOffersOfCustomer($card);
-        $lockedOffers = $cardManager->getLockedOffersOfCustomer($card);
+        $cardsOffers = $offersManager->getValidCardsOffersOfCustomer($card);
+        $lockedOffers = $offersManager->getLockedOffersOfCustomer($card);
+        $tempUnusedOffers = $offersManager->getCurrentTempOffers($card);
 
         $form = $cardManager->getChangeNumberCardForm();
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()){
             $cardManager->changeCardNumber($card, $form->getData()['number']);
             return $this->redirectToRoute('staff_customer_view', array(
@@ -80,6 +86,7 @@ class StaffCustomerController extends Controller
             'gameSessions' => $gameSessions,
             'cardsOffers'   => $cardsOffers,
             "lockedOffers" => $lockedOffers,
+            "tempUnusedOffers" => $tempUnusedOffers,
             "form" => $form->createView()
         ]);
     }
@@ -132,6 +139,13 @@ class StaffCustomerController extends Controller
         $entityManager->persist($cardOffer);
         $entityManager->flush();
         $this->addFlash('success', "The offer ".$cardOffer->getOffer()->getName()." has been used.");
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    public function useCardOfferTempAction($offerid, $cardid, Request $request)
+    {
+        $offerManager = $this->get('app.offer.manager');
+        $offerManager->useTempOffer($offerid, $cardid);
         return $this->redirect($request->headers->get('referer'));
     }
 }

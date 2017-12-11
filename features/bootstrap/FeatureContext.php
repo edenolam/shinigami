@@ -104,98 +104,36 @@ class FeatureContext extends MinkContext implements Context
     }
 
     /**
-     * @When I scroll :selector into view
-     *
-     * @param string $selector Allowed selectors: #id, .className, //xpath
-     *
-     * @throws \Exception
-     */
-    public function scrollIntoView($selector)
-    {
-        $locator = substr($selector, 0, 1);
-
-        switch ($locator) {
-            case '/' : // XPath selector
-                $function = <<<JS
-(function(){
-  var elem = document.evaluate($selector, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-  elem.scrollIntoView(false);
-})()
-JS;
-                break;
-
-            case '#' : // ID selector
-                $selector = substr($selector, 1);
-                $function = <<<JS
-(function(){
-  var elem = document.getElementById("$selector");
-  elem.scrollIntoView(false);
-})()
-JS;
-                break;
-
-            case '.' : // Class selector
-                $selector = substr($selector, 1);
-                $function = <<<JS
-(function(){
-  var elem = document.getElementsByClassName("$selector");
-  elem[0].scrollIntoView(false);
-})()
-JS;
-                break;
-
-            default:
-                throw new \Exception(__METHOD__ . ' Couldn\'t find selector: ' . $selector . ' - Allowed selectors: #id, .className, //xpath');
-                break;
-        }
-
-        try {
-            $this->getSession()->executeScript($function);
-        } catch (Exception $e) {
-            throw new \Exception(__METHOD__ . ' failed');
-        }
-    }
-
-    /**
-     * @Given /^I pick the date "([^"]*)"$/
-     */
-    public function iPickTheDate($date)
-    {
-        $function = <<<JS
-    (function(){
-      $( ".datepicker" ).pickadate("picker").set('select', '$date', { format: 'dd/mm/yyyy' });
-    })()
-JS;
-        try {
-            $this->getSession()->executeScript($function);
-        } catch (Exception $e) {
-            throw new \Exception(__METHOD__ . ' failed');
-        }
-    }
-
-    /**
-     * @Given /^I pick the time "([^"]*)"$/
-     */
-    public function iPickTheTime($time)
-    {
-        $function = <<<JS
-    (function(){
-      $( ".timepicker" ).pickatime("picker").set('select', '$time', { format: 'hh:mm' });
-    })()
-JS;
-        try {
-            $this->getSession()->executeScript($function);
-        } catch (Exception $e) {
-            throw new \Exception(__METHOD__ . ' failed');
-        }
-    }
-
-    /**
      * @Given /^I wait "([^"]*)"$/
      */
     public function iWait($time)
     {
         $this->getSession()->wait($time);
+    }
+
+    /**
+     * @Given /^I scroll down$/
+     */
+    public function iScrollDown()
+    {
+        $this->getSession()->executeScript('window.scrollTo(0,100);');
+    }
+
+    /**
+     * @Given /^I pick the date "([^"]*)" in "([^"]*)"$/
+     */
+    public function iPickTheDateIn($date, $class)
+    {
+        $function = <<<JS
+    (function(){
+      $( "." + '$class').pickadate("picker").set('select', '$date', { format: 'dd/mm/yyyy' });
+    })()
+JS;
+        try {
+            $this->getSession()->executeScript($function);
+        } catch (Exception $e) {
+            throw new \Exception(__METHOD__ . ' failed');
+        }
     }
 
 

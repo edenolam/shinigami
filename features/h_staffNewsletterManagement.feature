@@ -57,4 +57,4 @@ Feature: StaffNewsletterManagement
     Then I should be on "/staff/newsletter/list"
     And I follow "delete-1"
     And I wait "1000"
-    Then I should not see "new Shinigami Laser Safrania"
+    Then I should see "The newsletter new Shinigami Laser Safrania has been deleted."
