@@ -56,6 +56,7 @@ class OfferType extends AbstractType
                     "score" => "score",
                     "visits" => "visits",
                     "temp" => "temp",
+                    "welcome" => "welcome",
                     "autre" => "other",
                 ),
                 "attr" => array(

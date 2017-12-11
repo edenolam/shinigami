@@ -80,6 +80,12 @@ class StaffNewsletterController extends Controller
         ));
     }
 
+    /**
+     * Deletion of a newsletter
+     *
+     * @param Newsletter $newsletter
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction(Newsletter $newsletter)
 	{
 		if (!$newsletter){

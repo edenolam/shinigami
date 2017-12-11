@@ -1,39 +1,10 @@
 default:
   suites:
-#      my_feature:
-#          filters:
-#              tags: '@javascript'
-#          contexts:
-#              - 'FeatureContext':
-#                  kernel: '@kernel'
-#              - 'StaffContext'
-#              - 'FeatureContext'
-#     default:
-#      filters:
-#        tags: '@default'
-#      contexts:
-#        - FeatureContext
-#        - Behat\MinkExtension\Context\MinkContext
-#    security:
-#      filters:
-#        tags: '@security'
-#      contexts:
-#        - SecurityContext
-#        - FeatureContext
-#        - Behat\MinkExtension\Context\MinkContext
-#    customer:
-#      filters:
-#        tags: '@customer'
-#      contexts:
-#        - FeatureContext
-#        - Behat\MinkExtension\Context\MinkContext
     seleniumTests:
       filters:
         tags: '@javascript'
       contexts:
-        - StaffContext
         - FeatureContext
-#        - Behat\MinkExtension\Context\MinkContext
   extensions:
     Behat\Symfony2Extension:
         kernel:
